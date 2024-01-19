@@ -3,7 +3,7 @@ import { faLinkedin, faFacebookF, faInstagram } from '@fortawesome/free-brands-s
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
-  const handleSocialClick = (url) => {
+  const handleSocialClick = (url: string) => {
     window.open(url, '_blank');
   };
 
