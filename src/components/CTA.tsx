@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faBell, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -5,7 +6,7 @@ import { faStar, faBell, faUsers } from '@fortawesome/free-solid-svg-icons';
 const CtaComponent = () => {
   const [email, setEmail] = useState('');
 
-  const isValidEmail = (email) => {
+  const isValidEmail = (email: string) => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
