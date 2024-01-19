@@ -1,4 +1,10 @@
+
 import React from 'react';
+
+interface FeatureCardProps {
+  title: string;
+  description: string;
+}
 
 function DesignerForDevs() {
   // Event handlers can be added here if needed
@@ -44,7 +50,7 @@ function DesignerForDevs() {
   );
 }
 
-function FeatureCard({ title, description }) {
+function FeatureCard({ title, description }: FeatureCardProps) {
   return (
     <div className="flex flex-col bg-gray-100 border border-gray-300 rounded-xl p-4 w-full sm:w-1/2 lg:w-1/3">
       <h3 className="text-xl font-semibold text-indigo-800">{title}</h3>
