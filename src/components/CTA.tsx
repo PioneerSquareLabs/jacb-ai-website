@@ -10,7 +10,7 @@ const CtaComponent = () => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isValidEmail(email)) {
       alert('Please enter a valid email address.');
