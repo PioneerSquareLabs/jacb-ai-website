@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -5,7 +6,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 function HeroSection() {
   const [email, setEmail] = useState('');
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
