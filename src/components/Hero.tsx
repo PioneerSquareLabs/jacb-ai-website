@@ -1,42 +1,40 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const HeroSection = () => {
-  // Placeholder for the click event handler for the button
-  const handleButtonClick = () => {
-    // Implement the logic to handle the click event
-    console.log("Button clicked for joining the waitlist");
+function HeroSection() {
+  const [isJoiningWaitlist, setIsJoiningWaitlist] = useState(false);
+
+  const handleJoinWaitlist = () => {
+    // Placeholder for actual implementation
+    setIsJoiningWaitlist(true);
+    // Here you would typically handle the logic to join the waitlist, such as making an API call
   };
 
   return (
-    <div className="flex w-full max-w-7xl flex-1 py-24">
-      <div className="flex h-full w-3/5 flex-col justify-center px-12 pr-24">
-        <h1 className="text-secondary text-7xl font-semibold text-dark-blue">
-          Meet JACoB: Your AI Coding Partner
-        </h1>
-        <p className="mt-4 text-lg font-light text-gray-700 ">
-          JACoB is the AI-powered coding assistant that turns your designs into
-          deployable code, understands your codebase, and collaborates via your
-          existing workflow
-        </p>
-        <button
-          className="mt-6 h-12 max-w-lg items-center justify-center rounded-lg bg-navy-blue  shadow-lg"
-          onClick={handleButtonClick}
-        >
-          <span className="text-lg text-white">
-            Join the Waitlist for Early Access
-          </span>
-          <FontAwesomeIcon icon={faArrowRight} className="ml-2 text-white" />
-        </button>
-      </div>
-      <div className="flex h-full w-1/2 items-center justify-center rounded-lg bg-white shadow-lg">
-        <p className="text-center text-3xl font-medium text-gray-400">
+    <div className="relative bg-white w-full min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-0 right-0 w-full max-w-md h-full bg-peach rounded-3xl flex items-center justify-center">
+        <p className="text-3xl font-medium text-black text-opacity-20">
           Demo video
         </p>
       </div>
+      <div className="z-10 max-w-xl">
+        <h1 className="text-7xl text-primary font-bold mb-6">
+          Meet JACoB: Your AI Coding Partner
+        </h1>
+        <p className="text-lg font-light text-secondary mb-8">
+          JACoB is the AI-powered coding assistant that turns your designs into deployable code, understands your codebase, and collaborates via your existing workflow.
+        </p>
+        <button
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handleJoinWaitlist}
+        >
+          Join the Waitlist for Early Access
+          <FontAwesomeIcon icon={faArrowRight} className="ml-3" />
+        </button>
+      </div>
     </div>
   );
-};
+}
 
 export default HeroSection;
