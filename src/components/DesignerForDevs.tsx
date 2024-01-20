@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 
 interface FeatureCardProps {
   title: string;
@@ -11,16 +10,17 @@ function DesignerForDevs() {
   // Example: const handleButtonClick = () => { /* logic */ };
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-col items-center px-4 sm:px-24">
-        <h1 className="text-6xl font-bold text-indigo-800 leading-none text-center">
-          Designed for<br/>Developers,<br/>Tailored for Teams
+    <div className="mx-auto flex w-full max-w-7xl flex-row py-12">
+      <div className="mx-auto flex max-w-lg flex-col items-center p-8 px-2">
+        <h1 className="text-5xl font-bold leading-none text-dark-blue">
+          Designed for Developers, Tailored for Teams
         </h1>
-        <p className="text-lg font-light text-gray-600 mt-4">
-          JACoB is built from the ground up to address the specific needs of software development.
+        <p className="mt-4 text-lg font-light text-gray-600">
+          JACoB is built from the ground up to address the specific needs of
+          software development.
         </p>
       </div>
-      <div className="flex flex-wrap justify-center gap-4 px-4 sm:px-24 mt-8">
+      <div className="mt-8 flex w-full flex-1 flex-wrap justify-center gap-2 px-4">
         <FeatureCard
           title="Efficiency Boost"
           description="ACoB automates the repetitive and mundane, allowing you to concentrate on innovation and complex problem-solving."
@@ -52,11 +52,9 @@ function DesignerForDevs() {
 
 function FeatureCard({ title, description }: FeatureCardProps) {
   return (
-    <div className="flex flex-col bg-gray-100 border border-gray-300 rounded-xl p-4 w-full sm:w-1/2 lg:w-1/3">
-      <h3 className="text-xl font-semibold text-indigo-800">{title}</h3>
-      <p className="text-base font-light text-gray-600 mt-2">
-        {description}
-      </p>
+    <div className="bg-dark-beige flex w-full flex-col rounded-xl border border-gray-300 p-4 sm:w-1/2 lg:w-1/3">
+      <h3 className="text-lg text-dark-blue">{title}</h3>
+      <p className="mt-2 text-sm font-light text-gray-600">{description}</p>
     </div>
   );
 }
