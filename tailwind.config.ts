@@ -1,11 +1,12 @@
 import { type Config } from "tailwindcss";
 
 export default {
-  content: ["./src/**/*.tsx"],
+  content: ["./src/**/*.tsx", "./src/stories/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
         beige: "#FFFAF6",
+        "dark-beige": "#fcf3ed",
         "dark-blue": "#1D265D",
         "light-blue": "#00ACFF",
         pink: "#ff7bff",
