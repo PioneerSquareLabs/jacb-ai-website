@@ -16,7 +16,9 @@ JACoB automates coding tasks, transforms Figma designs into deployable code, and
 
 This repository is a living example of JACoB in action. Using the T3 Stack, we've set up a basic framework to build the jacb.ai home page for you to see how JACoB integrates with modern web development tools. It's a playground for you to experiment with JACoB's capabilities in a real-world scenario. 
 
-To see how JACoB was used to build out this site, check out this screencast showing the real-time creation of the site: https://www.youtube.com/watch?v=OfRUaehTcEM&t=8s
+To see how JACoB was used to build out this site, check out this screencast showing the real-time creation of the code in this repo for the jacb.ai site.
+
+[![Watch the video](https://img.youtube.com/vi/OfRUaehTcEM/maxresdefault.jpg)](https://youtu.be/OfRUaehTcEM)
 
 # Getting Started with JACoB
 
