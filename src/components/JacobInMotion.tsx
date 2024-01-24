@@ -1,87 +1,116 @@
+import React, { use, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 function JacobInMotion() {
-  const handleLiveCodingClick = () => {
-    // Implement the action for when the Live Coding Session is clicked
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState<string>("");
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const videoUrls = {
+    "Live Coding Session":
+      "https://www.youtube.com/embed/OfRUaehTcEM?si=Ztt02TwiywbZkSMS",
+    "Code Review Process":
+      "https://www.youtube.com/embed/x5xs3HXFvPA?si=6SJ3aZxRAx2uWxoN",
+    "Workflow Integration":
+      "https://www.youtube.com/embed/ERqldloLqjU?si=ZaO2RZA3udsOptAb",
   };
 
-  const handleCodeReviewClick = () => {
-    // Implement the action for when the Code Review Process is clicked
+  useEffect(() => {
+    // set the video url to the first video in the list
+    setSelectedVideoUrl(videoUrls["Live Coding Session"]);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsPlaying(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const handleCardClick = (videoUrl: string) => {
+    console.log("Card clicked", videoUrl);
+    setSelectedVideoUrl(videoUrl);
+    setIsPlaying(true);
   };
 
-  const handleWorkflowIntegrationClick = () => {
-    // Implement the action for when the Workflow Integration is clicked
+  interface SessionCardProps {
+    title: string;
+    description: string;
+    videoUrl: string;
+  }
+
+  const SessionCard: React.FC<SessionCardProps> = ({
+    title,
+    description,
+    videoUrl,
+  }) => {
+    const isSelected = selectedVideoUrl === videoUrl;
+
+    return (
+      <div
+        className={` border-orange-200 w-full cursor-pointer rounded-lg border bg-beige p-4 md:w-1/3 ${isSelected ? "border-navy-blue bg-dark-beige" : ""}`}
+        onClick={() => handleCardClick(videoUrl)}
+      >
+        <h2 className="text-lg font-semibold text-dark-blue sm:text-xl md:text-2xl">
+          {title}
+        </h2>
+        <p className="mt-2 text-sm font-light text-gray-600 sm:text-base md:text-lg">
+          {description}
+        </p>
+      </div>
+    );
   };
 
   return (
-    <div className="mt-12 flex min-h-screen w-full items-center justify-center bg-white pb-12">
-      <div className="max-w-7xl px-4">
+    <div className="mt-12 flex min-h-screen w-full flex-col items-center justify-center bg-white px-4 pb-12">
+      <div className="w-full max-w-7xl">
         <div className="text-center">
-          <h1 className="text-6xl font-bold text-dark-blue">
-            JACoB <span className=" text-pink"> in Motion</span>:
+          <h1 className="text-3xl font-bold text-dark-blue sm:text-4xl md:text-5xl lg:text-6xl">
+            JACoB <span className="text-pink"> in Motion</span>:
           </h1>
-          <h1 className="text-6xl text-dark-blue">
+          <h2 className="text-3xl text-dark-blue sm:text-4xl md:text-5xl lg:text-6xl">
             Watch the AI Developer at Work
-          </h1>
-          <p className="mt-4 text-lg font-light text-gray-600">
+          </h2>
+          <p className="mt-4 text-base font-light text-gray-600 sm:text-lg md:text-xl">
             Experience the seamless integration and coding expertise of JACoB.
           </p>
         </div>
-        <div className="mt-16 flex flex-wrap justify-between gap-4">
-          <div
-            className="bg-dark-beige border-orange-200 flex-1 rounded-lg border p-4"
-            onClick={handleLiveCodingClick}
-          >
-            <h2 className="text-xl font-semibold text-dark-blue">
-              Live Coding Session
-            </h2>
-            <p className="mt-2 text-sm font-light text-gray-600">
-              A recorded session showing JACoB writing code based on a task
-              description.
-            </p>
-          </div>
-          <div
-            className="bg-dark-beige border-orange-200 flex-1 rounded-lg border p-4"
-            onClick={handleCodeReviewClick}
-          >
-            <h2 className="text-xl font-semibold text-dark-blue">
-              Code Review Process
-            </h2>
-            <p className="mt-2 text-sm font-light text-gray-600">
-              How JACoB reviews a pull request, providing insights and
-              suggestions.
-            </p>
-          </div>
-          <div
-            className="bg-dark-beige border-orange-200 flex-1 rounded-lg border p-4"
-            onClick={handleWorkflowIntegrationClick}
-          >
-            <h2 className="text-xl font-semibold text-dark-blue">
-              Workflow Integration
-            </h2>
-            <p className="mt-2 text-sm font-light text-gray-600">
-              JACoB interacting with common developer tools and platforms, such
-              as GitHub actions, demonstrating real-time project contributions.
-            </p>
-          </div>
-        </div>
-        <div className="relative mt-16">
-          <img
-            src="/images/video.png"
-            alt="Video"
-            className="h-auto w-full rounded-3xl bg-gradient-to-b from-transparent to-black opacity-80"
+        <div className="mt-16 flex flex-col justify-center gap-4 lg:flex-row">
+          <SessionCard
+            title="Live Coding Session"
+            description="A recorded session showing JACoB writing code based on a task description."
+            videoUrl={videoUrls["Live Coding Session"]}
           />
-          <button
-            className="border-pink-500 absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full border-2 bg-transparent px-3 py-2 shadow-lg backdrop-blur-md"
-            onClick={() => {
-              /* Implement play video action */
-            }}
+          <SessionCard
+            title="Code Review Process"
+            description="How JACoB reviews a pull request, providing insights and suggestions."
+            videoUrl={videoUrls["Code Review Process"]}
+          />
+          <SessionCard
+            title="Workflow Integration"
+            description="JACoB interacting with common developer tools and platforms, such as GitHub actions, demonstrating real-time project contributions."
+            videoUrl={videoUrls["Workflow Integration"]}
+          />
+        </div>
+        <div className="aspect-ratio-box relative mt-8 h-0 w-full">
+          <iframe
+            className="absolute left-0 top-0 h-full w-full"
+            src={selectedVideoUrl}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            // style={{ display: isPlaying ? "block" : "none" }}
+          ></iframe>
+          {/* <button
+            className={`border-pink-500 absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full border-2 bg-transparent px-3 py-2 shadow-lg backdrop-blur-md ${isPlaying ? "hidden" : ""}`}
+            onClick={handlePlayButtonClick}
           >
-            <div className="rounded-full bg-pink p-6 px-7">
+            <div className="rounded-full bg-pink p-6">
               <FontAwesomeIcon icon={faPlay} className="text-white" size="2x" />
             </div>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

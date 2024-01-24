@@ -6,16 +6,13 @@ interface FeatureCardProps {
 }
 
 function DesignerForDevs() {
-  // Event handlers can be added here if needed
-  // Example: const handleButtonClick = () => { /* logic */ };
-
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-row py-12">
-      <div className="mx-auto flex max-w-lg flex-col items-center p-8 px-2">
-        <h1 className="text-5xl font-bold leading-none text-dark-blue">
+    <div className="mx-auto flex w-full max-w-7xl flex-col py-12 md:flex-row">
+      <div className="mx-auto flex max-w-lg flex-col items-center p-8 px-2 text-center md:text-left">
+        <h1 className="text-3xl font-bold leading-none text-dark-blue md:text-5xl">
           Designed for Developers, Tailored for Teams
         </h1>
-        <p className="mt-4 text-lg font-light text-gray-600">
+        <p className="text-md mt-4 font-light text-gray-600 md:text-lg">
           JACoB is built from the ground up to address the specific needs of
           software development.
         </p>
@@ -52,9 +49,11 @@ function DesignerForDevs() {
 
 function FeatureCard({ title, description }: FeatureCardProps) {
   return (
-    <div className="bg-dark-beige flex w-full flex-col rounded-xl border border-gray-300 p-4 sm:w-1/2 lg:w-1/3">
-      <h3 className="text-lg text-dark-blue">{title}</h3>
-      <p className="mt-2 text-sm font-light text-gray-600">{description}</p>
+    <div className="flex w-full flex-col rounded-xl border border-gray-300 bg-dark-beige p-4 sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <h3 className="text-md text-dark-blue md:text-lg">{title}</h3>
+      <p className="md:text-md mt-2 text-sm font-light text-gray-600">
+        {description}
+      </p>
     </div>
   );
 }
