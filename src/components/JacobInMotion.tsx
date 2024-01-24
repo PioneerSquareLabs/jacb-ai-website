@@ -70,9 +70,9 @@ function JacobInMotion() {
           <h1 className="text-3xl font-bold text-dark-blue sm:text-4xl md:text-5xl lg:text-6xl">
             JACoB <span className="text-pink"> in Motion</span>:
           </h1>
-          <h2 className="text-3xl text-dark-blue sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="text-3xl text-dark-blue sm:text-4xl md:text-5xl lg:text-6xl">
             Watch the AI Developer at Work
-          </h2>
+          </h1>
           <p className="mt-4 text-base font-light text-gray-600 sm:text-lg md:text-xl">
             Experience the seamless integration and coding expertise of JACoB.
           </p>
@@ -80,7 +80,7 @@ function JacobInMotion() {
         <div className="mt-16 flex flex-col justify-center gap-4 lg:flex-row">
           <SessionCard
             title="Live Coding Session"
-            description="A recorded session showing JACoB writing code based on a task description."
+            description="A recorded session showing JACoB writing the code for the jacb.ai site from a design."
             videoUrl={videoUrls["Live Coding Session"]}
           />
           <SessionCard

@@ -1,12 +1,13 @@
 import Head from "next/head";
 import CodeInAction from "~/components/CodeInAction";
-import DesignerForDevs from "~/components/DesignerForDevs";
+import DesignerForDevs from "~/components/DesignedForDevs";
 import Intro from "~/components/Intro";
 import WhyJacob from "~/components/WhyJacob";
 import Hero from "~/components/Hero";
 import Header from "~/components/Header";
 import CTA from "~/components/CTA";
 import JacobInMotion from "~/components/JacobInMotion";
+import Footer from "~/components/Footer";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <DesignerForDevs />
         <CodeInAction />
         <CTA />
+        <Footer />
       </main>
     </>
   );

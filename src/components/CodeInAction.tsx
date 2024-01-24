@@ -35,18 +35,25 @@ const CodeInAction = () => {
     <div className="w-full bg-white py-20">
       <div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:items-start md:text-left lg:space-y-8">
-          <h1 className="text-3xl font-bold text-dark-blue sm:text-4xl lg:text-6xl">
-            See JACoB’s Code <span className="text-pink">in Action</span>
+          <h1 className="text-center text-3xl font-bold text-dark-blue sm:text-4xl md:text-left lg:text-6xl">
+            See JACoB’s Code{" "}
+            <span className="block text-pink md:inline-block">in Action</span>
           </h1>
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-8">
             <p className="text-base font-light text-gray-600 sm:text-lg lg:text-lg">
               Real Examples. Real Projects. Real Impact.
             </p>
-            <p className="sm:text-md max-w-prose pl-24 text-sm font-light text-dark-blue lg:text-sm">
+            <p className="sm:text-md text-sm font-light text-dark-blue md:max-w-prose md:pl-24 lg:text-sm">
               JACoB isn’t about hypotheticals; it’s about real-world
               application. Here are some examples of how JACoB translates
               development challenges into clean, efficient, and robust code
               solutions.
+            </p>
+            <p className="sm:text-md text-sm font-light text-dark-blue md:max-w-prose md:pl-24 lg:text-sm">
+              Here are some screenshots of the code and process the JACoB GitHub
+              bot created for this section of the website. And if you want to
+              view the entire site's codebase, click the button below to review
+              the MIT-licensed repo on GitHub.
             </p>
           </div>
         </div>
@@ -87,8 +94,8 @@ const CodeInAction = () => {
             )
           }
         >
-          <p className="text-center text-lg font-medium uppercase text-white">
-            Explore JACoB’s Code Repositories
+          <p className="text-md text-center font-medium uppercase text-white md:text-lg">
+            Explore JACoB’s Code Repository
           </p>
         </button>
       </div>

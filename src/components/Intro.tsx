@@ -23,7 +23,7 @@ function Intro() {
   return (
     <div className="flex w-full flex-col items-center justify-center bg-indigo-900 p-4 py-12">
       <div className="flex max-w-2xl flex-col items-center px-4 md:max-w-3xl lg:max-w-4xl">
-        <h1 className="mb-2 text-center text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:mb-6">
+        <h1 className="mb-2 text-center text-2xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:mb-6">
           Introducing JACoB -{" "}
           <p>
             AI That Codes <span className="text-pink">Like You Do</span>
@@ -55,7 +55,7 @@ function Intro() {
         </div>
         <div className="mt-10 flex w-full justify-center md:mt-0 md:w-1/2 lg:w-1/3">
           <img
-            src="images/workflow.png"
+            src="images/workflow.svg"
             alt="Workflow Diagram"
             className="h-auto w-full"
           />

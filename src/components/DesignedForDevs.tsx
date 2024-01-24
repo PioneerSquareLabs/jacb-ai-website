@@ -7,7 +7,7 @@ interface FeatureCardProps {
 
 function DesignerForDevs() {
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col py-12 md:flex-row">
+    <div className="mx-auto flex w-full max-w-7xl flex-col py-4 md:flex-row md:py-12">
       <div className="mx-auto flex max-w-lg flex-col items-center p-8 px-2 text-center md:text-left">
         <h1 className="text-3xl font-bold leading-none text-dark-blue md:text-5xl">
           Designed for Developers, Tailored for Teams
@@ -17,10 +17,10 @@ function DesignerForDevs() {
           software development.
         </p>
       </div>
-      <div className="mt-8 flex w-full flex-1 flex-wrap justify-center gap-2 px-4">
+      <div className="mt-2 flex w-full flex-1 flex-wrap justify-center gap-2 px-4 md:mt-8">
         <FeatureCard
           title="Efficiency Boost"
-          description="ACoB automates the repetitive and mundane, allowing you to concentrate on innovation and complex problem-solving."
+          description="JACoB automates the repetitive and mundane, allowing you to concentrate on innovation and complex problem-solving."
         />
         <FeatureCard
           title="Quality Assurance"
@@ -39,8 +39,8 @@ function DesignerForDevs() {
           description="JACoB continuously learns from your codebase, contributing more effectively over time."
         />
         <FeatureCard
-          title="Security & Control"
-          description="Hosted within your environment, JACoB ensures your code remains secure and proprietary."
+          title="Customizable Workflow"
+          description="Configure JACoB with a simple config file to match your team's unique coding style and existing preferences."
         />
       </div>
     </div>
