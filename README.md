@@ -1,6 +1,6 @@
 # JACoB: AI-Powered Development Platform
 
-Welcome to the JACoB project! This repository is an open-source example showcasing the practical application of JACoB, an innovative AI-powered development platform revolutionizing the software development lifecycle. JACoB stands for Just Another Coding Bot, but don't let the name fool you - it's far more than just another bot. 
+Welcome to the JACoB project! This repository is an open-source example showcasing the practical application of JACoB (Just Another Coding Bot). It's still early days for our robot friend, but don't let the name fool you - our goal is to make JACoB far more than just another bot. 🦾🦾🦾
 
 ## What is JACoB?
 
@@ -14,13 +14,15 @@ JACoB automates coding tasks, transforms Figma designs into deployable code, and
 
 ## Example Project: This Repo
 
-This repository is a living example of JACoB in action. Using the T3 Stack, we've set up a basic framework for you to see how JACoB integrates with modern web development tools. It's a playground for you to experiment with JACoB's capabilities in a real-world scenario.
+This repository is a living example of JACoB in action. Using the T3 Stack, we've set up a basic framework to build the jacb.ai home page for you to see how JACoB integrates with modern web development tools. It's a playground for you to experiment with JACoB's capabilities in a real-world scenario. 
+
+To see how JACoB was used to build out this site, check out this screencast showing the real-time creation of the site: https://www.youtube.com/watch?v=OfRUaehTcEM&t=8s
 
 # Getting Started with JACoB
 
-Welcome to JACoB (Just Another Coding Bot), your AI-powered development platform. Here’s a quick guide to get you started with JACoB and integrate it seamlessly into your development workflow. 
+Interested in trying JACoB yourself? Here’s a quick guide to get you started with JACoB and integrate it seamlessly into your development workflow. 
 
-**Important Note**: Currently JACoB is set up to work with a limited number of languages and frameworks. Specficially, JACoB works best with a TypeScript Next.js application using Tailwind. More languages and frameworks are coming soon!
+**Important Note**: Currently JACoB is in a limited beta preview. While JACoB has the potential to work across any codebase, we've focused initially on a limited number of languages and frameworks. Specficially, JACoB works best with a TypeScript Next.js application using Tailwind. More languages and frameworks are coming soon!
 
 ## Step 1: Install the JACoB AI Bot GitHub Application
 
@@ -66,8 +68,8 @@ JACoB can convert your Figma designs into code, making the design-to-development
 After setting up, JACoB will start working on the tasks:
 
 1. JACoB creates an issue in your GitHub repository for the selected design frame.
-2. Follow the progress as JACoB updates the issue with comments.
-3. JACoB will eventually generate a pull request. Optionally, it can create a Storybook story if you have Storybook configured.
+2. Open the issue in GitHub and follow the progress as JACoB updates the issue with comments.
+3. JACoB will eventually generate a pull request. This usually take about 4-5 minutes. Optionally, it can create a Storybook story if you have Storybook configured.
 4. Review the generated code via GitHub’s standard Code Review process. JACoB will attempt to fix any issues based on your feedback.
 5. If JACoB encounters difficulties, it will create a draft pull request for manual review and fixes.
 
