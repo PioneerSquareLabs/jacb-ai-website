@@ -1,4 +1,4 @@
-# JACoB: AI-Powered Development Platform
+# JACoB: Just Another Coding Bot
 
 Welcome to the JACoB project! This repository is an open-source example showcasing the practical application of JACoB (Just Another Coding Bot). It's still early days for our robot friend, but don't let the name fool you - our goal is to make JACoB far more than just another bot. 🦾🦾🦾
 
