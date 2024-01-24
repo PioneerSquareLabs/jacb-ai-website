@@ -16,9 +16,7 @@ JACoB automates coding tasks, transforms Figma designs into deployable code, and
 
 This repository is a living example of JACoB in action. Using the T3 Stack, we've set up a basic framework to build the jacb.ai home page for you to see how JACoB integrates with modern web development tools. It's a playground for you to experiment with JACoB's capabilities in a real-world scenario. 
 
-To see how JACoB was used to build out this site, check out this screencast showing the real-time creation of the code in this repo for the jacb.ai site.
-
-[![Watch the video](https://img.youtube.com/vi/OfRUaehTcEM/maxresdefault.jpg)](https://youtu.be/OfRUaehTcEM)
+To see how JACoB was used to build out this site, check out this screencast showing the real-time creation of the site: https://www.youtube.com/watch?v=OfRUaehTcEM&t=8s
 
 # Getting Started with JACoB
 
@@ -59,15 +57,16 @@ Next, you need to run the JACoB custom setup command to create a `jacob.config` 
 
 JACoB can convert your Figma designs into code, making the design-to-development process smoother.
 
-1. Install the JACoB Figma plugin from [Figma Community](https://www.figma.com/community/plugin/1326684504185921461/jacob-ai-codegen-connector).
-2. Open an editable Figma file and launch the plugin.
-3. Authenticate using your GitHub account credentials.
-4. Select the top-level frame of your design and choose a target repository.
-5. Fill out the necessary information and click “Create Code”.
+Install the JACoB Figma plugin from [Figma Community](https://www.figma.com/community/plugin/1326684504185921461/jacob-ai-codegen-connector).
 
 ## Running JACoB
 
-After setting up, JACoB will start working on the tasks:
+1. Open an **editable** Figma file and launch the plugin.
+2. Authenticate using your GitHub account credentials.
+3. Select the top-level frame of your design and choose a target repository.
+4. Fill out the necessary information and click “Create Code”.
+
+If everything worked smoothly, JACoB will start working on the task in the background. You should get a finished Pull Request after about 5 mintues, but you can follow along using the steps below:
 
 1. JACoB creates an issue in your GitHub repository for the selected design frame.
 2. Open the issue in GitHub and follow the progress as JACoB updates the issue with comments.
