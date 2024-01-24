@@ -74,7 +74,7 @@ const WhyJacob = () => {
         />
         <TaskCard
           title="Customizable to Fit Your Workflow"
-          description="With JACoB, you set the rules. Configure everything in a YAML file right in your codebase, and JACoB follows suit."
+          description="With JACoB, you set the rules. Configure everything in a JSON file right in your codebase, and JACoB follows suit."
           icon={faTools}
           color="text-purple-400"
         />

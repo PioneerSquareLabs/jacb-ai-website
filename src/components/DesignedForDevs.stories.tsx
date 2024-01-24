@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import DesignerForDevs from "~/components/DesignerForDevs";
+import DesignerForDevs from "~/components/DesignedForDevs";
 
 const meta: Meta = {
   title: "Components/DesignerForDevs",

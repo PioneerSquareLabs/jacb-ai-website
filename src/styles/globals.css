@@ -29,6 +29,10 @@ h1 {
   @apply font-gooper text-4xl font-semibold;
 }
 
+.button-primary {
+  @apply flex h-12 w-full items-center justify-center rounded-lg bg-navy-blue shadow-lg sm:max-w-lg md:w-auto md:px-10;
+}
+
 .button-secondary {
   @apply flex h-10 items-center justify-center rounded-xl border border-solid border-navy-blue px-4 shadow-sm transition-colors hover:bg-blue-500 hover:text-white md:px-8 lg:px-10;
 }

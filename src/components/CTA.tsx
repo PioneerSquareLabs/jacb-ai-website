@@ -1,104 +1,67 @@
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faBell, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faBell,
+  faUsers,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
+import { PopupButton } from "@typeform/embed-react";
+
+interface FeatureCardProps {
+  icon: IconDefinition;
+  title: string;
+  description: string;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  icon,
+  title,
+  description,
+}) => (
+  <div className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left">
+    <FontAwesomeIcon
+      icon={icon}
+      className="mb-2 text-3xl text-pink sm:mb-0 sm:mr-4"
+    />
+    <div>
+      <h3 className="text-xl font-medium text-white">{title}</h3>
+      <p className="text-gray-400">{description}</p>
+    </div>
+  </div>
+);
 
 const CtaComponent = () => {
-  const [email, setEmail] = useState("");
-
-  const isValidEmail = (email: string) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!isValidEmail(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      if (response.ok) {
-        alert("Thank you for joining the waitlist!");
-        setEmail("");
-      } else {
-        alert(
-          "There was an issue submitting your email. Please try again later.",
-        );
-      }
-    } catch (error) {
-      alert(
-        "There was an error submitting your email. Please try again later.",
-      );
-    }
-  };
-
   return (
-    <div className="mx-auto w-full max-w-7xl rounded-3xl bg-dark-blue p-10 shadow-lg shadow-blue-300/20">
-      <div className="flex flex-col items-center">
-        <h1 className="text-center text-5xl text-white">
-          <span>Be Among the First to</span>
-          <span className="block text-pink">Elevate your Coding</span>
-        </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="mt-12 flex w-2/3 items-center space-y-4 md:flex-row md:space-x-4 md:space-y-0"
-        >
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className=" mx-auto w-full rounded-full bg-white/10 p-3 text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="focus:ring-pink-400 flex h-12 w-[400px] max-w-xl items-center justify-center rounded-full bg-pink px-8 font-medium uppercase text-indigo-900 hover:bg-pink focus:outline-none focus:ring-2 focus:ring-offset-2"
+    <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-md rounded-3xl bg-dark-blue p-6 shadow-lg shadow-blue-300/20 sm:max-w-xl sm:p-8 lg:max-w-7xl lg:p-10">
+        <div className="flex flex-col items-center text-center">
+          <h1 className="text-2xl font-bold text-white sm:text-4xl lg:text-5xl">
+            Be Among the First to
+            <span className="block text-pink">Elevate your Coding</span>
+          </h1>
+          <PopupButton
+            id={"DSxrFcdl"}
+            className="focus:ring-pink-400 mt-8 flex h-12 w-[300px] max-w-xl cursor-pointer items-center justify-center rounded-full bg-pink px-8 font-medium uppercase text-indigo-900 hover:bg-pink hover:bg-pink/80 focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-[400px] lg:mt-12"
+            medium="jacob-waitlist"
           >
             Join the Waitlist
-          </button>
-        </form>
-        <div className="mt-24 flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-          <div className="flex-1">
-            <div className="flex items-center space-x-2">
-              <div>
-                <h3 className="text-lg font-medium text-white">Early Access</h3>
-                <p className="text-sm text-gray-400">
-                  Get a head start in experiencing and influencing the future of
-                  AI coding.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center space-x-2">
-              <div>
-                <h3 className="text-lg font-medium text-white">
-                  Exclusive Updates
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Stay informed with the latest developments and updates as
-                  JACoB evolves.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center space-x-2">
-              <div>
-                <h3 className="text-lg font-medium text-white">
-                  Community Influence
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Be part of a community that's shaping JACoB to be the best AI
-                  coding assistant.
-                </p>
-              </div>
-            </div>
+          </PopupButton>
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:mt-24 sm:grid-cols-3 lg:gap-8">
+            <FeatureCard
+              icon={faStar}
+              title="Early Access"
+              description="Get a head start in experiencing and influencing the future of AI coding."
+            />
+            <FeatureCard
+              icon={faBell}
+              title="Exclusive Updates"
+              description="Stay informed with the latest developments and updates as JACoB evolves."
+            />
+            <FeatureCard
+              icon={faUsers}
+              title="Community Influence"
+              description="Be part of a community that's shaping JACoB to be the best AI coding assistant."
+            />
           </div>
         </div>
       </div>
