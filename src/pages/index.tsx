@@ -14,7 +14,7 @@ export default function Home() {
       <Head>
         <title>JACoB - Just Another Coding Bot</title>
       </Head>
-      <main className="flex min-h-screen flex-col items-center pb-12 text-dark-blue">
+      <main className="flex w-full flex-col items-center overflow-x-hidden pb-12">
         <Header />
         <Hero />
         <Intro />

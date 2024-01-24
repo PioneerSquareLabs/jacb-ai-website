@@ -3,16 +3,38 @@
 
 @font-face {
   font-family: "gooper";
-  src: url("../../public/fonts/gooper-semibold.otf") format("opentype");
+  src: url("/fonts/gooper-semibold.otf") format("opentype");
+}
+
+*,
+*::before,
+*::after {
+  @apply m-0 box-border p-0;
+}
+
+html,
+body {
+  @apply min-h-full w-full;
 }
 
 body {
-  @apply font-poppins;
-  @apply bg-beige;
+  @apply flex flex-col bg-beige font-poppins;
+}
+
+#__next {
+  @apply flex min-h-screen w-full;
 }
 
 h1 {
   @apply font-gooper text-4xl font-semibold;
+}
+
+.button-secondary {
+  @apply flex h-10 items-center justify-center rounded-xl border border-solid border-navy-blue px-4 shadow-sm transition-colors hover:bg-blue-500 hover:text-white md:px-8 lg:px-10;
+}
+
+.aspect-ratio-box {
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
 }
 
 @tailwind utilities;
