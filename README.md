@@ -37,9 +37,12 @@ To begin, you need to install the JACoB AI Bot on your GitHub account. This bot 
 
 Next, you need to run the JACoB custom setup command to create a `jacob.config` file in your repository. This configuration file allows JACoB to understand your project’s specific needs and any environment variables essential for building the app. 
 
-1. Run the JACoB custom setup command in your project directory.
-2. A `jacob.config` file will be created. Open it and fill in the necessary details to customize it to your project.
-3. Be sure to add any .env placeholder variables to the config file, as JACoB will need these to build the application (similar to a CI system). Here’s an example structure:
+1. Run the JACoB custom setup command in your project directory and answer the questions. You can always edit this later if needed.
+```
+npx jacob-setup create
+```
+3. A `jacob.config` file will be created. Open it and fill in the necessary details to customize it to your project.
+4. Be sure to add any .env placeholder variables to the config file, as JACoB will need these to build the application (similar to a CI system). Here’s an example structure:
 
 ```json
 "env": {
