@@ -10,7 +10,7 @@ function JacobInMotion() {
     "Live Coding Session":
       "https://www.youtube.com/embed/OfRUaehTcEM?si=Ztt02TwiywbZkSMS",
     "Code Review Process":
-      "https://www.youtube.com/embed/x5xs3HXFvPA?si=6SJ3aZxRAx2uWxoN",
+      "https://www.youtube.com/embed/j9Yeow-LxT8?si=wqtbVVTOztIMKzVt",
     "Workflow Integration":
       "https://www.youtube.com/embed/ERqldloLqjU?si=ZaO2RZA3udsOptAb",
   };
