@@ -26,7 +26,7 @@ const HeroSection = () => {
           <FontAwesomeIcon icon={faArrowRight} className="ml-2 text-white" />
         </PopupButton>
       </div>
-      <div className="mt-8 flex w-full items-center justify-center overflow-hidden md:mt-0 md:w-3/5">
+      <div className="mt-8 hidden w-full items-center justify-center overflow-hidden md:mt-0 md:flex md:w-3/5">
         <div className="aspect-ratio-box relative h-0 w-full">
           <video
             autoPlay
@@ -37,6 +37,17 @@ const HeroSection = () => {
             <source src="/videos/overview-small.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+        </div>
+      </div>
+      <div className="mt-8 flex w-full items-center justify-center overflow-hidden md:mt-0 md:hidden md:w-3/5">
+        <div className="aspect-ratio-box relative h-0 w-full">
+          <iframe
+            className="absolute left-0 top-0 z-10 h-full w-full"
+            src="https://www.youtube.com/embed/08fu8TLKAlI?si=x8vXW-ZiHYzUImEk"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
     </div>
