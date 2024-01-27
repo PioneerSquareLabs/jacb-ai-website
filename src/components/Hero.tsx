@@ -28,13 +28,15 @@ const HeroSection = () => {
       </div>
       <div className="mt-8 flex w-full items-center justify-center overflow-hidden md:mt-0 md:w-3/5">
         <div className="aspect-ratio-box relative h-0 w-full">
-          <iframe
-            className="absolute left-0 top-0 z-10 h-full w-full"
-            src="https://www.youtube.com/embed/OfRUaehTcEM?si=Ztt02TwiywbZkSMS"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
+          <video
+            autoPlay
+            muted
+            loop
+            className="absolute left-0 top-0 z-10 h-full w-full rounded-lg border-x-4 border-y-8  border-black object-cover"
+          >
+            <source src="/videos/overview-small.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>

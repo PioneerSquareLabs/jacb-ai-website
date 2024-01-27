@@ -11,8 +11,8 @@ function JacobInMotion() {
       "https://www.youtube.com/embed/OfRUaehTcEM?si=Ztt02TwiywbZkSMS",
     "Code Review Process":
       "https://www.youtube.com/embed/j9Yeow-LxT8?si=wqtbVVTOztIMKzVt",
-    "Workflow Integration":
-      "https://www.youtube.com/embed/ERqldloLqjU?si=ZaO2RZA3udsOptAb",
+    "Setting up JACoB":
+      "https://www.youtube.com/embed/sdLNSL-vFTU?si=MysanCOjnirBDF_J",
   };
 
   useEffect(() => {
@@ -89,9 +89,9 @@ function JacobInMotion() {
             videoUrl={videoUrls["Code Review Process"]}
           />
           <SessionCard
-            title="Workflow Integration"
-            description="JACoB interacting with common developer tools and platforms, such as GitHub actions, demonstrating real-time project contributions."
-            videoUrl={videoUrls["Workflow Integration"]}
+            title="Setting up JACoB"
+            description="A quick walkthrough of how to set up JACoB in your GitHub repo and Figma environment."
+            videoUrl={videoUrls["Setting up JACoB"]}
           />
         </div>
         <div className="aspect-ratio-box relative mt-8 h-0 w-full">
