@@ -32,7 +32,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 
 const CtaComponent = () => {
   return (
-    <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto mt-12 w-full px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md rounded-3xl bg-dark-blue p-6 shadow-lg shadow-blue-300/20 sm:max-w-xl sm:p-8 lg:max-w-7xl lg:p-10">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-2xl font-bold text-white sm:text-4xl lg:text-5xl">
