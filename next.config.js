@@ -17,6 +17,14 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  async rewrites() {
+    return [
+      {
+        source: "/try/:path*",
+        destination: "https://try.jacb.ai/:path*",
+      },
+    ];
+  },
 };
 
 export default config;
