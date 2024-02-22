@@ -8,7 +8,7 @@ function SetupComponent() {
   const [completedSteps, setCompletedSteps] = useState(new Array(4).fill(false));
   const router = useRouter();
 
-  const markAsComplete = (stepIndex) => {
+  const markAsComplete = (stepIndex: number) => {
     setCompletedSteps(completedSteps.map((completed, index) => index <= stepIndex ? true : completed));
     if (stepIndex === 3) {
       router.push('/finished');
