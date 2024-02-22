@@ -12,6 +12,9 @@ export default {
         pink: "#ff7bff",
         orange: "#FFBA00",
         "navy-blue": "#0044FF",
+        "drake-passage": "#1D265D",
+        "violet-beauregarde": "#0043FF",
+        "not-black-black": "#191818",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

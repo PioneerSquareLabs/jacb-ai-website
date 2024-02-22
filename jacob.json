@@ -10,7 +10,7 @@
     "pages": "/src/pages",
     "types": "/src/types",
     "styles": "/src/styles",
-    "tailwindConfig": "/tailwind.config.js",
+    "tailwindConfig": "/tailwind.config.ts",
     "staticAssets": "/public/assets"
   },
   "stateManagement": {
