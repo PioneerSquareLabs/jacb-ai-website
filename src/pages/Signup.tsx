@@ -7,12 +7,14 @@ const SignupPage = () => {
   const router = useRouter();
 
   const handleSignUp = async () => {
-    const res = await signIn("github");
-    if (res?.url) {
+    try {
+      const res = await signIn("github");
+      if (res?.error) {
+        throw new Error("An error occurred during sign up. Please try again.");
+      }
       await router.push("/setup"); // Navigate to the setup page
-    } else {
-      // Display error to the user
-      alert("An error occurred during sign up. Please try again.");
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 

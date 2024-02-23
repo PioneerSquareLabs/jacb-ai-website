@@ -67,6 +67,7 @@ function SetupComponent() {
                 <a
                   href="https://github.com/apps/jacob-ai-bot"
                   className="mt-3 inline-flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-navy-blue hover:bg-dark-beige"
+                  target="_blank"
                 >
                   JACoB AI Bot
                   <FontAwesomeIcon icon={faExternalLinkAlt} className="ml-2" />
@@ -154,6 +155,7 @@ function SetupComponent() {
                   <a
                     href="https://www.figma.com/community/plugin/1326684504185921461/jacob-ai-codegen-connector"
                     className="mt-3 inline-flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-navy-blue hover:bg-dark-beige"
+                    target="_blank"
                   >
                     JACoB Figma Plugin
                     <FontAwesomeIcon
@@ -202,6 +204,7 @@ function SetupComponent() {
                 <a
                   href="https://discord.gg/73TBGbES"
                   className="hover:bg-violet-beauregarde mt-3 inline-flex items-center rounded-md border border-transparent bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+                  target="_blank"
                 >
                   Join Discord
                   <FontAwesomeIcon icon={faDiscord} className="ml-2" />
