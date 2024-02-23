@@ -15,7 +15,7 @@ export default NextAuth({
       authorization: {
         params: {
           scope: "read:user",
-          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/github`,
+          redirect_uri: `${env.NEXTAUTH_URL}/api/auth/callback/github`,
         },
       },
     }),
