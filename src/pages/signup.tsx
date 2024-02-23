@@ -8,7 +8,9 @@ const SignupPage = () => {
 
   const handleSignUp = async () => {
     try {
-      const res = await signIn("github");
+      const res = await signIn("github", {
+        callbackUrl: `${window.location.origin}/setup`,
+      });
       if (res?.error) {
         throw new Error("An error occurred during sign up. Please try again.");
       }
