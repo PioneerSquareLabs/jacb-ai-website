@@ -5,7 +5,6 @@ import {
   faUsers,
   type IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { PopupButton } from "@typeform/embed-react";
 import Link from "next/link";
 
 interface FeatureCardProps {
