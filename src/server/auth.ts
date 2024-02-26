@@ -78,7 +78,7 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: "read:user",
-          redirect_uri: `${env.NEXTAUTH_URL}/api/auth/callback/github`,
+          redirect_uri: `https://www.jacb.ai/api/auth/callback/github`,
         },
       },
     }),
