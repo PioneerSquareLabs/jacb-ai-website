@@ -9,7 +9,9 @@ import GitHubProvider from "next-auth/providers/github";
 
 import { env } from "~/env";
 import { db } from "~/server/db";
+import LoopsClient from "loops";
 
+const loops = new LoopsClient(env.LOOPS_API_KEY);
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -45,6 +47,24 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+  },
+  events: {
+    createUser: async (data) => {
+      const user = data.user;
+      console.log("createUser event", user);
+      const email = user.email ?? undefined;
+      if (!email) {
+        console.error("User email is undefined");
+        console.log("user", user);
+        return;
+      }
+      try {
+        const resp = await loops.createContact(email);
+        console.log("createContact response", resp);
+      } catch (error) {
+        console.error("Failed to create contact", error);
+      }
+    },
   },
   adapter: PrismaAdapter(db),
   providers: [

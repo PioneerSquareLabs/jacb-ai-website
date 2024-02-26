@@ -40,7 +40,7 @@ const CtaComponent = () => {
             <span className="block text-pink">Elevate your Coding</span>
           </h1>
           <Link
-            href="/setup"
+            href="/signup"
             className="focus:ring-pink-400 mt-8 flex h-12 w-[300px] max-w-xl cursor-pointer items-center justify-center rounded-full bg-pink px-8 font-medium uppercase text-indigo-900 hover:bg-pink hover:bg-pink/80 focus:outline-none focus:ring-2 focus:ring-offset-2 md:w-[400px] lg:mt-12"
           >
             Get Started
