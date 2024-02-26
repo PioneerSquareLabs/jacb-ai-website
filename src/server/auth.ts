@@ -51,6 +51,12 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: "read:user",
+          redirect_uri: `${env.NEXTAUTH_URL}/api/auth/callback/github`,
+        },
+      },
     }),
     /**
      * ...add more providers here.
