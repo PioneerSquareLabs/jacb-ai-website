@@ -50,16 +50,20 @@ export const authOptions: NextAuthOptions = {
   },
   events: {
     createUser: async (data) => {
-      const user = data.user;
-      console.log("createUser event", user);
-      const email = user.email ?? undefined;
-      if (!email) {
-        console.error("User email is undefined");
-        console.log("user", user);
-        return;
-      }
       try {
-        const resp = await loops.createContact(email);
+        const user = data.user;
+        console.log("createUser event", user);
+        const email = user.email ?? undefined;
+        if (!email) {
+          throw new Error("User email is undefined");
+        }
+        const resp = await loops.createContact(email, {
+          id: user?.id,
+          name: user?.name ?? "",
+          firstName: user?.name?.split(" ")[0] ?? "",
+          email: user?.email ?? "",
+          image: user?.image ?? "",
+        });
         console.log("createContact response", resp);
       } catch (error) {
         console.error("Failed to create contact", error);
