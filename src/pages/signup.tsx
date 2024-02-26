@@ -1,11 +1,8 @@
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const SignupPage = () => {
-  const router = useRouter();
-
   const handleSignUp = async () => {
     try {
       const res = await signIn("github", {
@@ -14,7 +11,6 @@ const SignupPage = () => {
       if (res?.error) {
         throw new Error("An error occurred during sign up. Please try again.");
       }
-      await router.push("/setup"); // Navigate to the setup page
     } catch (error: any) {
       alert(error.message);
     }
