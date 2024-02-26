@@ -1,9 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { PopupButton } from "@typeform/embed-react";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 function Header() {

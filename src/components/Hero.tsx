@@ -1,7 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { PopupButton } from "@typeform/embed-react";
 import Link from "next/link";
 
 const HeroSection = () => {
