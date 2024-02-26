@@ -14,7 +14,7 @@ function Header() {
         <Logo />
       </div>
       <div className="items-center text-navy-blue sm:flex">
-        <Link href="/setup" className="button-secondary">
+        <Link href="/signup" className="button-secondary">
           Get Started
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </Link>
