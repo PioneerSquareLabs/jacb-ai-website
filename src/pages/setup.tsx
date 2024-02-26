@@ -164,7 +164,7 @@ function SetupComponent() {
             isCompleted={completedSteps[1]}
             imageSrc="/images/terminal.png"
             title="Customize Your Configuration"
-            description="Run the JACoB setup command in your project directory"
+            description="Run the JACoB setup command in your project's root directory"
             ctaText="Mark as Complete"
             codeCommand="npx jacob-setup create"
             onCtaClick={() => markAsComplete(1)}
@@ -176,7 +176,7 @@ function SetupComponent() {
             isCompleted={completedSteps[2]}
             imageSrc="/images/figma.png"
             title="Install the JACoB Figma Plugin"
-            description="Get the plugin from Figma Community"
+            description="Get the Figma plugin"
             ctaText="JACoB Figma Plugin"
             onCtaClick={() => markAsComplete(2)}
             ctaLink="https://www.figma.com/community/plugin/1326684504185921461/jacob-ai-codegen-connector"
@@ -193,6 +193,19 @@ function SetupComponent() {
             onCtaClick={() => markAsComplete(3)}
             ctaLink="https://discord.gg/73TBGbES"
           />
+        </div>
+        <div className="mt-4 text-center text-xs text-gray-400">
+          <p>
+            Not ready to install quite yet? View the{" "}
+            <a
+              href="https://docs.jacb.ai"
+              target="_blank"
+              className="text-blue-500"
+            >
+              full documentation
+            </a>{" "}
+            for more details and tutorials.
+          </p>
         </div>
       </div>
     </div>

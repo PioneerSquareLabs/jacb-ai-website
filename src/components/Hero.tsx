@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { PopupButton } from "@typeform/embed-react";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -15,16 +16,10 @@ const HeroSection = () => {
           that turns your designs into deployable code, understands your
           codebase, and collaborates via your existing GitHub workflow
         </p>
-        <PopupButton
-          id={"DSxrFcdl"}
-          className="button-primary mt-6"
-          medium="jacob-waitlist"
-        >
-          <span className="text-md text-white sm:text-lg">
-            Join the Waitlist for Early Access
-          </span>
-          <FontAwesomeIcon icon={faArrowRight} className="ml-2 text-white" />
-        </PopupButton>
+        <Link href="/setup" className="button-primary mt-6 text-white">
+          Get Started
+          <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+        </Link>
       </div>
       <div className="mt-8 hidden w-full items-center justify-center overflow-hidden md:mt-0 md:flex md:w-3/5">
         <div className="aspect-ratio-box relative h-0 w-full">

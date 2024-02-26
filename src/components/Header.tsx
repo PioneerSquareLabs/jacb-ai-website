@@ -4,6 +4,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { PopupButton } from "@typeform/embed-react";
+import Link from "next/link";
 
 function Header() {
   // Placeholder for the actual logo component
@@ -17,14 +18,10 @@ function Header() {
         <Logo />
       </div>
       <div className="items-center text-navy-blue sm:flex">
-        <PopupButton
-          id={"DSxrFcdl"}
-          className="button-secondary"
-          medium="jacob-waitlist"
-        >
-          Join Waitlist
+        <Link href="/setup" className="button-secondary">
+          Get Started
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-        </PopupButton>
+        </Link>
       </div>
     </div>
   );
