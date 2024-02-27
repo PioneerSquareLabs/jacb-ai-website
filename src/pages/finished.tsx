@@ -1,9 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInbox, faBook, faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 
 function FinishedPage() {
   const handleEmailClick = () => {
     window.location.href = "mailto:kevin@psl.com";
+  };
+
+  const handleVideoClick = () => {
+    window.open("https://www.youtube.com/@kevinleneway2290/videos", "_blank");
   };
 
   const handleDocsClick = () => {
@@ -22,11 +27,12 @@ function FinishedPage() {
         </div>
         <div className="mb-12">
           <h2 className="mb-3 text-xl text-dark-blue">
-            Walkthrough a tutorial
+            Try Our Interactive Tutorial
           </h2>
           <p className="mb-4 text-lg text-gray-600">
-            No need to start from scratch. We’ll supply the Figma files and a
-            walkthrough to launch your first project.
+            Not quite ready to let JACoB loose on your codebase yet? No problem!
+            We’ll supply the GitHub repo and Figma files to show you how it
+            works.
           </p>
           <div className="flex overflow-hidden rounded-lg border border-gray-400">
             <img
@@ -36,7 +42,7 @@ function FinishedPage() {
             />
             <div className="flex-grow bg-white p-4">
               <a
-                href="https://www.figma.com/community/file/1339388263795075198"
+                href="https://docs.jacb.ai/overview/quickstart#setting-up-your-repository"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-light-blue transition-colors hover:text-blue-700"
@@ -52,7 +58,7 @@ function FinishedPage() {
           </h2>
           <p className="mb-4 text-lg text-gray-600">
             Love what we’re doing? We’re looking for people to work directly
-            with and get feedback to improve JACoB.
+            with us and get feedback to improve JACoB.
           </p>
           <button
             onClick={handleEmailClick}
@@ -68,21 +74,28 @@ function FinishedPage() {
             You’re ready to go from design to code in minutes. Here are some
             more resources to get you started.
           </p>
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col items-start space-y-4">
             <button
               onClick={handleDocsClick}
-              className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+              className="flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
             >
               Read the docs
               <FontAwesomeIcon icon={faBook} className="ml-2" />
             </button>
             <button
+              onClick={handleVideoClick}
+              className="flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+            >
+              Watch the videos
+              <FontAwesomeIcon icon={faYoutube} className="ml-2" />
+            </button>
+            <button
               onClick={() => {
                 console.log("Coming soon");
               }}
-              className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+              className="flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
             >
-              Technical white-paper (coming soon)
+              Paper (coming soon)
               <FontAwesomeIcon icon={faFilePdf} className="ml-2" />
             </button>
           </div>
