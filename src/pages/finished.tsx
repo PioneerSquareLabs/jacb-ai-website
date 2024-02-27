@@ -68,22 +68,24 @@ function FinishedPage() {
             You’re ready to go from design to code in minutes. Here are some
             more resources to get you started.
           </p>
-          <button
-            onClick={handleDocsClick}
-            className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
-          >
-            Read the docs
-            <FontAwesomeIcon icon={faBook} className="ml-2" />
-          </button>
-          <button
-            onClick={() => {
-              console.log("Coming soon");
-            }}
-            className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
-          >
-            Technical white-paper (coming soon)
-            <FontAwesomeIcon icon={faFilePdf} className="ml-2" />
-          </button>
+          <div className="flex flex-col space-y-4">
+            <button
+              onClick={handleDocsClick}
+              className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+            >
+              Read the docs
+              <FontAwesomeIcon icon={faBook} className="ml-2" />
+            </button>
+            <button
+              onClick={() => {
+                console.log("Coming soon");
+              }}
+              className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+            >
+              Technical white-paper (coming soon)
+              <FontAwesomeIcon icon={faFilePdf} className="ml-2" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
