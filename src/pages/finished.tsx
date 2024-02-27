@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInbox, faBook } from "@fortawesome/free-solid-svg-icons";
+import { faInbox, faBook, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 function FinishedPage() {
   const handleEmailClick = () => {
     window.location.href = "mailto:kevin@psl.com";
   };
 
-  const handleWhitepaperClick = () => {
-    window.open("https://jacb.ai/whitepaper", "_blank");
+  const handleDocsClick = () => {
+    window.open("https://docs.jacb.ai", "_blank");
   };
 
   return (
@@ -63,17 +63,26 @@ function FinishedPage() {
           </button>
         </div>
         <div>
-          <h2 className="mb-3 text-xl text-dark-blue">Read our white-paper</h2>
+          <h2 className="mb-3 text-xl text-dark-blue">Resources</h2>
           <p className="mb-4 text-lg text-gray-600">
             You’re ready to go from design to code in minutes. Here are some
             more resources to get you started.
           </p>
           <button
-            onClick={handleWhitepaperClick}
+            onClick={handleDocsClick}
             className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
           >
-            Read paper
+            Read the docs
             <FontAwesomeIcon icon={faBook} className="ml-2" />
+          </button>
+          <button
+            onClick={() => {
+              console.log("Coming soon");
+            }}
+            className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-medium text-white"
+          >
+            Technical white-paper (coming soon)
+            <FontAwesomeIcon icon={faFilePdf} className="ml-2" />
           </button>
         </div>
       </div>
