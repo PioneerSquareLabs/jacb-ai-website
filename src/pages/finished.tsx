@@ -14,7 +14,7 @@ function FinishedPage() {
 
   return (
     <div className="bg-white w-full min-h-screen flex flex-col items-center">
-      <div className="flex flex-col items-start mt-16 w-3/4 max-w-4xl">
+      <div className="flex flex-col items-start mt-16 w-3/4 max-w-2xl">
         <div className="space-y-4">
           <h1 className="text-3xl text-dark-blue">Get Started With Your First Project</h1>
           <p className="text-base text-gray-600">
@@ -24,14 +24,14 @@ function FinishedPage() {
         <div className="mt-8 self-start">
           <h2 className="text-lg text-dark-blue mb-2">Starter Files</h2>
           <div className="flex items-center mb-2">
-            <div className="bg-dark-blue w-6 h-6 rounded-full flex items-center justify-center">
-              <img src="/images/figma.png" alt="Figma logo" className="w-3 h-3" onClick={handleFigmaClick} />
+            <div className="w-6 h-6 flex items-center justify-center">
+              <img src="/images/figma.png" alt="Figma logo" className="w-6 h-6" onClick={handleFigmaClick} />
             </div>
             <a href="https://www.figma.com/community/file/1339388263795075198" className="ml-2 text-sm underline text-light-blue" onClick={handleFigmaClick}>Figma Files</a>
           </div>
           <div className="flex items-center">
-            <div className="bg-dark-blue w-6 h-6 rounded-full flex items-center justify-center">
-              <img src="/images/github.png" alt="Github logo" className="w-3 h-3" onClick={handleGithubClick} />
+            <div className="w-6 h-6 flex items-center justify-center">
+              <img src="/images/github.png" alt="Github logo" className="w-6 h-6" onClick={handleGithubClick} />
             </div>
             <a href="https://github.com/PioneerSquareLabs/jacob-template" className="ml-2 text-sm underline text-light-blue" onClick={handleGithubClick}>Github Repo</a>
           </div>
