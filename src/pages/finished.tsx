@@ -12,21 +12,16 @@ function FinishedPage() {
     window.open("https://github.com/PioneerSquareLabs/jacob-template", "_blank");
   };
 
-  const handleSubmitFeedbackClick = () => {
-    // Placeholder for submit feedback functionality
-    console.log("Feedback submitted");
-  };
-
   return (
     <div className="bg-white w-full min-h-screen flex flex-col items-center">
-      <div className="flex flex-col items-center mt-16 w-3/4 max-w-2xl">
+      <div className="flex flex-col items-start mt-16 w-3/4 max-w-4xl">
         <div className="space-y-4">
           <h1 className="text-3xl text-dark-blue">Get Started With Your First Project</h1>
           <p className="text-base text-gray-600">
             We know getting started is the hardest part, so we’ve made it easy with an out-of-the-box project built by JACoB and our community.
           </p>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 self-start">
           <h2 className="text-lg text-dark-blue mb-2">Starter Files</h2>
           <div className="flex items-center mb-2">
             <div className="bg-dark-blue w-6 h-6 rounded-full flex items-center justify-center">
@@ -41,7 +36,7 @@ function FinishedPage() {
             <a href="https://github.com/PioneerSquareLabs/jacob-template" className="ml-2 text-sm underline text-light-blue" onClick={handleGithubClick}>Github Repo</a>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 w-full">
           <h2 className="text-lg text-dark-blue mb-2">Video</h2>
           <div className="relative w-full h-96 rounded-lg overflow-hidden">
             <iframe
@@ -53,16 +48,9 @@ function FinishedPage() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-dark-blue w-20 h-20 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={faPlay} className="text-white" />
-            </div>
           </div>
         </div>
       </div>
-      <button className="mt-auto bg-dark-blue rounded-md shadow-md py-2 px-6 flex items-center justify-center mb-8" onClick={handleSubmitFeedbackClick}>
-        <FontAwesomeIcon icon={faLightbulb} className="text-white" />
-        <span className="text-sm font-medium text-white ml-2">Submit Feedback</span>
-      </button>
     </div>
   );
 }
