@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { useSession } from "next-auth/react";
 import { type CodeSnippet } from "./api/challenge"; // Update this path to the actual location of your types
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
@@ -19,6 +20,25 @@ const CodeComparison: React.FC = () => {
   const [screenshot, setScreenshot] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { data, status } = useSession();
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (status === "loading") return; // Wait for session loading
+    if (data?.user) {
+      // If user is logged in, use their id
+      setUserId(data.user.id);
+    } else {
+      // If user is not logged in, generate a random id and store it in local storage
+      let id = localStorage.getItem("userId");
+      if (!id) {
+        id =
+          Date.now().toString(36) + Math.random().toString(36).substring(2, 8);
+        localStorage.setItem("userId", id);
+      }
+      setUserId(id);
+    }
+  }, [data, status]);
 
   const fetchSnippets = async () => {
     setIsLoading(true);
@@ -49,6 +69,7 @@ const CodeComparison: React.FC = () => {
           losingPlugin: snippets.find(
             (snippet) => snippet.id !== chosenSnippet.id,
           )?.plugin,
+          userId,
         }),
       });
 
@@ -58,7 +79,7 @@ const CodeComparison: React.FC = () => {
         await fetchSnippets();
         setCurrentChoice((prevChoice) => prevChoice + 1);
       } else {
-        window.location.href = "/finished";
+        window.location.href = "/results";
       }
     } catch (error) {
       console.error("Error submitting choice:", error);
@@ -81,10 +102,14 @@ const CodeComparison: React.FC = () => {
       </div>
       <div className="mx-auto grid gap-4 text-xs md:grid-cols-2">
         {snippets.map((snippet, index) => (
-          <div key={snippet.id} className="rounded-lg border p-4 shadow-sm">
-            <SyntaxHighlighter language="tsx" style={docco}>
+          <div
+            key={snippet.id}
+            className="min-w-0 overflow-x-auto rounded-lg border p-4 shadow-sm"
+          >
+            <SyntaxHighlighter language="typescript" style={docco}>
               {snippet.code}
             </SyntaxHighlighter>
+
             <button
               className="mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
               onClick={() => handleChoice(snippet)}

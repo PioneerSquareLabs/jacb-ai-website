@@ -1,0 +1,73 @@
+import { ResponsivePie } from "@nivo/pie"
+
+export default function Component() {
+  return (
+    <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow">
+      <PieChart className="w-full aspect-[4/3]" />
+      <div className="flex justify-center mt-4 space-x-3">
+        <div className="flex items-center space-x-1">
+          <div className="w-3 h-3 bg-purple-400 rounded-full" />
+          <span className="text-sm text-gray-700">A</span>
+        </div>
+        <div className="flex items-center space-x-1">
+          <div className="w-3 h-3 bg-pink-400 rounded-full" />
+          <span className="text-sm text-gray-700">B</span>
+        </div>
+        <div className="flex items-center space-x-1">
+          <div className="w-3 h-3 bg-blue-400 rounded-full" />
+          <span className="text-sm text-gray-700">AB</span>
+        </div>
+        <div className="flex items-center space-x-1">
+          <div className="w-3 h-3 bg-yellow-400 rounded-full" />
+          <span className="text-sm text-gray-700">O</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PieChart(props) {
+  return (
+    <div {...props}>
+      <ResponsivePie
+        data={[
+          { id: "Jan", value: 111 },
+          { id: "Feb", value: 157 },
+          { id: "Mar", value: 129 },
+          { id: "Apr", value: 150 },
+          { id: "May", value: 119 },
+          { id: "Jun", value: 72 },
+        ]}
+        sortByValue
+        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+        cornerRadius={0}
+        padAngle={0}
+        borderWidth={1}
+        borderColor={"#ffffff"}
+        enableArcLinkLabels={false}
+        arcLabel={(d) => `${d.id}`}
+        arcLabelsTextColor={"#ffffff"}
+        arcLabelsRadiusOffset={0.65}
+        colors={["#2563eb"]}
+        theme={{
+          labels: {
+            text: {
+              fontSize: "18px",
+            },
+          },
+          tooltip: {
+            chip: {
+              borderRadius: "9999px",
+            },
+            container: {
+              fontSize: "12px",
+              textTransform: "capitalize",
+              borderRadius: "6px",
+            },
+          },
+        }}
+        role="application"
+      />
+    </div>
+  )
+}
