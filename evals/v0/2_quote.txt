@@ -1,0 +1,91 @@
+export default function Component() {
+  return (
+    <div className="bg-white py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
+            Don't just take our words
+          </h2>
+          <p className="mt-3 text-xl leading-7 text-gray-500 sm:mt-4">3940+ Happy Landingfolio Users</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          <div className="w-full max-w-md">
+            <div className="flex flex-col items-center text-center">
+              <img
+                alt="Jenny Wilson"
+                className="w-32 h-32 rounded-full mb-4"
+                height="128"
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "128/128",
+                  objectFit: "cover",
+                }}
+                width="128"
+              />
+              <div className="flex mb-2">
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-gray-300" />
+              </div>
+              <blockquote className="mb-4">
+                "We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of
+                design they want."
+              </blockquote>
+              <p className="font-semibold">Jenny Wilson</p>
+              <p className="text-sm text-gray-600">Grower.io</p>
+            </div>
+          </div>
+          <div className="w-full max-w-md">
+            <div className="flex flex-col items-center text-center">
+              <img
+                alt="Devon Lane"
+                className="w-32 h-32 rounded-full mb-4"
+                height="128"
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "128/128",
+                  objectFit: "cover",
+                }}
+                width="128"
+              />
+              <div className="flex mb-2">
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-blue-500" />
+                <StarIcon className="text-gray-300" />
+              </div>
+              <blockquote className="mb-4">
+                "We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of
+                design they want."
+              </blockquote>
+              <p className="font-semibold">Devon Lane</p>
+              <p className="text-sm text-gray-600">DLDesign.co</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function StarIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  )
+}
