@@ -1,0 +1,37 @@
+import * as React from "react";
+
+function MyComponent(props) {
+  return (
+    <div className="flex justify-center items-center px-16 py-12 bg-white max-md:px-5">
+      <div className="mt-32 w-full max-w-[1296px] max-md:mt-10 max-md:max-w-full">
+        <div className="flex gap-5 max-md:flex-col max-md:gap-0 max-md:">
+          <div className="flex flex-col w-[56%] max-md:ml-0 max-md:w-full">
+            <div className="flex flex-col self-stretch my-auto max-md:mt-10 max-md:max-w-full">
+              <div className="text-7xl font-bold tracking-tighter leading-[86px] text-slate-900 max-md:max-w-full max-md:text-4xl max-md:leading-10">
+                Meet the New Landingfolio Kit
+              </div>
+              <div className="mt-10 mr-4 text-xl leading-9 text-gray-600 max-md:mr-2.5 max-md:max-w-full">
+                Clarity gives you the blocks & components you need to create a
+                truly professional website, landing page or admin panel for your
+                SaaS.
+              </div>
+              <div className="justify-center self-start px-6 py-4 mt-12 text-lg font-semibold leading-7 text-center text-white whitespace-nowrap bg-indigo-500 rounded-lg max-md:px-5 max-md:mt-10">
+                Start using LandingFolio
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col ml-5 w-[44%] max-md:ml-0 max-md:w-full">
+            <div className="flex grow justify-center items-center px-16 py-12 w-full bg-blue-100 rounded-3xl max-md:px-5 max-md:mt-10 max-md:max-w-full">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/e93bbcace3982682ede21b2b1bded613a6e270ab1cf3212b3dc3e7a1572fd6a3?"
+                className="mt-60 aspect-square w-[75px] max-md:mt-10"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+

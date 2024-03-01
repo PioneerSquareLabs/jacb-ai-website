@@ -1,0 +1,98 @@
+import React from 'react';
+import './index.css';
+
+export default function Main() {
+  return (
+    <div className='main-container w-[729px] h-[456px] relative mx-auto my-0'>
+      <div className='flex w-[729px] items-start flex-nowrap relative z-[35] mt-0 mr-0 mb-0 ml-0'>
+        <div className='flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] gap-[6px] items-start grow shrink-0 basis-0 flex-nowrap bg-[#e8f1ff] rounded-[4px] relative z-[36]'>
+          <div className='flex gap-[16px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[37]'>
+            <div className='flex w-[16px] pt-px pr-0 pb-0 pl-0 gap-[10px] items-start shrink-0 flex-nowrap relative z-[38]'>
+              <div className='w-[16px] h-[16px] shrink-0 bg-[url(../assets/images/5140aebf-f3dc-46e9-8bbf-caf86c86a1f0.png)] bg-[length:100%_100%] bg-no-repeat relative overflow-hidden z-[39]' />
+            </div>
+            <div className='flex flex-col gap-[8px] items-start grow shrink-0 basis-0 flex-nowrap relative z-40'>
+              <span className="h-[18px] shrink-0 basis-auto font-['Inter'] text-[14px] font-semibold leading-[18px] text-[#0041d0] tracking-[-0.5px] relative text-left whitespace-nowrap z-[41]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='flex w-[729px] items-start flex-nowrap relative z-[1] mt-[24px] mr-0 mb-0 ml-0'>
+        <div className='flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] gap-[6px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap bg-[#e8f1ff] rounded-[4px] relative z-[2]'>
+          <div className='flex gap-[16px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[3]'>
+            <div className='flex w-[16px] pt-px pr-0 pb-0 pl-0 gap-[10px] items-start shrink-0 flex-nowrap relative z-[4]'>
+              <div className='w-[16px] h-[16px] shrink-0 bg-[url(../assets/images/e62afc01-a8e6-4759-a673-90b5152d6e79.png)] bg-[length:100%_100%] bg-no-repeat relative overflow-hidden z-[5]' />
+            </div>
+            <div className='flex flex-col gap-[8px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[6]'>
+              <span className="h-[18px] shrink-0 basis-auto font-['Inter'] text-[14px] font-semibold leading-[18px] text-[#0041d0] tracking-[-0.5px] relative text-left whitespace-nowrap z-[7]">
+                Placeholder
+              </span>
+              <span className="flex w-[665px] h-[40px] justify-start items-start self-stretch shrink-0 font-['Inter'] text-[14px] font-medium leading-[20px] text-[#0053e7] tracking-[-0.5px] relative text-left z-[8]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
+                arcu, in nisi convallis rhoncus facilisi fames purus. Dictum sed
+                phasellus dolor porttitor eget nulla vitae porttitor.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='flex w-[729px] items-start flex-nowrap relative z-[9] mt-[24px] mr-0 mb-0 ml-0'>
+        <div className='flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] gap-[6px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap bg-[#e8f1ff] rounded-[4px] relative z-10'>
+          <div className='flex gap-[16px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[11]'>
+            <div className='flex w-[16px] pt-px pr-0 pb-0 pl-0 gap-[10px] items-start shrink-0 flex-nowrap relative z-[12]'>
+              <div className='w-[16px] h-[16px] shrink-0 bg-[url(../assets/images/27e02703-5422-4bc4-aa08-54478c0d9614.png)] bg-[length:100%_100%] bg-no-repeat relative overflow-hidden z-[13]' />
+            </div>
+            <div className='flex flex-col gap-[8px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[14]'>
+              <span className="h-[18px] shrink-0 basis-auto font-['Inter'] text-[14px] font-semibold leading-[18px] text-[#0041d0] tracking-[-0.5px] relative text-left whitespace-nowrap z-[15]">
+                Placeholder
+              </span>
+              <div className='flex gap-[8px] items-start self-stretch shrink-0 flex-nowrap relative z-[16]'>
+                <div className='flex w-[6px] pt-[6px] pr-0 pb-0 pl-0 gap-[10px] items-start shrink-0 flex-nowrap relative z-[17]'>
+                  <div className='w-[6px] h-[6px] shrink-0 bg-[url(../assets/images/0bb0f2c8-134f-41a3-b8e7-d801f18ccbc4.png)] bg-cover bg-no-repeat relative z-[18]' />
+                </div>
+                <span className="h-[20px] grow shrink-0 basis-auto font-['Inter'] text-[14px] font-medium leading-[20px] text-[#0053e7] tracking-[-0.5px] relative text-left whitespace-nowrap z-[19]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </span>
+              </div>
+              <div className='flex gap-[8px] items-start self-stretch shrink-0 flex-nowrap relative z-20'>
+                <div className='flex w-[6px] pt-[6px] pr-0 pb-0 pl-0 gap-[10px] items-start shrink-0 flex-nowrap relative z-[21]'>
+                  <div className='w-[6px] h-[6px] shrink-0 bg-[url(../assets/images/e86134cf-0cdd-4ba7-b744-6b567c10c1ae.png)] bg-cover bg-no-repeat relative z-[22]' />
+                </div>
+                <span className="h-[20px] grow shrink-0 basis-auto font-['Inter'] text-[14px] font-medium leading-[20px] text-[#0053e7] tracking-[-0.5px] relative text-left whitespace-nowrap z-[23]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='flex w-[729px] items-start flex-nowrap relative z-[24] mt-[24px] mr-0 mb-0 ml-0'>
+        <div className='flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] gap-[6px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap bg-[#e8f1ff] rounded-[4px] relative z-[25]'>
+          <div className='flex gap-[16px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[26]'>
+            <div className='flex w-[16px] pt-px pr-0 pb-0 pl-0 gap-[10px] items-start shrink-0 flex-nowrap relative z-[27]'>
+              <div className='w-[16px] h-[16px] shrink-0 bg-[url(../assets/images/e7040966-c42b-4b72-a548-3f93cb160e63.png)] bg-[length:100%_100%] bg-no-repeat relative overflow-hidden z-[28]' />
+            </div>
+            <div className='flex flex-col gap-[8px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[29]'>
+              <span className="h-[18px] shrink-0 basis-auto font-['Inter'] text-[14px] font-semibold leading-[18px] text-[#0041d0] tracking-[-0.5px] relative text-left whitespace-nowrap z-30">
+                Placeholder
+              </span>
+              <span className="flex w-[665px] h-[40px] justify-start items-start self-stretch shrink-0 font-['Inter'] text-[14px] font-medium leading-[20px] text-[#0053e7] tracking-[-0.5px] relative text-left z-[31]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
+                arcu, in nisi convallis rhoncus facilisi fames purus.
+              </span>
+              <div className='flex w-[102px] gap-[32px] items-start shrink-0 flex-nowrap relative z-[32]'>
+                <span className="h-[24px] shrink-0 basis-auto font-['Inter'] text-[14px] font-semibold leading-[24px] text-[#0030b9] tracking-[-0.5px] relative text-left whitespace-nowrap z-[33]">
+                  Label
+                </span>
+                <span className="h-[24px] shrink-0 basis-auto font-['Inter'] text-[14px] font-semibold leading-[24px] text-[#0030b9] tracking-[-0.5px] relative text-left whitespace-nowrap z-[34]">
+                  Label
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

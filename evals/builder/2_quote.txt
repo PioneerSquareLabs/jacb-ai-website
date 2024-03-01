@@ -1,0 +1,79 @@
+import * as React from "react";
+
+function MyComponent(props) {
+  return (
+    <div className="flex justify-center items-center px-16 py-12 bg-white max-md:px-5">
+      <div className="flex flex-col items-center mt-14 w-full max-w-[1285px] max-md:mt-10 max-md:max-w-full">
+        <div className="text-base font-semibold tracking-normal leading-7 text-center text-blue-600 whitespace-nowrap">
+          3940+ Happy Landingfolio Users
+        </div>
+        <div className="mt-8 text-5xl font-semibold tracking-tighter text-center leading-[61.88px] text-gray-950 max-md:max-w-full max-md:text-4xl">
+          Don’t just take our words
+        </div>
+        <div className="self-stretch px-px mt-24 max-md:mt-10 max-md:max-w-full">
+          <div className="flex gap-5 max-md:flex-col max-md:gap-0 max-md:">
+            <div className="flex flex-col w-1/5 max-md:ml-0 max-md:w-full">
+              <img
+                loading="lazy"
+                srcSet="..."
+                className="max-w-full aspect-square w-[239px] max-md:mt-10"
+              />
+            </div>
+            <div className="flex flex-col ml-5 w-[30%] max-md:ml-0 max-md:w-full">
+              <div className="flex flex-col self-stretch my-auto max-md:mt-10">
+                <img
+                  loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/41009f167c66654388766ac1a96ac2806cfd5869f18b5990784a19fbb1ba6906?"
+                  className="max-w-full aspect-[6.67] w-[121px]"
+                />
+                <div className="mt-9 text-lg font-medium leading-7 text-gray-950">
+                  &quot;We love Landingfolio! Our designers were using it for
+                  their projects, so we already knew what kind of design they
+                  want.&quot;
+                </div>
+                <div className="flex gap-3 justify-between mt-8 text-base whitespace-nowrap">
+                  <div className="font-semibold tracking-normal leading-[175%] text-gray-950">
+                    Jenny Wilson
+                  </div>
+                  <div className="flex-auto font-medium leading-[150%] text-slate-500">
+                    Grower.io
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col ml-5 w-1/5 max-md:ml-0 max-md:w-full">
+              <img
+                loading="lazy"
+                srcSet="..."
+                className="max-w-full aspect-square w-[239px] max-md:mt-10"
+              />
+            </div>
+            <div className="flex flex-col ml-5 w-[30%] max-md:ml-0 max-md:w-full">
+              <div className="flex flex-col self-stretch my-auto max-md:mt-10">
+                <img
+                  loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/41009f167c66654388766ac1a96ac2806cfd5869f18b5990784a19fbb1ba6906?"
+                  className="max-w-full aspect-[6.67] w-[121px]"
+                />
+                <div className="mt-9 text-lg font-medium leading-7 text-gray-950">
+                  &quot;We love Landingfolio! Our designers were using it for
+                  their projects, so we already knew what kind of design they
+                  want.&quot;
+                </div>
+                <div className="flex gap-2.5 justify-between mt-8 text-base whitespace-nowrap">
+                  <div className="font-semibold tracking-normal leading-[175%] text-gray-950">
+                    Devon Lane
+                  </div>
+                  <div className="flex-auto font-medium leading-[150%] text-slate-500">
+                    DLDesign.co
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+

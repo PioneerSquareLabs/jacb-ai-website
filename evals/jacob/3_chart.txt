@@ -1,0 +1,81 @@
+import React, { useEffect, useState } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import axios from 'axios';
+
+interface BloodTypeCount {
+  [key: string]: number;
+}
+
+interface BloodType {
+  type: string;
+}
+
+const BloodTypePieChart = () => {
+  const [bloodTypeData, setBloodTypeData] = useState({
+    labels: [] as string[],
+    datasets: [
+      {
+        data: [],
+        backgroundColor: [] as string[],
+        hoverBackgroundColor: [] as string[],
+        borderWidth: 0,
+      },
+    ],
+  });
+
+  useEffect(() => {
+    const fetchBloodTypeData = async () => {
+      try {
+        const response = await axios.get('https://random-data-api.com/api/v2/blood_types?size=100');
+        const bloodTypes = response.data.reduce((acc: BloodTypeCount, curr: BloodType) => {
+          acc[curr.type] = (acc[curr.type] || 0) + 1;
+          return acc;
+        }, {});
+
+        setBloodTypeData(prevState => ({
+          ...prevState,
+          labels: Object.keys(bloodTypes),
+          datasets: prevState.datasets.map(dataset => ({
+            ...dataset,
+            data: Object.values(bloodTypes),
+            backgroundColor: ['rgb(161, 85, 185)', 'rgb(247, 101, 163)', 'rgb(22, 191, 214)', 'rgb(255, 184, 0)'],
+            hoverBackgroundColor: ['rgb(161, 85, 185)', 'rgb(247, 101, 163)', 'rgb(22, 191, 214)', 'rgb(255, 184, 0)'],
+          })),
+        }));
+      } catch (error) {
+        console.error('Error fetching blood type data:', error);
+      }
+    };
+
+    fetchBloodTypeData();
+  }, []);
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+    cutoutPercentage: 80,
+  };
+
+  return (
+    <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full h-full relative">
+        <Doughnut data={bloodTypeData} options={options} />
+        <div className="absolute inset-0 flex justify-center items-center">
+          <div className="flex flex-col items-center">
+            {bloodTypeData.labels.map((label, index) => (
+              <div key={label} className="flex items-center mb-2">
+                <div className={`w-5 h-2 mr-2`} style={{ backgroundColor: bloodTypeData.datasets[0].backgroundColor[index] }}></div>
+                <span className="text-xs text-gray-700">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BloodTypePieChart;

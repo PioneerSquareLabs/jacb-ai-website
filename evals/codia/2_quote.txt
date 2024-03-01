@@ -1,0 +1,43 @@
+import React from 'react';
+import './index.css';
+
+export default function Main() {
+  return (
+    <div className='main-container w-[1600px] h-[672px] relative mx-auto my-0'>
+      <div className='w-[1600px] h-[672px] text-[0px] bg-[#fff] absolute top-0 left-0 z-[2]'>
+        <span className="flex w-[256px] h-[28px] justify-center items-start font-['Poppins'] text-[16px] font-semibold leading-[28px] text-[#2563eb] tracking-[-0.2px] relative text-center whitespace-nowrap z-[21] mt-[97px] mr-0 mb-0 ml-[671px]">
+          3940+ Happy Landingfolio Users
+        </span>
+        <span className="flex w-[659px] h-[62px] justify-center items-start font-['Poppins'] text-[52px] font-semibold leading-[62px] text-[#080814] tracking-[-2px] relative text-center whitespace-nowrap z-20 mt-[24px] mr-0 mb-0 ml-[470px]">
+          Don’t just take our words
+        </span>
+        <div className='w-[1285px] h-[239px] relative z-[18] mt-[92px] mr-0 mb-0 ml-[152px]'>
+          <div className='w-[239px] h-[239px] bg-[url(../assets/images/5351d381-b274-45a9-a8e0-a1d5c7c570ea.png)] bg-cover bg-no-repeat rounded-[15px] absolute top-0 left-0 z-10' />
+          <div className='w-[239px] h-[239px] bg-[url(../assets/images/8cdcee1f5525376b47bcf91a5f80c99d6819e17e.png)] bg-cover bg-no-repeat rounded-[15px] absolute top-0 left-[660px] z-[18]' />
+          <div className='w-[121px] h-[18.085px] bg-[url(../assets/images/0167a065-31bc-4aef-9068-55c352add0fa.png)] bg-cover bg-no-repeat absolute top-[15px] left-[279px] z-[9]' />
+          <div className='w-[121px] h-[18.085px] bg-[url(../assets/images/3d6e2879-3e1b-4c9a-8837-efd0d169160a.png)] bg-cover bg-no-repeat absolute top-[15px] left-[939px] z-[17]' />
+          <span className="flex w-[346px] h-[112px] justify-start items-start font-['Poppins'] text-[18px] font-medium leading-[28px] text-[#080814] absolute top-[64px] left-[279px] text-left z-[5]">
+            "We love Landingfolio! Our designers were using it for their
+            projects, so we already knew what kind of design they want."
+          </span>
+          <span className="flex w-[346px] h-[112px] justify-start items-start font-['Poppins'] text-[18px] font-medium leading-[28px] text-[#080814] absolute top-[64px] left-[939px] text-left z-[13]">
+            "We love Landingfolio! Our designers were using it for their
+            projects, so we already knew what kind of design they want."
+          </span>
+          <span className="flex h-[28px] justify-start items-center font-['Poppins'] text-[16px] font-semibold leading-[28px] text-[#080814] tracking-[-0.2px] absolute top-[196px] left-[279px] text-left whitespace-nowrap z-[7]">
+            Jenny Wilson
+          </span>
+          <span className="flex h-[28px] justify-start items-center font-['Poppins'] text-[16px] font-semibold leading-[28px] text-[#080814] tracking-[-0.2px] absolute top-[196px] left-[939px] text-left whitespace-nowrap z-[15]">
+            Devon Lane
+          </span>
+          <span className="flex h-[24px] justify-start items-center font-['Poppins'] text-[16px] font-medium leading-[24px] text-[#64748b] absolute top-[198px] left-[398px] text-left whitespace-nowrap z-[8]">
+            Grower.io
+          </span>
+          <span className="flex h-[24px] justify-start items-center font-['Poppins'] text-[16px] font-medium leading-[24px] text-[#64748b] absolute top-[198px] left-[1041px] text-left whitespace-nowrap z-[16]">
+            DLDesign.co
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}

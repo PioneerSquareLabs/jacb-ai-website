@@ -1,0 +1,38 @@
+import React from 'react';
+import './index.css';
+
+export default function Main() {
+  return (
+    <div className='main-container w-[430px] h-[300px] relative overflow-hidden mx-auto my-0'>
+      <div className='w-[430px] h-[400px] relative overflow-hidden mt-[-110px] mr-0 mb-0 ml-0'>
+        <div className='w-full h-[74.75%] bg-[#fff] rounded-[6px] absolute top-[25.25%] left-0 shadow-[0_2px_10px_0_rgba(0,0,0,0.1)] z-[1]' />
+        <div className='w-[64.79%] h-[69.65%] bg-[url(../assets/images/f8971652-0de8-429a-9213-f2e1ed69f02d.png)] bg-[length:100%_100%] bg-no-repeat rounded-[50%] absolute top-[30.8%] left-[0.98%] z-[12]' />
+        <div className='w-[62.7%] h-[67.4%] bg-[url(../assets/images/40da50c8-a027-4a43-bcff-a3a7122bfcc4.png)] bg-[length:100%_100%] bg-no-repeat rounded-[50%] absolute top-[32.16%] left-[2.01%] z-[14]' />
+        <div className='w-[56.11%] h-[60.32%] bg-[url(../assets/images/9668f12c-9c8c-469b-b8f3-ee9ed2456e45.png)] bg-[length:100%_100%] bg-no-repeat rounded-[50%] absolute top-[35.47%] left-[5.32%] z-[13]' />
+        <div className='w-[45.81%] h-[49.25%] bg-[url(../assets/images/e355f5d7-cae7-4bd4-9f93-3a19d7da6097.png)] bg-[length:100%_100%] bg-no-repeat rounded-[50%] absolute top-[41%] left-[10.47%] z-[11]' />
+        <div className='w-[21.16%] h-[22.25%] absolute top-[43.5%] left-[64.65%] z-[2]'>
+          <div className='w-[67.03%] h-full text-[0px] absolute top-0 left-[32.97%] z-[9]'>
+            <span className="block h-[17px] font-['Inter'] text-[12px] font-normal leading-[14.523px] text-[#4f4f4f] relative text-left whitespace-nowrap z-[9] mt-0 mr-0 mb-0 ml-0">
+              A
+            </span>
+            <span className="block h-[17px] font-['Inter'] text-[12px] font-normal leading-[14.523px] text-[#4f4f4f] relative text-left whitespace-nowrap z-[7] mt-[8px] mr-0 mb-0 ml-0">
+              B
+            </span>
+            <span className="block h-[17px] font-['Inter'] text-[12px] font-normal leading-[14.523px] text-[#4f4f4f] relative text-left whitespace-nowrap z-[5] mt-[7px] mr-0 mb-0 ml-0">
+              AB
+            </span>
+            <span className="block h-[17px] font-['Inter'] text-[12px] font-normal leading-[14.523px] text-[#4f4f4f] relative text-left whitespace-nowrap z-[3] mt-[6px] mr-0 mb-0 ml-0">
+              O
+            </span>
+          </div>
+          <div className='w-[23.08%] h-[89.89%] absolute top-[4.49%] left-0 z-10'>
+            <div className='w-[21px] h-[8px] bg-[#a155b9] relative z-10 mt-0 mr-0 mb-0 ml-0' />
+            <button className='w-[21px] h-[8px] bg-[#f765a3] border-none relative z-[8] pointer mt-[17px] mr-0 mb-0 ml-0' />
+            <div className='w-[21px] h-[8px] bg-[#16bed5] relative z-[6] mt-[16px] mr-0 mb-0 ml-0' />
+            <button className='w-[21px] h-[8px] bg-[#ffb700] border-none relative z-[4] pointer mt-[15px] mr-0 mb-0 ml-0' />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,38 @@
+import React from "react";
+
+export const ComponentPie = (): JSX.Element => {
+  return (
+    <div className="bg-transparent flex flex-row justify-center w-full">
+      <div className="w-[430px] h-[300px]">
+        <div className="relative h-[400px] top-[-110px]">
+          <div className="relative w-[430px] h-[299px] top-[101px] bg-white rounded-[6px] shadow-[0px_2px_10px_#0000001a]">
+            <div className="absolute w-[99px] h-[89px] top-[73px] left-[278px]">
+              <div className="absolute w-[61px] top-[72px] left-[30px] font-product font-[number:var(--product-font-weight)] text-gray-2 text-[length:var(--product-font-size)] tracking-[var(--product-letter-spacing)] leading-[var(--product-line-height)] [font-style:var(--product-font-style)]">
+                O
+              </div>
+              <div className="top-[76px] bg-[#ffb700] absolute w-[21px] h-[8px] left-0" />
+              <div className="absolute w-[61px] top-[49px] left-[30px] font-product font-[number:var(--product-font-weight)] text-gray-2 text-[length:var(--product-font-size)] tracking-[var(--product-letter-spacing)] leading-[var(--product-line-height)] [font-style:var(--product-font-style)]">
+                AB
+              </div>
+              <div className="absolute w-[21px] h-[8px] top-[53px] left-0 bg-data-4" />
+              <div className="absolute w-[61px] top-[25px] left-[30px] font-product font-[number:var(--product-font-weight)] text-gray-2 text-[length:var(--product-font-size)] tracking-[var(--product-letter-spacing)] leading-[var(--product-line-height)] [font-style:var(--product-font-style)]">
+                B
+              </div>
+              <div className="top-[29px] bg-data-3 absolute w-[21px] h-[8px] left-0" />
+              <div className="absolute w-[61px] top-0 left-[30px] font-product font-[number:var(--product-font-weight)] text-gray-2 text-[length:var(--product-font-size)] tracking-[var(--product-letter-spacing)] leading-[var(--product-line-height)] [font-style:var(--product-font-style)]">
+                A
+              </div>
+              <div className="absolute w-[21px] h-[8px] top-[4px] left-0 bg-[#a155b9]" />
+            </div>
+            <div className="absolute w-[197px] h-[197px] top-[63px] left-[45px]">
+              <img className="absolute w-[98px] h-[70px] top-[98px] left-[98px]" alt="Ellipse" src="image.svg" />
+              <img className="absolute w-[168px] h-[194px] top-[3px] left-0" alt="Ellipse" src="ellipse-209.svg" />
+              <img className="absolute w-[124px] h-[100px] top-0 left-[73px]" alt="Ellipse" src="ellipse-208.svg" />
+              <img className="absolute w-[85px] h-[95px] top-[4px] left-[13px]" alt="Ellipse" src="ellipse-207.svg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

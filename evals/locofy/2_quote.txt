@@ -1,0 +1,133 @@
+import { FunctionComponent } from "react";
+import FramesReviews from "./FramesReviews";
+
+export type FramesReviewsType = {
+  star1?: string;
+  star2?: string;
+  star3?: string;
+  star4?: string;
+  star5?: string;
+  jennyWilson?: string;
+  growerio?: string;
+};
+
+const FramesReviews: FunctionComponent<FramesReviewsType> = ({
+  star1,
+  star2,
+  star3,
+  star4,
+  star5,
+  jennyWilson,
+  growerio,
+}) => {
+  return (
+    <div className="flex-1 flex flex-col items-start justify-start gap-[31px_0px] min-w-[225px] max-w-full text-left text-lg text-base-02 font-semi-bold-16 mq450:gap-[31px_0px]">
+      <div className="flex flex-row items-start justify-start py-0 pr-0.5 pl-0 gap-[0px_6px]">
+        <img
+          className="h-[18.1px] w-[18.9px] relative min-h-[18px] z-[1]"
+          loading="lazy"
+          alt=""
+          src={star1}
+        />
+        <img
+          className="h-[18.1px] w-[18.9px] relative min-h-[18px] z-[1]"
+          loading="lazy"
+          alt=""
+          src={star2}
+        />
+        <img
+          className="h-[18.1px] w-[18.9px] relative min-h-[18px] z-[1]"
+          loading="lazy"
+          alt=""
+          src={star3}
+        />
+        <img
+          className="h-[18.1px] w-[18.9px] relative min-h-[18px] z-[1]"
+          loading="lazy"
+          alt=""
+          src={star4}
+        />
+        <img
+          className="h-[18.1px] w-[18.9px] relative min-h-[18px] z-[1]"
+          loading="lazy"
+          alt=""
+          src={star5}
+        />
+      </div>
+      <div className="flex flex-col items-start justify-start gap-[20px_0px]">
+        <div className="w-[346px] relative leading-[28px] font-medium inline-block z-[1]">
+          "We love Landingfolio! Our designers were using it for their projects,
+          so we already knew what kind of design they want."
+        </div>
+        <div className="flex flex-row items-center justify-start gap-[0px_7px] text-base">
+          <div className="relative tracking-[-0.2px] leading-[28px] font-semibold z-[1]">
+            {jennyWilson}
+          </div>
+          <div className="relative leading-[24px] font-medium text-blue-gray-500 z-[1]">
+            {growerio}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Component2Testimonial: FunctionComponent = () => {
+  return (
+    <div className="w-full h-[672px] tracking-[normal] mq1050:h-auto mq1050:min-h-[672]">
+      <section className="absolute h-full w-full top-[0px] right-[0px] bottom-[0px] left-[0px] flex flex-row items-center justify-center max-w-full text-center text-base text-blue-600 font-semi-bold-16">
+        <div className="flex-1 bg-white flex flex-col items-center justify-start pt-[97px] pb-[130px] pr-[31px] pl-5 box-border gap-[92px] max-w-full mq450:gap-[92px] mq725:gap-[92px]">
+          <div className="w-[1600px] h-[672px] relative bg-white hidden max-w-full" />
+          <div className="w-[669px] flex flex-row items-start justify-start py-0 pr-0 pl-2.5 box-border max-w-full">
+            <div className="flex-1 flex flex-col items-center justify-start gap-[24px_0px] max-w-full">
+              <div className="relative tracking-[-0.2px] leading-[28px] font-semibold z-[1]">
+                3940+ Happy Landingfolio Users
+              </div>
+              <h1 className="m-0 self-stretch relative text-33xl tracking-[-2px] leading-[62px] font-semibold font-inherit text-base-02 z-[1] mq450:text-[31px] mq450:leading-[37px] mq1000:text-[42px] mq1000:leading-[50px]">
+                Don’t just take our words
+              </h1>
+            </div>
+          </div>
+          <div className="w-[1285px] flex flex-row flex-wrap items-center justify-start gap-[0px_35px] max-w-full mq725:gap-[0px_35px]">
+            <div className="flex flex-col items-start justify-start py-0 pr-[5px] pl-0">
+              <img
+                className="w-[239px] h-[239px] relative rounded-mini object-cover z-[1]"
+                loading="lazy"
+                alt=""
+                src="/user-profile-pic@2x.png"
+              />
+            </div>
+            <FramesReviews
+              star1="/star-1.svg"
+              star2="/star-2.svg"
+              star3="/star-3.svg"
+              star4="/star-4.svg"
+              star5="/star-5.svg"
+              jennyWilson="Jenny Wilson"
+              growerio="Grower.io"
+            />
+            <div className="flex flex-col items-start justify-start py-0 pr-[5px] pl-0">
+              <img
+                className="w-[239px] h-[239px] relative rounded-mini object-cover z-[1]"
+                loading="lazy"
+                alt=""
+                src="/user-profile-pic-1@2x.png"
+              />
+            </div>
+            <FramesReviews
+              star1="/star-1-1.svg"
+              star2="/star-2-1.svg"
+              star3="/star-3-1.svg"
+              star4="/star-4-1.svg"
+              star5="/star-5-1.svg"
+              jennyWilson="Devon Lane"
+              growerio="DLDesign.co"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Component2Testimonial;

@@ -1,0 +1,72 @@
+import React from 'react';
+
+const ToastVariants = {
+  HEADINGS_ONLY: 'headingsOnly',
+  TEXT: 'text',
+  BULLETS: 'bullets',
+  BUTTONS: 'buttons',
+};
+
+const Toast = ({ type, content, buttonList }) => {
+  const renderContent = () => {
+    switch (type) {
+      case ToastVariants.HEADINGS_ONLY:
+        return (
+          <div className="font-semibold text-blue-700 leading-[129%]">{content}</div>
+        );
+      case ToastVariants.TEXT:
+        return (
+          <div className="mt-2 font-medium leading-5 text-blue-700">{content}</div>
+        );
+      case ToastVariants.BULLETS:
+        return (
+          <ul className="list-disc pl-5 space-y-1">
+            {content.map((item, index) => (
+              <li key={index} className="font-medium text-blue-700">{item}</li>
+            ))}
+          </ul>
+        );
+      case ToastVariants.BUTTONS:
+        return (
+          <div className="flex gap-5">
+            {buttonList.map((button, index) => (
+              <button key={index} className="py-2 px-4 bg-blue-700 text-white font-semibold rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50">{button.label}</button>
+            ))}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="p-4 mt-6 w-full bg-indigo-50 rounded">
+      {renderContent()}
+    </div>
+  );
+};
+
+const MyComponent = () => {
+  return (
+    <div className="flex flex-col text-sm tracking-tight max-w-[729px] space-y-6">
+      <Toast
+        type={ToastVariants.HEADINGS_ONLY}
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      />
+      <Toast
+        type={ToastVariants.TEXT}
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae arcu, in nisi convallis rhoncus facilisi fames purus."
+      />
+      <Toast
+        type={ToastVariants.BULLETS}
+        content={["Lorem ipsum dolor sit amet.", "Consectetur adipiscing elit.", "Vitae arcu in nisi convallis."]}
+      />
+      <Toast
+        type={ToastVariants.BUTTONS}
+        buttonList={[{ label: 'Action 1' }, { label: 'Action 2' }]}
+      />
+    </div>
+  );
+};
+
+export default MyComponent;

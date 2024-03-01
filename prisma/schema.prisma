@@ -49,6 +49,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Choice        Choice[]
 
   @@map("users")
 }
@@ -60,4 +61,18 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Choice {
+  id            String   @id @default(cuid())
+  userId        String? // This field is optional
+  snippetName   String // This will store '1_hero', '2_quote', etc.
+  winningPlugin String // This will store 'anima', 'builder', 'codia', etc.
+  losingPlugin  String // This will store 'anima', 'builder', 'codia', etc.
+  createdAt     DateTime @default(now())
+  isActive      Boolean  @default(true)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("choices")
 }
