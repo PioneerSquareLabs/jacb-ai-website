@@ -3,7 +3,6 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { set } from "zod";
 
 const Arena: React.FC = () => {
   const { data, status } = useSession();
@@ -39,7 +38,7 @@ const Arena: React.FC = () => {
         </h1>
         <p className="mb-8 px-4">
           This is a structured contest where design-to-code tools battle it out.
-          We have six popular design-to-code tools along with a human-coded
+          We have seven popular design-to-code tools along with a human-coded
           design benchmark. Brace yourself for 20 rounds of thrilling
           competition, each featuring one design and two code samples. At the
           end you will view an elo-based ranking of the tools. Your mission,
