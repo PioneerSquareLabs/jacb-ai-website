@@ -1,0 +1,49 @@
+import { FunctionComponent } from "react";
+
+const Component1HomePageHeroS: FunctionComponent = () => {
+  return (
+    <div className="w-full h-[958px] relative tracking-[normal] mq1275:h-auto mq1275:min-h-[958]">
+      <main className="absolute h-full w-full top-[0px] right-[0px] bottom-[0px] left-[0px] flex flex-row items-center justify-center max-w-full">
+        <section className="flex-1 bg-white flex flex-row items-center justify-start pt-[178px] px-[152px] pb-[125px] box-border gap-[116px] max-w-full text-left text-61xl text-blue-900 font-semi-bold-18 mq750:gap-[116px] mq750:pl-[38px] mq750:pr-[38px] mq750:box-border mq1275:flex-wrap mq1275:gap-[116px] mq1275:pl-[76px] mq1275:pr-[76px] mq1275:box-border">
+          <div className="h-[958px] w-[1600px] relative bg-white hidden max-w-full" />
+          <div className="flex-1 flex flex-col items-start justify-start gap-[41px_0px] min-w-[422px] max-w-full mq750:gap-[41px_0px] mq750:min-w-full">
+            <div className="self-stretch flex flex-col items-start justify-start gap-[34px_0px] max-w-full mq750:gap-[34px_0px]">
+              <h1 className="m-0 w-[650px] relative text-inherit tracking-[-4px] leading-[86px] font-bold font-inherit flex items-center z-[1] mq750:text-[40px] mq750:leading-[52px] mq450:text-[24px] mq450:leading-[34px]">
+                Meet the New Landingfolio Kit
+              </h1>
+              <div className="flex flex-row items-start justify-start py-0 px-[3px] box-border max-w-full text-2xl text-blue-600">
+                <div className="w-[530px] relative leading-[34px] inline-block shrink-0 max-w-full z-[1] mq450:text-[17px] mq450:leading-[27px]">{`Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.`}</div>
+              </div>
+            </div>
+            <div className="flex flex-row items-start justify-start py-0 px-1">
+              <button className="cursor-pointer [border:none] p-4 bg-primary-01 rounded-lg flex flex-row items-center justify-center z-[1]">
+                <div className="flex flex-row items-center justify-center py-0 px-2 gap-[0px_9px]">
+                  <div className="relative text-lg leading-[28px] font-semibold font-semi-bold-18 text-white text-center">
+                    Start using LandingFolio
+                  </div>
+                  <div className="hidden flex-row items-center justify-center">
+                    <img
+                      className="h-[18px] w-[18px] relative overflow-hidden shrink-0"
+                      alt=""
+                      src="/iconoutlinearrowright.svg"
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div className="w-[530px] rounded-3xl bg-blue-100 flex flex-row items-center justify-center py-[290px] px-5 box-border min-w-[530px] max-w-full z-[1] mq1100:min-w-full mq1275:flex-1">
+            <img
+              className="h-[75px] w-[75px] relative overflow-hidden shrink-0 mq1275:flex-1"
+              loading="lazy"
+              alt=""
+              src="/iconoutlinephotograph.svg"
+            />
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default Component1HomePageHeroS;

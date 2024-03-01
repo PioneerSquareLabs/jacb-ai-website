@@ -1,0 +1,61 @@
+
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
+interface QuoteProps {
+  imageUrl: string;
+  rating: number;
+  quote: string;
+  name: string;
+  website: string;
+}
+
+const Quote = ({ imageUrl, rating, quote, name, website }: QuoteProps) => {
+  return (
+    <div className="flex flex-col items-center md:flex-row md:items-start space-x-0 md:space-x-4">
+      <img src={imageUrl} alt={`${name} profile`} className="w-24 h-24 md:w-32 md:h-32 rounded-full" />
+      <div className="flex flex-col space-y-2 mt-4 md:mt-0">
+        <div className="flex">
+          {Array.from({ length: rating }, (_, i) => (
+            <FontAwesomeIcon key={i} icon={faStar} className="text-yellow-400" />
+          ))}
+        </div>
+        <p className="text-lg font-medium text-gray-900">{quote}</p>
+        <div className="flex flex-col items-center md:items-start">
+          <span className="text-base text-gray-900">{name}</span>
+          <span className="text-sm font-medium text-gray-500">{website}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Testimonial = ({ usersCount = 3940 }) => {
+  return (
+    <div className="bg-white">
+      <div className="text-center py-12">
+        <h2 className="text-sm leading-7 text-blue-600">{usersCount}+ Happy Landingfolio Users</h2>
+        <p className="text-4xl font-extrabold text-gray-900 my-4">Don’t just take our words</p>
+      </div>
+      <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8 px-8">
+        <Quote
+          imageUrl="/images/19f20f0750b4e198d5ba9d67a1acfa203715a7e4.png"
+          rating={5}
+          quote="We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of design they want."
+          name="Jenny Wilson"
+          website="Grower.io"
+        />
+        <Quote
+          imageUrl="/images/8cdcee1f5525376b47bcf91a5f80c99d6819e17e.png"
+          rating={5}
+          quote="We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of design they want."
+          name="Devon Lane"
+          website="DLDesign.co"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Testimonial;

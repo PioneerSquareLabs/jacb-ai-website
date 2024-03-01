@@ -1,0 +1,72 @@
+
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
+interface Button {
+  label: string;
+  onClick: () => void;
+}
+
+interface ToastProps {
+  variant: 'headline' | 'text' | 'bullets' | 'buttons';
+  headline: string;
+  messages?: string[];
+  buttons?: Button[];
+}
+
+const Toast: React.FC<ToastProps> = ({ variant, headline, messages = [], buttons = [] }) => {
+  const renderContent = () => {
+    switch (variant) {
+      case 'headline':
+        return <p className="text-sm text-blue-700">{headline}</p>;
+      case 'text':
+        return (
+          <>
+            <p className="text-sm text-blue-700">{headline}</p>
+            <p className="text-sm font-medium text-blue-800">{messages.join(' ')}</p>
+          </>
+        );
+      case 'bullets':
+        return (
+          <>
+            <p className="text-sm text-blue-700">{headline}</p>
+            <ul className="list-inside list-disc text-sm font-medium text-blue-800">
+              {messages.map((message, index) => (
+                <li key={index}>{message}</li>
+              ))}
+            </ul>
+          </>
+        );
+      case 'buttons':
+        return (
+          <>
+            <p className="text-sm text-blue-700">{headline}</p>
+            <p className="text-sm font-medium text-blue-800">{messages.join(' ')}</p>
+            <div className="flex space-x-2 mt-2">
+              {buttons.map((button, index) => (
+                <button key={index} className="text-sm text-blue-900" onClick={button.onClick}>
+                  {button.label}
+                </button>
+              ))}
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="bg-blue-100 rounded-md p-4">
+      <div className="flex items-start space-x-2">
+        <FontAwesomeIcon icon={faInfoCircle} className="text-blue-500 mt-1" />
+        <div className="w-full">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Toast;

@@ -26,6 +26,7 @@
     "next-auth": "^4.24.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-syntax-highlighter": "^15.5.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -41,6 +42,7 @@
     "@types/node": "^18.17.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/react-syntax-highlighter": "^15.5.11",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "autoprefixer": "^10.4.14",

@@ -1,0 +1,64 @@
+import React from "react";
+
+export const Component = (): JSX.Element => {
+  return (
+    <div className="bg-transparent flex flex-row justify-center w-full">
+      <div className="w-[1600px] h-[672px]">
+        <div className="relative h-[672px] bg-white">
+          <div className="left-[152px] absolute w-[625px] h-[239px] top-[303px]">
+            <div className="absolute w-[348px] h-[209px] top-[15px] left-[279px]">
+              <p className="absolute w-[346px] top-[49px] left-0 font-semi-bold-18px font-[number:var(--semi-bold-18px-font-weight)] text-base-02 text-[length:var(--semi-bold-18px-font-size)] tracking-[var(--semi-bold-18px-letter-spacing)] leading-[var(--semi-bold-18px-line-height)] [font-style:var(--semi-bold-18px-font-style)]">
+                &#34;We love Landingfolio! Our designers were using it for their projects, so we already knew what kind
+                of design they want.&#34;
+              </p>
+              <div className="absolute w-[200px] h-[28px] top-[181px] left-0">
+                <div className="absolute h-[28px] top-0 left-0 font-bold-16px font-[number:var(--bold-16px-font-weight)] text-base-02 text-[length:var(--bold-16px-font-size)] tracking-[var(--bold-16px-letter-spacing)] leading-[var(--bold-16px-line-height)] whitespace-nowrap [font-style:var(--bold-16px-font-style)]">
+                  Jenny Wilson
+                </div>
+                <div className="absolute h-[24px] top-[2px] left-[119px] font-semi-bold-16px font-[number:var(--semi-bold-16px-font-weight)] text-blue-gray500 text-[length:var(--semi-bold-16px-font-size)] tracking-[var(--semi-bold-16px-letter-spacing)] leading-[var(--semi-bold-16px-line-height)] whitespace-nowrap [font-style:var(--semi-bold-16px-font-style)]">
+                  Grower.io
+                </div>
+              </div>
+              <img className="absolute w-[121px] h-[18px] top-0 left-0" alt="Review" src="review.png" />
+            </div>
+            <img
+              className="absolute w-[239px] h-[239px] top-0 left-0"
+              alt="User profile pic"
+              src="user-profile-pic.png"
+            />
+          </div>
+          <div className="left-[812px] absolute w-[625px] h-[239px] top-[303px]">
+            <div className="absolute w-[348px] h-[209px] top-[15px] left-[279px]">
+              <p className="absolute w-[346px] top-[49px] left-0 font-semi-bold-18px font-[number:var(--semi-bold-18px-font-weight)] text-base-02 text-[length:var(--semi-bold-18px-font-size)] tracking-[var(--semi-bold-18px-letter-spacing)] leading-[var(--semi-bold-18px-line-height)] [font-style:var(--semi-bold-18px-font-style)]">
+                &#34;We love Landingfolio! Our designers were using it for their projects, so we already knew what kind
+                of design they want.&#34;
+              </p>
+              <div className="absolute w-[204px] h-[28px] top-[181px] left-0">
+                <div className="absolute h-[28px] top-0 left-0 font-bold-16px font-[number:var(--bold-16px-font-weight)] text-base-02 text-[length:var(--bold-16px-font-size)] tracking-[var(--bold-16px-letter-spacing)] leading-[var(--bold-16px-line-height)] whitespace-nowrap [font-style:var(--bold-16px-font-style)]">
+                  Devon Lane
+                </div>
+                <div className="absolute h-[24px] top-[2px] left-[102px] font-semi-bold-16px font-[number:var(--semi-bold-16px-font-weight)] text-blue-gray500 text-[length:var(--semi-bold-16px-font-size)] tracking-[var(--semi-bold-16px-letter-spacing)] leading-[var(--semi-bold-16px-line-height)] whitespace-nowrap [font-style:var(--semi-bold-16px-font-style)]">
+                  DLDesign.co
+                </div>
+              </div>
+              <img className="absolute w-[121px] h-[18px] top-0 left-0" alt="Review" src="image.png" />
+            </div>
+            <img
+              className="absolute w-[239px] h-[239px] top-0 left-0 object-cover"
+              alt="User profile pic"
+              src="user-profile-pic-2.png"
+            />
+          </div>
+          <div className="absolute w-[663px] h-[114px] top-[97px] left-[470px]">
+            <p className="absolute w-[659px] top-[52px] left-0 font-bold-52px font-[number:var(--bold-52px-font-weight)] text-base-02 text-[length:var(--bold-52px-font-size)] text-center tracking-[var(--bold-52px-letter-spacing)] leading-[var(--bold-52px-line-height)] [font-style:var(--bold-52px-font-style)]">
+              Don’t just take our words
+            </p>
+            <div className="absolute top-0 left-[201px] font-bold-16px font-[number:var(--bold-16px-font-weight)] text-blue-600 text-[length:var(--bold-16px-font-size)] text-center tracking-[var(--bold-16px-letter-spacing)] leading-[var(--bold-16px-line-height)] whitespace-nowrap [font-style:var(--bold-16px-font-style)]">
+              3940+ Happy Landingfolio Users
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

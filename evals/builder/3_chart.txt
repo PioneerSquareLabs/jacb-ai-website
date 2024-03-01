@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from "react";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const ProfileCardWithChart = () => {
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [{ data: [], backgroundColor: [], borderColor: [], borderWidth: 1 }],
+  });
+
+  useEffect(() => {
+    fetch("https://random-data-api.com/api/v2/blood_types?size=100")
+      .then((response) => response.json())
+      .then((data) => {
+        const bloodTypeCounts = data.reduce((accum, { type }) => {
+          accum[type] = (accum[type] || 0) + 1;
+          return accum;
+        }, {});
+
+        const chartLabels = Object.keys(bloodTypeCounts);
+        const chartData = Object.values(bloodTypeCounts);
+        const backgroundColors = chartLabels.map((label) => {
+          switch (label) {
+            case "A":
+              return "#f472b6"; // A fuchsia
+            case "B":
+              return "#f472b6"; // B pink
+            case "AB":
+              return "#06b6d4"; // AB cyan
+            case "O":
+              return "#fde047"; // O yellow
+            default:
+              return "#9ca3af"; // Default color gray
+          }
+        });
+
+        setChartData({
+          labels: chartLabels,
+          datasets: [{
+            data: chartData,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors.map((color) => color),
+            borderWidth: 1,
+          }],
+        });
+      });
+  }, []);
+
+  return (
+    <section className="px-16 py-11 bg-white rounded-md shadow-sm max-w-[430px]">
+      <header className="flex gap-5 max-md:flex-col max-md:gap-0 max-md:">
+        <aside className="flex flex-col w-[81%] max-md:ml-0 max-md:w-full">
+          <Pie data={chartData} options={{ responsive: true }} />
+        </aside>
+        <article className="flex flex-col ml-5 w-[19%] max-md:ml-0 max-md:w-full">
+          {/* Below is a placeholder for potentially additional content like user info or details */}
+        </article>
+      </header>
+    </section>
+  );
+};
+
+export default ProfileCardWithChart;

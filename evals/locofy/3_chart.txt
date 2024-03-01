@@ -1,0 +1,37 @@
+import { FunctionComponent } from "react";
+
+const Component3PieChart: FunctionComponent = () => {
+  return (
+    <div className="w-full overflow-hidden flex flex-row items-start justify-center pt-0 px-0 pb-2.5 box-border">
+      <section className="h-[290px] flex-1 flex flex-col items-start justify-end pt-0 px-0 pb-0 box-border text-left text-xs text-gray2 font-product">
+        <div className="mt-[-110px] self-stretch h-[400px] overflow-hidden shrink-0 flex flex-row items-end justify-center">
+          <div className="h-[301px] flex-1 rounded-md bg-white shadow-[0px_2px_10px_rgba(0,_0,_0,_0.1)] flex flex-row items-start justify-start pt-[13px] px-1 pb-0 box-border gap-[0px_9px]">
+            <div className="h-[299px] w-[430px] relative rounded-md bg-white shadow-[0px_2px_10px_rgba(0,_0,_0,_0.1)] hidden" />
+            <div className="w-[295px] flex flex-col items-start justify-start pt-0 px-0 pb-0 box-border">
+              <div className="mb-[-1px] self-stretch h-[279px] relative">
+                <div className="absolute top-[127px] left-[274px] bg-orange w-[21px] h-2 z-[1]" />
+                <div className="absolute top-[104px] left-[274px] bg-data4 w-[21px] h-2 z-[1]" />
+                <div className="absolute top-[80px] left-[274px] bg-data3 w-[21px] h-2 z-[1]" />
+                <div className="absolute top-[55px] left-[274px] bg-data2 w-[21px] h-2 z-[1]" />
+                <div className="absolute top-[41px] left-[41px] rounded-[50%] bg-data2 w-[197px] h-[197px] z-[1]" />
+                <div className="absolute top-[0.2px] left-[139.5px] rounded-[50%] bg-data4 w-[197px] h-[197px] [transform:_rotate(45deg)] [transform-origin:0_0] z-[2]" />
+                <div className="absolute top-[260.18px] left-[69.89px] rounded-[50%] bg-data3 w-[197px] h-[197px] [transform:_rotate(-105deg)] [transform-origin:0_0] z-[3]" />
+                <div className="absolute top-[275.2px] left-[174.54px] rounded-[50%] bg-orange w-[197px] h-[197px] [transform:_rotate(-149.61deg)] [transform-origin:0_0] z-[4]" />
+              </div>
+            </div>
+            <div className="w-3.5 flex flex-col items-start justify-start pt-[51px] px-0 pb-0 box-border">
+              <div className="self-stretch flex flex-col items-start justify-start gap-[7px_0px]">
+                <div className="self-stretch relative pr-[5px] z-[1]">A</div>
+                <div className="self-stretch relative pr-1.5 z-[1]">B</div>
+                <div className="relative z-[1]">AB</div>
+                <div className="self-stretch relative pr-1 z-[1]">O</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Component3PieChart;

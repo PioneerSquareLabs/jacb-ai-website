@@ -1,0 +1,36 @@
+import React from "react";
+import { ButtonPrimaryWith } from "./ButtonPrimaryWith";
+import { Media } from "./Media";
+
+export const ComponentHome = (): JSX.Element => {
+  return (
+    <div className="bg-transparent flex flex-row justify-center w-full">
+      <div className="w-[1600px] h-[958px]">
+        <div className="relative h-[958px] bg-white">
+          <Media
+            className="!h-[655px] !rounded-[24px] !flex !absolute !left-[918px] !w-[530px] !top-[178px]"
+            iconSize="normal"
+            mediaType="image"
+            photographStyleOverrideClassName="!relative !w-[75px] !h-[75px] !ml-[-42.50px] !mr-[-42.50px]"
+          />
+          <div className="absolute w-[654px] h-[409px] top-[301px] left-[152px]">
+            <p className="absolute w-[650px] h-[172px] top-0 left-0 font-bold-80px font-[number:var(--bold-80px-font-weight)] text-blue-900 text-[length:var(--bold-80px-font-size)] tracking-[var(--bold-80px-letter-spacing)] leading-[var(--bold-80px-line-height)] [font-style:var(--bold-80px-font-style)]">
+              Meet the New Landingfolio Kit
+            </p>
+            <p className="absolute w-[530px] top-[206px] left-[3px] font-regular-21px font-[number:var(--regular-21px-font-weight)] text-blue-600 text-[length:var(--regular-21px-font-size)] tracking-[var(--regular-21px-letter-spacing)] leading-[var(--regular-21px-line-height)] [font-style:var(--regular-21px-font-style)]">
+              Clarity gives you the blocks &amp; components you need to create a truly professional website, landing
+              page or admin panel for your SaaS.
+            </p>
+            <ButtonPrimaryWith
+              className="!rounded-[8px] !px-[24px] !py-[16px] !inline-flex !absolute !left-[4px] !bg-primary-01 !w-[unset] !top-[349px]"
+              divClassName="!tracking-[var(--semi-bold-18px-letter-spacing)] !text-[length:var(--semi-bold-18px-font-size)] !text-center ![font-style:var(--semi-bold-18px-font-style)] !font-[number:var(--semi-bold-18px-font-weight)] !font-semi-bold-18px !leading-[var(--semi-bold-18px-line-height)]"
+              hasIcon={false}
+              text="Start using LandingFolio"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+

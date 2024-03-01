@@ -1,0 +1,149 @@
+import { FunctionComponent } from "react";
+import ToastHeadingInformation from "./ToastHeadingInformation";
+import ToastTextInformation from "./ToastTextInformation";
+import ToastBulletInformation from "./ToastBulletInformation";
+import ToastButtonsInformation from "./ToastButtonsInformation";
+
+
+const ToastHeadingInformation: FunctionComponent = () => {
+  return (
+    <div className="self-stretch flex flex-row items-start justify-start max-w-full">
+      <div className="flex-1 rounded bg-primary-p0 flex flex-row items-start justify-start p-4 box-border max-w-full">
+        <div className="flex-1 flex flex-row flex-wrap items-start justify-start gap-[0px_16px] max-w-full">
+          <div className="flex flex-row items-start justify-start pt-px px-0 pb-0">
+            <img
+              className="h-4 w-4 relative overflow-hidden shrink-0"
+              alt=""
+              src="/icon16inform.svg"
+            />
+          </div>
+          <input
+            className="w-[calc(100%_-_16px)] [border:none] [outline:none] bg-[transparent] h-[18px] flex-1 flex flex-col items-start justify-start font-functional-button-b3 font-semibold text-sm text-functional-information-i800 min-w-[300px] max-w-full"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            type="text"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ToastTextInformation: FunctionComponent = () => {
+  return (
+    <div className="self-stretch flex flex-row items-start justify-start max-w-full text-left text-sm text-functional-information-i800 font-functional-button-b3">
+      <div className="flex-1 rounded bg-primary-p0 flex flex-row items-start justify-start p-4 box-border max-w-full">
+        <div className="flex-1 flex flex-row flex-wrap items-start justify-start gap-[0px_16px] max-w-full">
+          <div className="flex flex-row items-start justify-start pt-px px-0 pb-0">
+            <img
+              className="h-4 w-4 relative overflow-hidden shrink-0"
+              loading="lazy"
+              alt=""
+              src="/icon16inform-1.svg"
+            />
+          </div>
+          <div className="flex-1 flex flex-col items-start justify-start gap-[8px_0px] min-w-[432px] max-w-full mq600:min-w-full">
+            <div className="w-24 relative tracking-[-0.5px] leading-[18px] font-semibold inline-block box-border pr-5">
+              Placeholder
+            </div>
+            <div className="w-[665px] relative tracking-[-0.5px] leading-[20px] font-medium text-functional-information-i700 inline-block">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae arcu, in nisi convallis rhoncus facilisi fames purus. Dictum sed phasellus dolor porttitor eget nulla vitae porttitor. `}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ToastBulletInformation: FunctionComponent = () => {
+  return (
+    <div className="self-stretch flex flex-row items-start justify-start max-w-full text-left text-sm text-functional-information-i700 font-functional-button-b3">
+      <div className="flex-1 rounded bg-primary-p0 flex flex-row items-start justify-start p-4 box-border max-w-full">
+        <div className="flex-1 flex flex-row flex-wrap items-start justify-start gap-[0px_16px] max-w-full">
+          <div className="flex flex-row items-start justify-start pt-px px-0 pb-0">
+            <img
+              className="h-4 w-4 relative overflow-hidden shrink-0"
+              loading="lazy"
+              alt=""
+              src="/icon16inform-2.svg"
+            />
+          </div>
+          <div className="flex-1 flex flex-col items-start justify-start gap-[8px_0px] min-w-[432px] max-w-full mq600:min-w-full">
+            <div className="w-24 relative tracking-[-0.5px] leading-[18px] font-semibold text-functional-information-i800 inline-block box-border pr-5">
+              Placeholder
+            </div>
+            <div className="self-stretch flex flex-row items-start justify-start gap-[0px_8px] max-w-full mq600:flex-wrap">
+              <div className="flex flex-row items-start justify-start pt-1.5 px-0 pb-0">
+                <img
+                  className="h-1.5 w-1.5 relative"
+                  loading="lazy"
+                  alt=""
+                  src="/typeround.svg"
+                />
+              </div>
+              <div className="flex-1 relative tracking-[-0.5px] leading-[20px] font-medium inline-block min-w-[272px] max-w-full">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}</div>
+            </div>
+            <div className="self-stretch flex flex-row items-start justify-start gap-[0px_8px] max-w-full mq600:flex-wrap">
+              <div className="flex flex-row items-start justify-start pt-1.5 px-0 pb-0">
+                <img
+                  className="h-1.5 w-1.5 relative"
+                  loading="lazy"
+                  alt=""
+                  src="/typeround-1.svg"
+                />
+              </div>
+              <div className="flex-1 relative tracking-[-0.5px] leading-[20px] font-medium inline-block min-w-[272px] max-w-full">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ToastButtonsInformation: FunctionComponent = () => {
+  return (
+    <div className="self-stretch flex flex-row items-start justify-start max-w-full text-left text-sm text-functional-information-i800 font-functional-button-b3">
+      <div className="flex-1 rounded bg-primary-p0 flex flex-row items-start justify-start p-4 box-border max-w-full">
+        <div className="flex-1 flex flex-row flex-wrap items-start justify-start gap-[0px_16px] max-w-full">
+          <div className="flex flex-row items-start justify-start pt-px px-0 pb-0">
+            <img
+              className="h-4 w-4 relative overflow-hidden shrink-0"
+              loading="lazy"
+              alt=""
+              src="/icon16inform-3.svg"
+            />
+          </div>
+          <div className="flex-1 flex flex-col items-start justify-start gap-[8px_0px] min-w-[432px] max-w-full mq600:min-w-full">
+            <div className="w-24 relative tracking-[-0.5px] leading-[18px] font-semibold inline-block box-border pr-5">
+              Placeholder
+            </div>
+            <div className="w-[665px] relative tracking-[-0.5px] leading-[20px] font-medium text-functional-information-i700 inline-block">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae arcu, in nisi convallis rhoncus facilisi fames purus. `}</div>
+            <div className="w-[122px] flex flex-row items-start justify-between py-0 pr-5 pl-0 box-border gap-[20px] text-functional-information-i900">
+              <div className="relative tracking-[-0.5px] leading-[24px] font-semibold">
+                Label
+              </div>
+              <div className="relative tracking-[-0.5px] leading-[24px] font-semibold">
+                Label
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Component4ToastVariations: FunctionComponent = () => {
+  return (
+    <div className="w-full h-[456px] tracking-[normal] mq600:h-auto mq600:min-h-[456]">
+      <section className="absolute h-full w-full top-[0px] right-[0px] bottom-[0px] left-[0px] flex flex-col items-start justify-start gap-[24px] max-w-full">
+        <ToastHeadingInformation />
+        <ToastTextInformation />
+        <ToastBulletInformation />
+        <ToastButtonsInformation />
+      </section>
+    </div>
+  );
+};
+
+export default Component4ToastVariations;
+
