@@ -75,7 +75,7 @@ const CodeComparison: React.FC = () => {
 
       if (!response.ok) throw new Error("Network response was not ok");
 
-      if (currentChoice < 20) {
+      if (currentChoice < 10) {
         await fetchSnippets();
         setCurrentChoice((prevChoice) => prevChoice + 1);
       } else {

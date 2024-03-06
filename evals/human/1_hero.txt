@@ -1,0 +1,28 @@
+import Image from "next/image";
+
+export default function StaticSection() {
+  return (
+    <section className="container px-8 mx-auto flex flex-col lg:flex-row justify-between items-center my-[178px] gap-10 font-inter">
+      <Image
+        className="shrink-0 lg:order-2"
+        width="530"
+        height="655"
+        src="/media.png"
+        alt="Photograph"
+      />
+      <div className="lg:order-1">
+        <h2 className="text-[#0F172A] text-[5rem] font-bold leading-[5.375rem] tracking-[-0.25rem]">
+          Meet the New <br />
+          Landingfolio Kit
+        </h2>
+        <p className="max-w-[530px] text-[#4B5262] mt-[34px] text-[1.3125rem] leading-[2.125rem]">
+          Clarity gives you the blocks & components you need to create a truly
+          professional website, landing page or admin panel for your SaaS.
+        </p>
+        <button className="py-4 px-6 bg-[#485AFF] rounded-lg text-white mt-[41px] text-[1.125rem] font-semibold leading-[1.75rem]">
+          Start using LandingFolio
+        </button>
+      </div>
+    </section>
+  );
+}

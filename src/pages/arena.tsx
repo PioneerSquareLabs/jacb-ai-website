@@ -38,10 +38,10 @@ const Arena: React.FC = () => {
         </h1>
         <p className="mb-8 px-4">
           This is a structured contest where design-to-code tools battle it out.
-          We have seven popular design-to-code tools along with a human-coded
-          design benchmark. Brace yourself for 20 rounds of thrilling
+          We have eight popular design-to-code tools along with a human-coded
+          design benchmark. Brace yourself for 10 rounds of thrilling
           competition, each featuring one design and two code samples. At the
-          end you will view an elo-based ranking of the tools. Your mission,
+          end you will view an Elo-based ranking of the tools. Your mission,
           should you choose to accept it, is to decide which code reigns
           supreme. Let the duel commence!
         </p>

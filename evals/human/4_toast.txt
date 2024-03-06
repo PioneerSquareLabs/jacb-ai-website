@@ -1,0 +1,53 @@
+import Image from "next/image";
+
+interface ButtonProps {
+  text: string;
+  onClick?: () => void;
+}
+
+export interface ToastProps {
+  heading: string;
+  text?: string;
+  bullets?: string[];
+  buttons?: ButtonProps[];
+}
+
+export default function Toast({ heading, text, bullets, buttons }: ToastProps) {
+  return (
+    <div className="bg-[#E9F1FF] p-4 max-w-[730px] text-sm leading-[1.125rem] tracking-[-0.03125rem] rounded-[4px]">
+      <div className="flex items-start gap-4">
+        <Image
+          className="shrink-0"
+          src="/inform.svg"
+          alt="Inform"
+          width={16}
+          height={16}
+        />
+        <div className="space-y-2">
+          <h4 className="text-[#0041D1] font-semibold">{heading}</h4>
+          {text && <p className="text-[#0053E8] font-medium">{text}</p>}
+          {bullets && (
+            <ul className="list-disc text-[#0053E8] font-medium space-y-2 ml-4">
+              {bullets.map((bullet, index) => (
+                <li key={index}>{bullet}</li>
+              ))}
+            </ul>
+          )}
+          {buttons && (
+            <div className="flex items-center gap-8">
+              {buttons.map(({ text, onClick }, index) => (
+                <button
+                  className="text-[#0031BA] font-semibold"
+                  key={text + index}
+                  onClick={onClick}
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

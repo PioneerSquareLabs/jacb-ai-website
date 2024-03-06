@@ -1,0 +1,40 @@
+ function Quote({ imageUrl, rating, quote, name, website }) {
+    const stars = Array(rating).fill(<i className="fas fa-star text-blue-600"></i>);
+    return (
+        <div className="flex flex-col items-center">
+            <img className="rounded-lg mb-6" src={imageUrl} alt={`Portrait of ${name}`} width="160" height="160"/>
+            <div className="mb-2">{stars}</div>
+            <p className="text-gray-600 text-center mb-2">"{quote}"</p>
+            <p className="text-gray-900 font-semibold">{name} <span className="font-normal text-gray-500">{website}</span></p>
+        </div>
+    );
+}
+
+function Testimonials({ userCount = 3490 }) {
+    return (
+        <div className="bg-white py-16 px-4">
+            <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl font-semibold">Don't just take our words</h2>
+                    <p className="text-gray-500 mt-4">{userCount}+ Happy Landingfolio Users</p>
+                </div>
+                <div className="flex justify-center space-x-10">
+                    <Quote
+                        imageUrl="https://placehold.co/160x160"
+                        rating={5}
+                        quote="We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of design they want."
+                        name="Jenny Wilson"
+                        website="Grower.io"
+                    />
+                    <Quote
+                        imageUrl="https://placehold.co/160x160"
+                        rating={5}
+                        quote="We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of design they want."
+                        name="Devon Lane"
+                        website="DLDesign.co"
+                    />
+                </div>
+            </div>
+        </div>
+    );
+}

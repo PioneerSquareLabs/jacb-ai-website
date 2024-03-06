@@ -59,6 +59,8 @@ export default async function handler(
       locofy: defaultRating,
       replit: defaultRating,
       v0: defaultRating,
+      human: defaultRating,
+      screenshot: defaultRating,
     };
 
     allChoices.forEach((choice) => {

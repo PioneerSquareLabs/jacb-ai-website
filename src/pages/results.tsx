@@ -77,7 +77,9 @@ const Results: React.FC = () => {
                       className="mr-4 h-10 w-10 rounded-full"
                     />
                     <span className="text-lg font-medium capitalize text-gray-800">
-                      {plugin.pluginName}
+                      {plugin.pluginName === "screenshot"
+                        ? "screenshot-to-code"
+                        : plugin.pluginName}
                     </span>
                   </div>
                   <span className="rounded bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
