@@ -93,7 +93,7 @@ const CodeComparison: React.FC = () => {
 
   return (
     <div className="flex flex-col p-4">
-      <p className="mb-4 text-lg font-semibold">Choice {currentChoice} of 20</p>
+      <p className="mb-4 text-lg font-semibold">Choice {currentChoice} of 10</p>
       <div className="mx-auto mb-8 flex h-auto max-w-xl">
         <img src={screenshot} alt="Screenshot" className="rounded-lg" />
       </div>
