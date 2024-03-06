@@ -1,0 +1,90 @@
+import { useState, useEffect } from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+import { BloodData, ChartData } from "@/types";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export interface BloodData {
+  id: number;
+  uid: string;
+  type: string;
+  rh_factor: string;
+  group: string;
+};
+
+export interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor: string[];
+  }[];
+};
+
+export default function Charts() {
+  const [chartData, setChartData] = useState<ChartData | null>(null);
+
+  useEffect(() => {
+    fetch("https://random-data-api.com/api/v2/blood_types?size=100")
+      .then((response) => response.json())
+      .then((data: BloodData[]) => {
+        const bloodTypeCounts = data.reduce(
+          (counts: { [key: string]: number }, item) => {
+            const type = item.type;
+            counts[type] = (counts[type] || 0) + 1;
+            return counts;
+          },
+          {}
+        );
+
+        const sortedTypes = ["A", "B", "AB", "O"];
+        const sortedCounts = sortedTypes.map(
+          (type) => bloodTypeCounts[type] || 0
+        );
+        const colors = [
+          "rgba(161, 85, 185, 1)",
+          "rgba(247, 101, 163, 1)",
+          "rgba(22, 191, 214, 1)",
+          "rgba(255, 184, 0, 1)",
+        ];
+
+        setChartData({
+          labels: sortedTypes,
+          datasets: [
+            {
+              label: "Number Of People",
+              data: sortedCounts,
+              backgroundColor: colors,
+            },
+          ],
+        });
+      });
+  }, []);
+
+  return (
+    <section className="container mx-auto mt-20 font-inter">
+      <div className="h-[500px] w-[800px]">
+        {chartData && (
+          <Pie
+            data={chartData}
+            options={{
+              plugins: {
+                legend: {
+                  position: "right",
+                  align: "start",
+                },
+              },
+              elements: {
+                arc: {
+                  borderWidth: 0,
+                },
+              },
+              maintainAspectRatio: false,
+            }}
+          />
+        )}
+      </div>
+    </section>
+  );
+}

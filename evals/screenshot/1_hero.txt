@@ -1,0 +1,23 @@
+
+function App() {
+    return (
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="max-w-4xl mx-auto p-6">
+                <div className="grid grid-cols-2 gap-10">
+                    <div>
+                        <h1 className="text-6xl font-bold mb-6">Meet the New Landingfolio Kit</h1>
+                        <p className="text-lg mb-6">
+                            Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
+                        </p>
+                        <button className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
+                            Start using Landingfolio
+                        </button>
+                    </div>
+                    <div className="flex justify-center items-center bg-blue-100 rounded-2xl">
+                        <img src="https://placehold.co/300x200" alt="Placeholder image with a light blue background and a gallery icon in the center" className="p-10"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

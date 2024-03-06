@@ -1,0 +1,55 @@
+ function Toast({ title, content, isList, buttons }) {
+    return (
+        <div className="border-b">
+            <div className="flex items-center p-4">
+                <i className="fas fa-info-circle text-blue-500 mr-2"></i>
+                <h2 className="font-semibold">{title}</h2>
+            </div>
+            <div className="px-8 pb-4">
+                {isList ? (
+                    <ul className="list-disc">
+                        {content.map((item, index) => (
+                            <li key={index}>{item}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>{content}</p>
+                )}
+                {buttons && (
+                    <div className="flex mt-4">
+                        {buttons.map((button, index) => (
+                            <button key={index} className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                {button}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <div className="max-w-2xl mx-auto my-10">
+            <Toast
+                title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae arcu, in nisi convallis rhoncus facilisi fames purus. Dictum sed phasellus dolor porttitor eget nulla vitae porttitor."
+            />
+            <Toast
+                title="Placeholder"
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae arcu, in nisi convallis rhoncus facilisi fames purus. Dictum sed phasellus dolor porttitor eget nulla vitae porttitor."
+            />
+            <Toast
+                title="Placeholder"
+                content={["Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."]}
+                isList={true}
+            />
+            <Toast
+                title="Placeholder"
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae arcu, in nisi convallis rhoncus facilisi fames purus."
+                buttons={["Label", "Label"]}
+            />
+        </div>
+    );
+}
