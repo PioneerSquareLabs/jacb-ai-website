@@ -40,6 +40,7 @@ const config = {
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-redundant-type-constituents": "off",
     "@next/next/no-img-element": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
   },
 };
 
