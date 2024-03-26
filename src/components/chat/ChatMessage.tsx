@@ -57,9 +57,9 @@ export const ChatMessage: FC<Props> = ({ message }) => {
           </SyntaxHighlighter>
         </div>
       ) : (
-        <code className={className} {...props}>
+        <div className={className} {...props}>
           {children}
-        </code>
+        </div>
       );
     },
   };
@@ -71,7 +71,7 @@ export const ChatMessage: FC<Props> = ({ message }) => {
       <ToastContainer />
       {content?.length > 0 && (
         <div
-          className={`markdown flex flex-col ${message.role === Role.ASSISTANT ? "border border-gray-500 " : "bg-gradient-to-l from-gray-500/80 to-gray-600/80"} hide-scrollbar max-w-[95%] rounded-md px-4 py-2 text-white shadow-md`}
+          className={`markdown flex flex-col ${message.role === Role.ASSISTANT ? "border border-gray-500 " : "bg-gradient-to-l from-gray-500/80 to-gray-600/80"} hide-scrollbar max-w-[95%] rounded-md px-2 font-sans text-sm text-white shadow-md`}
           style={{ overflowWrap: "anywhere" }}
         >
           <Markdown components={renderers}>{content}</Markdown>

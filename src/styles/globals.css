@@ -14,7 +14,7 @@
 
 html,
 body {
-  @apply min-h-full w-full;
+  @apply bg-blueGray-900 min-h-full w-full;
 }
 
 body {
@@ -113,6 +113,15 @@ h1 {
 .markdown strong {
   @apply text-white;
   @apply font-semibold;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+.blink {
+  animation: blink 1s linear infinite;
 }
 
 @tailwind utilities;
