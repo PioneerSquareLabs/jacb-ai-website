@@ -31,7 +31,7 @@ const Arena: React.FC = () => {
     }
   };
   return (
-    <div className="to-pink-600 flex h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-gray-100 text-not-black-black">
+    <div className="to-pink-600 text-base-black flex h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-gray-100">
       <div className="max-w-2xl">
         <h1 className="mb-6 text-center text-3xl font-bold md:text-5xl">
           Welcome to the Design to Code Arena!
@@ -70,7 +70,7 @@ const Arena: React.FC = () => {
           {userId ? (
             <Link
               href="/challenge"
-              className="inline-block rounded bg-violet-beauregarde px-8 py-4 text-xl font-semibold text-white shadow-lg transition-colors hover:bg-violet-beauregarde/80 focus:outline-none focus:ring-2 focus:ring-violet-beauregarde/50 focus:ring-offset-2"
+              className="inline-block rounded bg-navy-blue px-8 py-4 text-xl font-semibold text-white shadow-lg transition-colors hover:bg-navy-blue/80 focus:outline-none focus:ring-2 focus:ring-navy-blue/50 focus:ring-offset-2"
             >
               {isLoading ? "Loading..." : "Start Voting"}
             </Link>

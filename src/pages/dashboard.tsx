@@ -2,9 +2,9 @@ import { ChatCompletionStreamingRunner } from "openai/lib/ChatCompletionStreamin
 import React, { useEffect, useRef, useState } from "react";
 import { Chat } from "~/components/chat/Chat";
 import Sidebar, { SidebarIcon } from "~/components/dashboard/Sidebar";
-import Tasks, { type Task } from "~/components/dashboard/Tasks";
+import Tasks from "~/components/dashboard/tasks";
 
-import { type Message, Role } from "~/types";
+import { type Message, type Task, Role } from "~/types";
 
 const TOP_MENU_HEIGHT = 0;
 
@@ -13,7 +13,7 @@ Welcome! I’m JACoB, your AI Coding Assistant. I’m focused on helping you wri
 `;
 const DEFAULT_PROMPT_2 = `What can I help you build today?`;
 
-const OnboardingPage: React.FC = () => {
+const DashboardPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -64,7 +64,7 @@ const OnboardingPage: React.FC = () => {
     if (messages?.length > 0 && messagesEndRef.current && isAtBottom) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages]);
+  }, [messages, isAtBottom]);
 
   useEffect(() => {
     setMessages([
@@ -178,7 +178,7 @@ const OnboardingPage: React.FC = () => {
   return (
     <div className="h-screen w-full bg-gray-900">
       <div className="flex w-full flex-row">
-        <div className="w-1/4 max-w-7xl bg-gray-900" style={{ height }}>
+        <div className="w-1/3 max-w-7xl bg-gray-900" style={{ height }}>
           <Chat
             messages={messages}
             loading={loading}
@@ -192,16 +192,20 @@ const OnboardingPage: React.FC = () => {
             checkIfAtBottom={checkIfAtBottom}
           />
         </div>
-        <Tasks
-          tasks={tasks}
-          onRemove={onRemoveTask}
-          onEdit={onEditTask}
-          onStart={onStartTask}
-        />
+        <div className="w-1/4 max-w-7xl bg-gray-900" style={{ height }}>
+          <Tasks
+            tasks={tasks}
+            onRemove={onRemoveTask}
+            onEdit={onEditTask}
+            onStart={onStartTask}
+          />
+        </div>
+        <div className="w-full bg-gray-900/90" />
+
         <Sidebar onIconClick={onIconClick} selectedIcon={selectedIcon} />
       </div>
     </div>
   );
 };
 
-export default OnboardingPage;
+export default DashboardPage;
