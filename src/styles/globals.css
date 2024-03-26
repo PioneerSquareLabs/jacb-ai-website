@@ -41,4 +41,78 @@ h1 {
   padding-top: 56.25%; /* 16:9 Aspect Ratio */
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.markdown {
+  @apply text-base;
+  @apply leading-normal;
+  @apply font-light;
+  @apply text-neutral-300;
+}
+
+.markdown h1 {
+  @apply text-2xl;
+  @apply mt-1;
+  @apply mb-3;
+  @apply text-white;
+}
+
+.markdown h2 {
+  @apply text-xl;
+  @apply mt-1;
+  @apply mb-3;
+  @apply text-white;
+}
+
+.markdown h3 {
+  @apply text-lg;
+  @apply mt-1;
+  @apply mb-3;
+  @apply text-white;
+}
+
+.markdown h4 {
+  @apply text-base;
+  @apply mt-1;
+  @apply mb-3;
+  @apply text-white;
+}
+
+.markdown h5 {
+  @apply text-base;
+  @apply mt-1;
+  @apply mb-3;
+  @apply text-white;
+}
+
+.markdown hr {
+  @apply border-neutral-500;
+  @apply my-3;
+}
+
+.markdown p {
+  @apply my-3;
+}
+
+.markdown ul {
+  list-style: disc;
+  @apply p-2;
+}
+
+.markdown li {
+  @apply mb-1;
+}
+
+.markdown strong {
+  @apply text-white;
+  @apply font-semibold;
+}
+
 @tailwind utilities;
