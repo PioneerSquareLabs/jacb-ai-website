@@ -4,55 +4,12 @@ import {
   Draggable,
   type DropResult,
 } from "react-beautiful-dnd";
-import Droppable from "../Droppable";
+import Droppable from "./Droppable";
 
 import { SelectedTask } from "./SelectedTask";
 import { StandardTask } from "./StandardTask";
 import { type Task } from "~/types";
 import { TaskStatus } from "./TaskStatus";
-
-const SAMPLE_TASKS: Task[] = [
-  {
-    id: "1",
-    name: "Refactor Login Component",
-    description:
-      "The Login component has grown quite large and is handling too many responsibilities. It needs to be refactored into smaller, more manageable components.",
-    storyPoints: 5,
-    completed: true,
-  },
-  {
-    id: "2",
-    name: "Fix Bug in User Registration",
-    description:
-      "There's a bug in the user registration flow where the form doesn't properly validate the user's email address. This needs to be fixed.",
-    storyPoints: 3,
-    completed: true,
-  },
-  {
-    id: "3",
-    name: "Add Tests for Profile Page",
-    description:
-      "The Profile page currently has no tests. We need to add unit and integration tests to ensure it's working correctly.",
-    storyPoints: 8,
-    completed: false,
-  },
-  {
-    id: "4",
-    name: "Implement Dark Mode",
-    description:
-      "Users have been asking for a dark mode. We need to implement this across the entire application.",
-    storyPoints: 3,
-    completed: false,
-  },
-  {
-    id: "5",
-    name: "Optimize Image Loading",
-    description:
-      "Images on the site are currently loaded all at once, which is causing performance issues. We need to implement lazy loading for images.",
-    storyPoints: 5,
-    completed: false,
-  },
-];
 
 interface TasksProps {
   tasks: Task[];
@@ -62,12 +19,12 @@ interface TasksProps {
 }
 
 const Tasks: React.FC<TasksProps> = ({
-  tasks: _tasks,
+  tasks: _tasks = [],
   onRemove,
   onEdit,
   onStart,
 }) => {
-  const [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
+  const [tasks, setTasks] = useState<Task[]>(_tasks);
 
   const handleDragEnd = (result: DropResult) => {
     console.log("Drag end", result);
@@ -94,7 +51,7 @@ const Tasks: React.FC<TasksProps> = ({
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <h2 className="mt-2 px-2 font-bold text-light-blue">
-                  Current Task
+                  Next Task
                 </h2>
                 {tasks.map((task, index) => (
                   <Draggable
@@ -118,7 +75,7 @@ const Tasks: React.FC<TasksProps> = ({
                               />
                             </div>
                             <h2 className="my-2 ml-2 text-sm text-indigo-100/50">
-                              Upcoming Tasks
+                              Suggested Tasks
                             </h2>
                           </>
                         ) : (

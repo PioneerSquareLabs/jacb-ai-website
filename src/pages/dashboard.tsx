@@ -1,8 +1,10 @@
 import { ChatCompletionStreamingRunner } from "openai/lib/ChatCompletionStreamingRunner";
 import React, { useEffect, useRef, useState } from "react";
 import { Chat } from "~/components/chat/Chat";
-import Sidebar, { SidebarIcon } from "~/components/dashboard/Sidebar";
+import Sidebar from "~/components/dashboard/Sidebar";
 import Tasks from "~/components/dashboard/tasks";
+import Workspace from "~/components/dashboard/workspace";
+import { SAMPLE_TASKS, SidebarIcon } from "~/types";
 
 import { type Message, type Task, Role } from "~/types";
 
@@ -22,10 +24,8 @@ const DashboardPage: React.FC = () => {
   const [isAtBottom, setIsAtBottom] = useState<boolean>(true);
   const [responding, setResponding] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
-  const [selectedIcon, setSelectedIcon] = useState<SidebarIcon>(
-    SidebarIcon.None,
-  );
-  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -158,10 +158,6 @@ const DashboardPage: React.FC = () => {
     ]);
   };
 
-  const onIconClick = (icon: SidebarIcon) => {
-    setSelectedIcon(icon);
-  };
-
   const onRemoveTask = (taskId: string) => {
     console.log("Removing task: ", taskId);
     setTasks((tasks) => tasks.filter((t) => t.id !== taskId));
@@ -175,34 +171,34 @@ const DashboardPage: React.FC = () => {
     console.log("Starting task: ", taskId);
   };
 
-  return (
-    <div className="h-screen w-full bg-gray-900">
-      <div className="flex w-full flex-row">
-        <div className="w-1/3 max-w-7xl bg-gray-900" style={{ height }}>
-          <Chat
-            messages={messages}
-            loading={loading}
-            onSend={handleSend}
-            onReset={handleReset}
-            isResponding={responding}
-            messagesEndRef={messagesEndRef}
-            scrollToBottom={scrollToBottom}
-            isAtBottom={isAtBottom}
-            sidebarRef={sidebarRef}
-            checkIfAtBottom={checkIfAtBottom}
-          />
-        </div>
-        <div className="w-1/4 max-w-7xl bg-gray-900" style={{ height }}>
-          <Tasks
-            tasks={tasks}
-            onRemove={onRemoveTask}
-            onEdit={onEditTask}
-            onStart={onStartTask}
-          />
-        </div>
-        <div className="w-full bg-gray-900/90" />
+  console.log("tasks", tasks);
 
-        <Sidebar onIconClick={onIconClick} selectedIcon={selectedIcon} />
+  return (
+    <div className="grid h-screen w-full grid-cols-12 bg-gray-900">
+      <div className="col-span-3 max-w-7xl bg-gray-900" style={{ height }}>
+        <Chat
+          messages={messages}
+          loading={loading}
+          onSend={handleSend}
+          onReset={handleReset}
+          isResponding={responding}
+          messagesEndRef={messagesEndRef}
+          scrollToBottom={scrollToBottom}
+          isAtBottom={isAtBottom}
+          sidebarRef={sidebarRef}
+          checkIfAtBottom={checkIfAtBottom}
+        />
+      </div>
+      <div className="col-span-2 max-w-7xl bg-gray-900" style={{ height }}>
+        <Tasks
+          tasks={tasks}
+          onRemove={onRemoveTask}
+          onEdit={onEditTask}
+          onStart={onStartTask}
+        />
+      </div>
+      <div className="col-span-7 flex bg-gray-900/90">
+        <Workspace tasks={tasks} />
       </div>
     </div>
   );
