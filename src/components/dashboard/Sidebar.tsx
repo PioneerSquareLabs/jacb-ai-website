@@ -9,22 +9,13 @@ import {
   faCodeBranch,
 } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-tooltip";
-
-export enum SidebarIcon {
-  None = "None",
-  Code = "Code",
-  Design = "Design",
-  Terminal = "Terminal",
-  Plan = "Plan",
-  Prompts = "Prompts",
-  Issues = "Issues",
-  PullRequests = "Pull Requests",
-}
+import { SidebarIcon } from "~/types";
 
 interface SidebarProps {
   selectedIcon: SidebarIcon;
   onIconClick: (icon: SidebarIcon) => void;
 }
+
 const Sidebar: React.FC<SidebarProps> = ({ selectedIcon, onIconClick }) => {
   const icons = [
     { icon: faClipboardList, name: SidebarIcon.Plan },
