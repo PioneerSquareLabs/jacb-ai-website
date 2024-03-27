@@ -58,32 +58,38 @@ const Workspace: React.FC<WorkspaceProps> = ({ tasks }) => {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden ">
-      <div className="space-between w-full flex-shrink flex-col">
-        <div className="border-blueGray-600 mt-3 flex w-full  overflow-x-auto  border-b px-2 ">
-          {tasks?.map((task) => (
-            <div
-              key={task.id}
-              className={`mr-2 flex flex-shrink-0 items-center rounded-t-md px-2 py-1 ${selectedTask?.id === task.id ? "bg-slate-700 text-orange" : "bg-blueGray-800 text-blueGray-500"} transition duration-300 ease-in-out hover:bg-slate-700 hover:text-orange`}
+    <div className="flex h-screen w-full flex-grow flex-col overflow-hidden">
+      <div className="mt-3 flex w-full overflow-x-auto border-b border-blueGray-600 px-2">
+        {tasks?.map((task) => (
+          <div
+            key={task.id}
+            className={`mr-2 flex flex-shrink-0 items-center rounded-t-md px-2 py-2 ${selectedTask?.id === task.id ? "bg-slate-700 text-orange" : "bg-blueGray-800 text-blueGray-500"} transition duration-300 ease-in-out hover:bg-slate-700 hover:text-orange`}
+          >
+            <button
+              className="max-w-32 truncate text-sm"
+              onClick={() => handleSelectTask(task)}
             >
-              <button
-                className="max-w-32 truncate text-sm"
-                onClick={() => handleSelectTask(task)}
-              >
-                {task.name}
-              </button>
-              <button
-                className="ml-2 h-6 w-6 text-gray-300  hover:rounded-full hover:bg-gray-500"
-                onClick={() => console.log("Delete task")}
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
-            </div>
-          ))}
+              {task.name}
+            </button>
+            <button
+              className="ml-2 h-6 w-6 text-gray-300  hover:rounded-full hover:bg-gray-500"
+              onClick={() => console.log("Delete task")}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          </div>
+        ))}
+      </div>
+      <div
+        className="flex h-full flex-grow"
+        style={{ height: "calc(100vh - 3rem)" }}
+      >
+        <div className="hide-scrollbar h-full w-full overflow-y-auto">
+          <div className="flex h-full w-full flex-grow p-4">
+            {renderComponent()}
+          </div>
         </div>
-        <div className="flex flex-row justify-between">
-          <div className="flex w-full  p-4">{renderComponent()}</div>
-
+        <div className="min-h-screen">
           <Sidebar selectedIcon={selectedIcon} onIconClick={onIconClick} />
         </div>
       </div>

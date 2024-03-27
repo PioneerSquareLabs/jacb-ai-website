@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Header from "~/components/Header";
+import Header from "~/components/home/Header";
 
 const meta: Meta = {
   title: "Components/Header",
@@ -21,9 +21,7 @@ export const WithPlaceholderLogo: Story = {
   decorators: [
     (Story) => (
       <div>
-        <style>
-          {`.w-30 { width: 120px; } .h-8 { height: 32px; }`}
-        </style>
+        <style>{`.w-30 { width: 120px; } .h-8 { height: 32px; }`}</style>
         <Story />
       </div>
     ),
@@ -40,10 +38,12 @@ export const WithRealLogo: Story = {
   decorators: [
     (Story) => (
       <div>
-        <style>
-          {`.w-30 { width: 120px; } .h-8 { height: 32px; }`}
-        </style>
-        <img src="https://via.placeholder.com/1024x768" alt="Placeholder Logo" className="w-30 h-8" />
+        <style>{`.w-30 { width: 120px; } .h-8 { height: 32px; }`}</style>
+        <img
+          src="https://via.placeholder.com/1024x768"
+          alt="Placeholder Logo"
+          className="w-30 h-8"
+        />
         <Story />
       </div>
     ),
