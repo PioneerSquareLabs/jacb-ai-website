@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedIcon, onIconClick }) => {
   ];
 
   return (
-    <div className="flex h-screen w-12 flex-col items-center space-y-1 bg-gray-800 text-white">
+    <div className="flex h-full w-12 flex-col items-center space-y-1 bg-gray-800 text-white">
       {icons.map(({ icon, name }) => (
         <div
           className={`w-full ${selectedIcon === name ? "bg-gray-900/50" : ""} p-4 text-center`}

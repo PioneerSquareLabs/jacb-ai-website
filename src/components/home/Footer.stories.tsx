@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CtaComponent from "~/components/CTA";
+import Footer from "~/components/home/Footer";
 
 const meta: Meta = {
-  title: "Components/CTA",
-  component: CtaComponent,
+  title: "Components/Footer",
+  component: Footer,
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta;
-
+};
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
