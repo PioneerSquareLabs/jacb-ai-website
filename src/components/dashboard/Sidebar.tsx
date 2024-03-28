@@ -22,9 +22,9 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedIcon, onIconClick }) => {
     { icon: faCode, name: SidebarIcon.Code },
     { icon: faTerminal, name: SidebarIcon.Terminal },
     { icon: faBug, name: SidebarIcon.Issues },
+    { icon: faCodeBranch, name: SidebarIcon.PullRequests },
     { icon: faPaintBrush, name: SidebarIcon.Design },
     { icon: faCommentDots, name: SidebarIcon.Prompts },
-    { icon: faCodeBranch, name: SidebarIcon.PullRequests },
   ];
 
   return (
