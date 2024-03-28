@@ -51,7 +51,7 @@ const Results: React.FC = () => {
     <div className="min-h-screen w-full bg-gray-100 p-4">
       <div className="mx-auto max-w-4xl rounded-lg bg-beige p-8 shadow-sm">
         <header className="text-center">
-          <h1 className="text-2xl font-bold text-drake-passage md:text-4xl">
+          <h1 className="text-2xl font-bold text-dark-blue md:text-4xl">
             Thanks for voting!{" "}
           </h1>
           <p className="mt-4 text-xl text-gray-600">

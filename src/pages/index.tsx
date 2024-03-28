@@ -1,13 +1,13 @@
 import Head from "next/head";
-import CodeInAction from "~/components/CodeInAction";
-import DesignerForDevs from "~/components/DesignedForDevs";
-import Intro from "~/components/Intro";
-import WhyJacob from "~/components/WhyJacob";
-import Hero from "~/components/Hero";
-import Header from "~/components/Header";
-import CTA from "~/components/CTA";
-import JacobInMotion from "~/components/JacobInMotion";
-import Footer from "~/components/Footer";
+import CodeInAction from "~/components/home/CodeInAction";
+import DesignerForDevs from "~/components/home/DesignedForDevs";
+import Intro from "~/components/home/Intro";
+import WhyJacob from "~/components/home/WhyJacob";
+import Hero from "~/components/home/Hero";
+import Header from "~/components/home/Header";
+import CTA from "~/components/home/CTA";
+import JacobInMotion from "~/components/home/JacobInMotion";
+import Footer from "~/components/home/Footer";
 
 export default function Home() {
   return (

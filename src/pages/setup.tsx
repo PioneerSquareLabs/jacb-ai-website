@@ -82,14 +82,14 @@ const SetupStep: React.FC<SetupStepProps> = ({
             {codeCommand ? (
               <div className="mt-3 flex w-full items-center justify-center self-start rounded-md bg-white px-4 py-2 text-sm font-medium text-navy-blue">
                 <code
-                  className="flex-grow text-drake-passage"
+                  className="flex-grow text-dark-blue"
                   id="code-block"
                   onClick={() => copyToClipboard("code-block")}
                 >
                   npx jacob-setup create
                 </code>
                 <button
-                  className="ml-2 rounded  px-2 py-2 font-bold text-drake-passage hover:text-blue-700"
+                  className="ml-2 rounded  px-2 py-2 font-bold text-dark-blue hover:text-blue-700"
                   onClick={() => copyToClipboard("code-block")}
                 >
                   <FontAwesomeIcon icon={faCopy} className="fa-lg" />
@@ -108,7 +108,7 @@ const SetupStep: React.FC<SetupStepProps> = ({
 
             <button
               onClick={onCtaClick}
-              className="items-center justify-center self-start rounded-md border border-transparent bg-drake-passage px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="items-center justify-center self-start rounded-md border border-transparent bg-dark-blue px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               Mark as Complete
               <FontAwesomeIcon icon={faCheckCircle} className="ml-2" />
