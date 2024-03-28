@@ -7,13 +7,7 @@ type ComponentProps = {
 };
 // The TerminalComponent
 export const TerminalComponent: React.FC<ComponentProps> = ({
-  commands = [
-    ...SAMPLE_COMMANDS,
-    ...SAMPLE_COMMANDS,
-    ...SAMPLE_COMMANDS,
-    ...SAMPLE_COMMANDS,
-    ...SAMPLE_COMMANDS,
-  ],
+  commands = SAMPLE_COMMANDS,
 }) => {
   return (
     <div className="flex h-full min-h-full w-full flex-grow flex-col p-2 pt-0">
