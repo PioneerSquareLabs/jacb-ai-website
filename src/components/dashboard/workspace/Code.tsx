@@ -8,7 +8,7 @@ import { SAMPLE_CODE_FILES, type CodeFile, type Task } from "~/types";
 import "react-toastify/dist/ReactToastify.css";
 
 type ComponentProps = {
-  selectedTask?: Task;
+  task?: Task;
   codeFiles?: CodeFile[];
 };
 

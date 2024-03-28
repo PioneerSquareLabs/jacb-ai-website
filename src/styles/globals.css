@@ -14,7 +14,7 @@
 
 html,
 body {
-  @apply bg-blueGray-900 min-h-full w-full;
+  @apply min-h-full w-full bg-blueGray-900;
 }
 
 body {
@@ -113,6 +113,14 @@ h1 {
 .markdown strong {
   @apply text-white;
   @apply font-semibold;
+}
+
+.markdown code {
+  @apply text-white;
+  @apply bg-blueGray-900/80;
+  @apply px-1;
+  @apply py-1;
+  @apply rounded-sm;
 }
 
 @keyframes blink {

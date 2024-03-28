@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { type Task } from "~/types";
+import {
+  SAMPLE_ISSUE,
+  SAMPLE_PR,
+  SAMPLE_PROMPT_DETAILS_ARRAY,
+  type Task,
+} from "~/types";
 import { SidebarIcon } from "~/types";
 import { CodeComponent } from "./Code";
 import { DesignComponent } from "./Design";
-import { IssuesComponent } from "./Issues";
+import { IssueComponent } from "./Issue";
 import { PlanComponent } from "./Plan";
 import { PromptsComponent } from "./Prompts";
-import { PullRequestsComponent } from "./PullRequests";
+import { PullRequestComponent } from "./PullRequest";
 import { TerminalComponent } from "./Terminal";
 import Sidebar from "../Sidebar";
-
-type ComponentProps = {
-  task?: Task;
-};
 
 type WorkspaceProps = {
   tasks: Task[];
@@ -37,13 +38,15 @@ const Workspace: React.FC<WorkspaceProps> = ({ tasks }) => {
       case SidebarIcon.Terminal:
         return <TerminalComponent task={selectedTask} />;
       case SidebarIcon.Issues:
-        return <IssuesComponent task={selectedTask} />;
+        return <IssueComponent issue={SAMPLE_ISSUE} />;
       case SidebarIcon.Design:
-        return <DesignComponent task={selectedTask} />;
+        return <DesignComponent imageUrl={"/images/sample_website.jpg"} />;
       case SidebarIcon.Prompts:
-        return <PromptsComponent task={selectedTask} />;
+        return (
+          <PromptsComponent promptDetailsArray={SAMPLE_PROMPT_DETAILS_ARRAY} />
+        );
       case SidebarIcon.PullRequests:
-        return <PullRequestsComponent task={selectedTask} />;
+        return <PullRequestComponent pullRequest={SAMPLE_PR} />;
       default:
         return null;
     }
