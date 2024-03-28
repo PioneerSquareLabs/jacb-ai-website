@@ -26,7 +26,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ tasks }) => {
     tasks ? tasks[0] : undefined,
   );
   const [selectedIcon, setSelectedIcon] = useState<SidebarIcon>(
-    SidebarIcon.None,
+    SidebarIcon.Plan,
   );
 
   const renderComponent = () => {
