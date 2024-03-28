@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react";
-import JacobInMotion from "~/components/JacobInMotion";
+import { type Meta, type StoryObj } from "@storybook/react";
+import JacobInMotion from "~/components/home/JacobInMotion";
 
 const meta: Meta = {
   title: "Components/JacobInMotion",
@@ -16,7 +16,7 @@ export const Default: Story = {
   args: {},
   parameters: {
     backgrounds: {
-      default: 'light',
+      default: "light",
     },
   },
 };
