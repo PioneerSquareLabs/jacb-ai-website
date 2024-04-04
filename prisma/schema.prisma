@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -75,4 +72,192 @@ model Choice {
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@map("choices")
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+model Task {
+  id              String         @id @default(cuid())
+  name            String
+  description     String
+  type            String // "Create New File" \ "Edit Files" | "Code Review"
+  storyPoints     Int
+  status          TaskStatus
+  createdAt       DateTime       @default(now())
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("tasks")
+}
+
+model Command {
+  id              String         @id @default(cuid())
+  command         String
+  response        String
+  directory       String?
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("commands")
+}
+
+enum Language {
+  TypeScript
+  JavaScript
+}
+
+model CodeFile {
+  id              String         @id @default(cuid())
+  fileName        String
+  filePath        String
+  language        Language
+  codeBlock       String
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("code_files")
+}
+
+model Plan {
+  id              String         @id @default(cuid())
+  title           String
+  description     String
+  position        Int
+  isComplete      Boolean
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("plans")
+}
+
+model Comment {
+  id              String         @id @default(cuid())
+  commentId       Int            @map("comment_id")
+  username        String
+  createdAt       DateTime       @default(now())
+  content         String
+  issueId         String?        @map("issue_id")
+  pullRequestId   String?        @map("pull_request_id")
+  issue           Issue?         @relation(fields: [issueId], references: [id])
+  pullRequest     PullRequest?   @relation(fields: [pullRequestId], references: [id])
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("comments")
+}
+
+model Issue {
+  id              String         @id @default(cuid())
+  issueId         Int            @map("issue_id")
+  title           String
+  description     String
+  createdAt       DateTime       @default(now())
+  author          String
+  assignee        String
+  status          String // "open" | "closed"
+  link            String
+  comments        Comment[]
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("issues")
+}
+
+model PullRequest {
+  id              String         @id @default(cuid())
+  pullRequestId   Int            @map("pull_request_id")
+  title           String
+  description     String
+  link            String
+  status          String // "open" | "closed" | "merged"
+  createdAt       DateTime       @default(now())
+  author          String
+  comments        Comment[]
+  changedFiles    Int
+  additions       Int
+  deletions       Int
+  internalEventId String?        @map("internal_event_id")
+  internalEvent   InternalEvent? @relation(fields: [internalEventId], references: [id])
+
+  @@map("pull_requests")
+}
+
+model PromptMetadata {
+  id        String        @id @default(cuid())
+  timestamp DateTime
+  tokens    Int
+  cost      Float
+  duration  Int
+  model     String
+  detail    PromptDetail? @relation(fields: [detailId], references: [id])
+  detailId  String?       @unique
+
+  @@map("prompt_metadata")
+}
+
+model PromptDetail {
+  id         String           @id @default(cuid())
+  metadata   PromptMetadata?
+  metadataId String?          @unique
+  requests   PromptRequest[]
+  responses  PromptResponse[]
+
+  @@map("prompt_details")
+}
+
+model PromptRequest {
+  id           String       @id @default(cuid())
+  prompts      Prompt[]
+  detailId     String       @unique
+  promptDetail PromptDetail @relation(fields: [detailId], references: [id])
+
+  @@map("prompt_requests")
+}
+
+model Prompt {
+  id              String          @id @default(cuid())
+  promptType      String
+  prompt          String
+  timestamp       DateTime
+  PromptRequest   PromptRequest?  @relation(fields: [promptRequestId], references: [id])
+  promptRequestId String?
+  PromptResponse  PromptResponse?
+  internalEventId String?         @map("internal_event_id")
+  internalEvent   InternalEvent?  @relation(fields: [internalEventId], references: [id])
+
+  @@map("prompts")
+}
+
+model PromptResponse {
+  id           String       @id @default(cuid())
+  promptId     String       @unique
+  prompt       Prompt       @relation(fields: [promptId], references: [id])
+  detailId     String       @unique
+  promptDetail PromptDetail @relation(fields: [detailId], references: [id])
+
+  @@map("prompt_responses")
+}
+
+model InternalEvent {
+  id            String        @id @default(cuid())
+  type          String
+  repo          String
+  issueId       Int?          @map("issue_id")
+  pullRequestId Int?          @map("pull_request_id")
+  userId        String
+  payload       Json
+  Task          Task[]
+  Command       Command[]
+  CodeFile      CodeFile[]
+  Plan          Plan[]
+  Comment       Comment[]
+  Issue         Issue[]
+  PullRequest   PullRequest[]
+  Prompt        Prompt[]
+
+  @@map("internal_events")
 }

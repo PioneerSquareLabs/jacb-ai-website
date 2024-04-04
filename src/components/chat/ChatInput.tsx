@@ -24,8 +24,8 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    if (value.length > 2000) {
-      toast.error("Message limit is 2000 characters");
+    if (value.length > 3000) {
+      toast.error("Message limit is 3000 characters");
       return;
     }
 
@@ -65,7 +65,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
     >
       <textarea
         ref={textareaRef}
-        className="w-full bg-transparent text-base text-white text-opacity-80 placeholder-gray-400 outline-none"
+        className="w-full bg-transparent text-sm text-white text-opacity-80 placeholder-gray-400 outline-none"
         placeholder="Send a reply.."
         value={content}
         onChange={handleChange}
@@ -73,7 +73,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
       />
       <div className="items-between flex w-full flex-row">
         <p className="mt-2 text-base text-white text-opacity-40">
-          {content?.length ?? 0}/2000
+          {content?.length ?? 0}/3000
         </p>
         <div className="mt-2 flex w-full items-center justify-end">
           <button

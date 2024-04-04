@@ -1,6 +1,8 @@
 import { type Message } from "~/types";
 import { Models } from "~/utils/openai_completion";
 import { OpenAIStream } from "~/utils/openai_streaming";
+import { chatCreateIssueSystem } from "~/prompts/edge_prompts";
+import { getServerSession } from "next-auth";
 
 export const config = {
   runtime: "edge",
@@ -12,7 +14,7 @@ const handler = async (req: Request): Promise<Response> => {
       messages: Message[];
     };
 
-    const systemPrompt = "You are a helpful friendly assistant.";
+    const systemPrompt = chatCreateIssueSystem;
     const temperature = 0.3;
     const model = Models.GPT4;
 

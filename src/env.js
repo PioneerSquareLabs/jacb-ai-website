@@ -34,6 +34,7 @@ export const env = createEnv({
     OPENAI_API_KEY: z.string(),
     PORTKEY_API_KEY: z.string(),
     ANTHROPIC_API_KEY: z.string(),
+    PROMPT_FOLDER: z.string(),
   },
 
   /**
@@ -60,6 +61,7 @@ export const env = createEnv({
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     PORTKEY_API_KEY: process.env.PORTKEY_API_KEY,
     ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+    PROMPT_FOLDER: process.env.PROMPT_FOLDER,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
