@@ -76,7 +76,7 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
   return (
     <div className="min-h-full w-full flex-grow flex-col overflow-clip p-2 pt-0">
       <div className="w-full py-2 ">
-        <h2 className="text-lg font-semibold text-white">Terminal</h2>
+        <h2 className="text-lg font-semibold text-white">Prompts</h2>
         <hr className="my-2 border-t border-gray-700" />
       </div>
       <div className="relative h-full w-full overflow-clip rounded-lg bg-gray-800/50 pb-2 text-white">
@@ -138,7 +138,7 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                 <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
               </Transition.Child>
               <span
-                className="inline-block h-screen align-middle"
+                className="inline-block h-full min-h-screen align-middle"
                 aria-hidden="true"
               >
                 &#8203;

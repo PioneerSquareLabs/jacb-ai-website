@@ -11,6 +11,7 @@ interface Props {
   loading: boolean;
   onSend: (message: Message) => void;
   onReset: () => void;
+  onCreateNewTask: () => void;
   isResponding?: boolean;
   shouldHideLogo?: boolean;
   messagesEndRef: React.RefObject<HTMLDivElement>;
@@ -25,6 +26,7 @@ export const Chat: FC<Props> = ({
   loading,
   onSend,
   onReset,
+  onCreateNewTask,
   isResponding = false,
   shouldHideLogo = false,
   messagesEndRef,
@@ -34,11 +36,12 @@ export const Chat: FC<Props> = ({
   isAtBottom,
 }) => {
   return (
-    <div className="relative flex h-full w-full flex-col bg-gray-900/90">
+    <div className="hide-scrollbar flex h-screen w-full flex-col overflow-hidden bg-gray-900/90">
       <div
         className={`flex items-center justify-between border-b border-gray-800 p-4 ${
           shouldHideLogo ? "hidden" : ""
         }`}
+        style={{ height: "6rem" }}
       >
         <div className={`flex items-center `}>
           <img
@@ -49,7 +52,10 @@ export const Chat: FC<Props> = ({
           <h1 className="ml-4 text-lg text-white">JACoB</h1>
         </div>
       </div>
-      <div className="space-between flex h-full flex-col rounded-lg px-2 pb-8 sm:p-4">
+      <div
+        className="space-between flex flex-col rounded-lg px-2 pb-8 sm:p-4"
+        style={{ height: "calc(100vh - 6rem)" }}
+      >
         <div
           className="hide-scrollbar flex flex-1 flex-col overflow-y-auto"
           ref={sidebarRef}
@@ -57,7 +63,11 @@ export const Chat: FC<Props> = ({
         >
           {messages.map((message, index) => (
             <div key={index} className="my-1 sm:my-2">
-              <ChatMessage message={message} isResponding={isResponding} />
+              <ChatMessage
+                message={message}
+                isResponding={isResponding}
+                onCreateNewTask={onCreateNewTask}
+              />
             </div>
           ))}
 
@@ -69,7 +79,7 @@ export const Chat: FC<Props> = ({
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="relative left-0 mb-2 mt-3 w-full sm:mb-6 sm:mt-6">
+        <div className="relative left-0 mt-3 w-full sm:mt-6">
           <ChatInput onSend={onSend} isResponding={isResponding} />
           {!isAtBottom && (
             <div

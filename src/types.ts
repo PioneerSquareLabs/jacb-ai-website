@@ -8,12 +8,36 @@ export type Message = {
   content: string;
 };
 
+export enum SpecialPhrases {
+  CREATE_TASK = "<<CREATE_TASK>>",
+}
+
+export enum TaskStatus {
+  TODO = "todo",
+  IN_PROGRESS = "in_progress",
+  DONE = "done",
+}
+
+export enum TaskType {
+  CREATE_NEW_FILE = "Create New File",
+  EDIT_FILES = "Edit Files",
+  CODE_REVIEW = "Code Review",
+}
+
 export type Task = {
   id: string;
   name: string;
+  type: TaskType;
   description: string;
   storyPoints: number;
-  completed: boolean;
+  status: TaskStatus;
+  plan?: Plan[];
+  currentPlanStep?: number;
+  issue?: Issue;
+  pullRequest?: PullRequest;
+  commands?: Command[];
+  codeFiles?: CodeFile[];
+  prompts?: PromptDetails[];
 };
 
 export type Command = {
@@ -57,42 +81,47 @@ export const SAMPLE_TASKS: Task[] = [
   {
     id: "1",
     name: "Refactor Login Component",
+    type: TaskType.EDIT_FILES,
     description:
       "The Login component has grown quite large and is handling too many responsibilities. It needs to be refactored into smaller, more manageable components.",
     storyPoints: 5,
-    completed: true,
+    status: TaskStatus.TODO,
   },
   {
     id: "2",
     name: "Fix Bug in User Registration",
+    type: TaskType.EDIT_FILES,
     description:
       "There's a bug in the user registration flow where the form doesn't properly validate the user's email address. This needs to be fixed.",
     storyPoints: 3,
-    completed: true,
+    status: TaskStatus.TODO,
   },
   {
     id: "3",
     name: "Add Tests for Profile Page",
+    type: TaskType.CODE_REVIEW,
     description:
       "The Profile page currently has no tests. We need to add unit and integration tests to ensure it's working correctly.",
     storyPoints: 8,
-    completed: false,
+    status: TaskStatus.IN_PROGRESS,
   },
   {
     id: "4",
     name: "Implement Dark Mode",
+    type: TaskType.CREATE_NEW_FILE,
     description:
       "Users have been asking for a dark mode. We need to implement this across the entire application.",
     storyPoints: 3,
-    completed: false,
+    status: TaskStatus.DONE,
   },
   {
     id: "5",
     name: "Optimize Image Loading",
+    type: TaskType.CREATE_NEW_FILE,
     description:
       "Images on the site are currently loaded all at once, which is causing performance issues. We need to implement lazy loading for images.",
     storyPoints: 5,
-    completed: false,
+    status: TaskStatus.DONE,
   },
 ];
 
@@ -200,98 +229,200 @@ const App: React.FC = () => (
   },
 ];
 
-export const SAMPLE_PLAN: Plan[] = [
+export const CREATE_NEW_FILE_PLAN: Plan[] = [
+  {
+    id: "0",
+    title: "Create GitHub Issue",
+    description: "Create a new GitHub issue to track the progress of the task.",
+    position: 0,
+    isComplete: false,
+  },
   {
     id: "1",
-    title: "Set Up the File Structure",
+    title: "Clone Repo",
     description:
-      "Create a new TypeScript file named ElevateYourCodingPanel.tsx in the src/components/ directory.",
+      "Clone the repository from the remote source to your local machine.",
     position: 1,
-    isComplete: true,
+    isComplete: false,
   },
   {
     id: "2",
-    title: "Transfer Initial Code",
-    description:
-      "Copy the provided JSX code into the newly created file as the starting point for the component.",
+    title: "Create Plan",
+    description: "Generates a plan for the coding task.",
     position: 2,
-    isComplete: true,
+    isComplete: false,
   },
   {
     id: "3",
-    title: "Validate and Adjust CSS Classes",
-    description:
-      "Go through the JSX code and ensure all TailwindCSS classes are valid according to the TailwindCSS documentation. Replace any arbitrary values with standard TailwindCSS classes and use custom color names from tailwind.config if they match exactly.",
+    title: "Write Code",
+    description: "Triggers the code writing phase.",
     position: 3,
-    isComplete: true,
+    isComplete: false,
   },
   {
     id: "4",
-    title: "Replace Placeholder Text",
-    description:
-      "Identify any placeholder text within the JSX code and replace it with the appropriate content or data bindings as required.",
+    title: "Build",
+    description: "Commences the build process to compile the code.",
     position: 4,
-    isComplete: true,
+    isComplete: false,
   },
   {
     id: "5",
-    title: "Implement Additional Logic",
-    description:
-      "Write any necessary functions or hooks to make the component functional, such as form submission logic or state management for the input field.",
+    title: "Fix Build Error",
+    description: "Addresses and rectifies any build errors.",
     position: 5,
     isComplete: false,
   },
   {
     id: "6",
-    title: "Ensure Design Fidelity",
+    title: "Verify Build",
     description:
-      "Adjust the layout using flexbox and other modern CSS features provided by TailwindCSS to match the provided design as closely as possible without hardcoding sizes.",
+      "Checks the build for any issues or errors and verifies its successful completion.",
     position: 6,
     isComplete: false,
   },
   {
     id: "7",
-    title: "Integrate Icons and Images",
+    title: "Run Tests",
     description:
-      "Replace placeholder icons with actual icons using the FontAwesomeIcon component from Font Awesome, and replace placeholder images with the correct image paths, ensuring the images are saved in the public folder.",
+      "Executes the test suite to ensure the code behaves as expected.",
     position: 7,
     isComplete: false,
   },
   {
     id: "8",
-    title: "Handle Click Events",
-    description:
-      "Implement the necessary event handlers for any clickable elements, such as buttons or links, to ensure they perform the intended actions when interacted with.",
+    title: "Create Story",
+    description: "Initiates the creation of user stories or documentation.",
     position: 8,
     isComplete: false,
   },
   {
     id: "9",
-    title: "Test the Component",
-    description:
-      "Thoroughly test the component to ensure it looks and functions as expected across different screen sizes and browsers.",
+    title: "Code Review",
+    description: "Starts the code review process for quality assurance.",
     position: 9,
-    isComplete: false,
-  },
-  {
-    id: "10",
-    title: "Code Review and Refinement",
-    description:
-      "Review the code for any potential improvements or optimizations and make necessary refinements to ensure the code is clean, well-documented, and follows best practices.",
-    position: 10,
     isComplete: false,
   },
 ];
 
+const EDIT_FILES_PLAN: Plan[] = [
+  {
+    id: "0",
+    title: "Create GitHub Issue",
+    description: "Create a new GitHub issue to track the progress of the task.",
+    position: 0,
+    isComplete: false,
+  },
+  {
+    id: "1",
+    title: "Clone Repo",
+    description:
+      "Clone the repository from the remote source to your local machine.",
+    position: 1,
+    isComplete: false,
+  },
+  {
+    id: "2",
+    title: "Edit Files",
+    description: "Edit the necessary files to complete the task.",
+    position: 2,
+    isComplete: false,
+  },
+  {
+    id: "3",
+    title: "Build",
+    description: "Commences the build process to compile the code.",
+    position: 3,
+    isComplete: false,
+  },
+  {
+    id: "4",
+    title: "Fix Build Error",
+    description: "Addresses and rectifies any build errors.",
+    position: 4,
+    isComplete: false,
+  },
+  {
+    id: "5",
+    title: "Verify Build",
+    description:
+      "Checks the build for any issues or errors and verifies its successful completion.",
+    position: 5,
+    isComplete: false,
+  },
+  {
+    id: "6",
+    title: "Run Tests",
+    description:
+      "Executes the test suite to ensure the code behaves as expected.",
+    position: 6,
+    isComplete: false,
+  },
+  {
+    id: "7",
+    title: "Create Story",
+    description: "Initiates the creation of user stories or documentation.",
+    position: 7,
+    isComplete: false,
+  },
+  {
+    id: "8",
+    title: "Code Review",
+    description: "Starts the code review process for quality assurance.",
+    position: 8,
+    isComplete: false,
+  },
+];
+
+const CODE_REVIEW_PLAN: Plan[] = [
+  {
+    id: "0",
+    title: "Clone Repo",
+    description:
+      "Clone the repository from the remote source to your local machine.",
+    position: 0,
+    isComplete: false,
+  },
+  {
+    id: "1",
+    title: "Code Review",
+    description: "Review the code changes submitted in the pull request.",
+    position: 1,
+    isComplete: false,
+  },
+  {
+    id: "2",
+    title: "Approve Changes",
+    description: "Approve the changes made in the pull request.",
+    position: 2,
+    isComplete: false,
+  },
+  {
+    id: "3",
+    title: "Merge Pull Request",
+    description: "Merge the changes into the main branch.",
+    position: 3,
+    isComplete: false,
+  },
+];
+
+export const PLANS = {
+  [TaskType.CREATE_NEW_FILE]: CREATE_NEW_FILE_PLAN,
+  [TaskType.EDIT_FILES]: EDIT_FILES_PLAN,
+  [TaskType.CODE_REVIEW]: CODE_REVIEW_PLAN,
+};
+
 export type Comment = {
-  id: number;
+  id: string;
+  commentId: number;
   username: string;
   createdAt: string;
   content: string;
 };
 
 export type Issue = {
-  id: number;
+  id: string;
+  issueId: number;
   title: string;
   description: string;
   createdAt: string;
@@ -303,7 +434,8 @@ export type Issue = {
 };
 
 export type PullRequest = {
-  id: number;
+  id: string;
+  pullRequestId: number;
   title: string;
   description: string;
   link: string;
@@ -317,7 +449,8 @@ export type PullRequest = {
 };
 
 export const SAMPLE_ISSUE: Issue = {
-  id: 1,
+  id: "1",
+  issueId: 1,
   title: "Add new timezone parameter to the posts API",
   description:
     `**Objective:**\n` +
@@ -329,14 +462,16 @@ export const SAMPLE_ISSUE: Issue = {
   author: "jacob-ai-bot",
   comments: [
     {
-      id: 1,
+      id: "1",
+      commentId: 1,
       username: "jacob-ai-bot",
       createdAt: "2024-03-28T10:00:00Z",
       content:
         "I've started working on this issue. The `timezone` field will be optional with a default value of 'UTC'.",
     },
     {
-      id: 2,
+      id: "2",
+      commentId: 2,
       username: "kleneway",
       createdAt: "2024-03-28T11:00:00Z",
       content:
@@ -349,7 +484,8 @@ export const SAMPLE_ISSUE: Issue = {
 };
 
 export const SAMPLE_PR: PullRequest = {
-  id: 284,
+  id: "284",
+  pullRequestId: 284,
   title: "Implement time zone conversions",
   description: "This PR adds functionality to convert time zones.",
   link: "https://github.com/PioneerSquareLabs/t3-starter-template/pull/284",
@@ -358,13 +494,15 @@ export const SAMPLE_PR: PullRequest = {
   author: "kleneway",
   comments: [
     {
-      id: 1,
+      id: "1",
+      commentId: 1,
       username: "reviewer1",
       content: "Looks good to me. Just a few minor changes needed.",
       createdAt: "2024-03-29T11:00:00Z",
     },
     {
-      id: 2,
+      id: "2",
+      commentId: 2,
       username: "reviewer2",
       content:
         "Thanks for the update. Ensure that the implementation handles time zone conversions accurately.",
@@ -433,5 +571,34 @@ const SAMPLE_PROMPT_DETAILS = {
 };
 
 export const SAMPLE_PROMPT_DETAILS_ARRAY: PromptDetails[] = [
-  ...Array(100).fill(SAMPLE_PROMPT_DETAILS),
+  ...Array(10).fill(SAMPLE_PROMPT_DETAILS),
 ];
+
+export enum InternalEventType {
+  Task = "Task",
+  Code = "Code",
+  Design = "Design",
+  Terminal = "Terminal",
+  Plan = "Plan",
+  Prompt = "Prompt",
+  Issue = "Issue",
+  PullRequest = "Pull Request",
+}
+
+// This is the InternalEvent type from the otto-mvp repo
+export type InternalEvent = {
+  id?: string;
+  type: InternalEventType;
+  repo: string;
+  issueId?: number | undefined;
+  pullRequestId?: number | undefined;
+  userId: string;
+  payload:
+    | Task
+    | Plan
+    | Issue
+    | PullRequest
+    | Command
+    | CodeFile
+    | PromptDetails;
+};

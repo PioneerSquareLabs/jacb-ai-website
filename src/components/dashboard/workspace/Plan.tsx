@@ -5,17 +5,16 @@ import {
   faCircle,
   faCircleDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { type Plan, type Task, SAMPLE_PLAN } from "~/types";
+import { type Plan, type Task } from "~/types";
 
 type ComponentProps = {
-  planSteps?: Plan[];
-  task?: Task;
-  currentPlanStep?: number;
+  planSteps: Plan[];
+  currentPlanStep: number;
 };
 
 export const PlanComponent: React.FC<ComponentProps> = ({
-  planSteps = SAMPLE_PLAN,
-  currentPlanStep = 4,
+  planSteps,
+  currentPlanStep,
 }) => (
   <div className="w-full bg-blueGray-900 p-2 pt-0 text-gray-100">
     <h2 className="border-b border-blueGray-700 py-2 text-lg font-semibold">

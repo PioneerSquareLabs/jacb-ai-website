@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import {
+  PLANS,
   SAMPLE_ISSUE,
   SAMPLE_PR,
   SAMPLE_PROMPT_DETAILS_ARRAY,
@@ -19,26 +20,54 @@ import Sidebar from "../Sidebar";
 
 type WorkspaceProps = {
   tasks: Task[];
+  selectedIcon: SidebarIcon;
 };
 
-const Workspace: React.FC<WorkspaceProps> = ({ tasks }) => {
+const Workspace: React.FC<WorkspaceProps> = ({
+  tasks,
+  selectedIcon: _selectedIcon,
+}) => {
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(
     tasks ? tasks[0] : undefined,
   );
-  const [selectedIcon, setSelectedIcon] = useState<SidebarIcon>(
-    SidebarIcon.Plan,
-  );
+  const [selectedIcon, setSelectedIcon] = useState<SidebarIcon>(_selectedIcon);
+
+  // if new tasks are added, update selectedTask to the first task
+  useEffect(() => {
+    if (tasks && tasks.length > 0) {
+      setSelectedTask(tasks[0]);
+    }
+  }, [tasks]);
+
+  // if the selected icon changes, update the selected icon
+  useEffect(() => {
+    setSelectedIcon(_selectedIcon);
+  }, [_selectedIcon]);
 
   const renderComponent = () => {
+    if (!selectedTask) {
+      return null;
+    } else {
+      console.log("Selected task: ", selectedTask);
+    }
     switch (selectedIcon) {
-      case SidebarIcon.Plan:
-        return <PlanComponent task={selectedTask} />;
+      case SidebarIcon.Plan: {
+        const planSteps = selectedTask.plan ?? [];
+        const currentPlanStep = selectedTask.currentPlanStep ?? 0; // TODO: Implement logic to determine current plan step
+        return (
+          <PlanComponent
+            planSteps={planSteps}
+            currentPlanStep={currentPlanStep}
+          />
+        );
+      }
+
       case SidebarIcon.Code:
         return <CodeComponent task={selectedTask} />;
       case SidebarIcon.Terminal:
         return <TerminalComponent task={selectedTask} />;
       case SidebarIcon.Issues:
-        return <IssueComponent issue={SAMPLE_ISSUE} />;
+        return <IssueComponent issue={selectedTask?.issue} />;
       case SidebarIcon.Design:
         return <DesignComponent imageUrl={"/images/sample_website.jpg"} />;
       case SidebarIcon.Prompts:
