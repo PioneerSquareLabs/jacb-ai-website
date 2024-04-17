@@ -10,7 +10,7 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { ToastContainer, toast } from "react-toastify";
 
 type ComponentProps = {
-  promptDetailsArray: PromptDetails[];
+  promptDetailsArray?: PromptDetails[];
 };
 
 export const PromptsComponent: React.FC<ComponentProps> = ({
@@ -72,6 +72,7 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
   const closePanel = () => {
     setIsPanelOpen(false);
   };
+  console.log("promptDetailsArray", promptDetailsArray);
 
   return (
     <div className="min-h-full w-full flex-grow flex-col overflow-clip p-2 pt-0">
@@ -103,14 +104,17 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                   onClick={() => openPanel(promptDetails)}
                 >
                   <td className="px-6 py-4">
-                    {promptDetails.metadata.timestamp}
+                    {formatDistanceToNow(
+                      new Date(promptDetails?.metadata.timestamp ?? 0),
+                      { addSuffix: true },
+                    )}
                   </td>
                   <td className="px-6 py-4">{promptDetails.metadata.model}</td>
                   <td className="px-6 py-4">
                     {promptDetails.metadata.tokens > 1000
                       ? `${(promptDetails.metadata.tokens / 1000)?.toFixed(1)}K`
                       : promptDetails.metadata.tokens}{" "}
-                    (${promptDetails.metadata.cost})
+                    (${promptDetails.metadata.cost.toFixed(2)})
                   </td>
                 </tr>
               ))}
@@ -189,13 +193,21 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                           <p className="mb-2 text-sm text-gray-400">
                             Total Cost:{" "}
                             <span className="font-medium text-gray-200">
-                              {selectedPromptDetails?.metadata.cost} cents
+                              {(
+                                (selectedPromptDetails?.metadata.cost ?? 0) *
+                                100
+                              ).toFixed(2)}{" "}
+                              cents
                             </span>
                           </p>
                           <p className="text-sm text-gray-400">
                             Request Timing:{" "}
                             <span className="font-medium text-gray-200">
-                              {selectedPromptDetails?.metadata.duration} ms
+                              {(
+                                (selectedPromptDetails?.metadata.duration ??
+                                  0) / 1000
+                              ).toFixed(2)}{" "}
+                              seconds
                             </span>
                           </p>
                         </div>

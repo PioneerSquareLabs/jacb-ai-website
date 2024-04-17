@@ -7,12 +7,11 @@ import { sendClaudeRequest } from "./claude_handler";
 
 export enum Models {
   // GPT4_1106_PREVIEW = "gpt-4-1106-preview", // "gpt-4-turbo-preview"
-  GPT4 = "gpt-4-turbo-preview", //"gpt-4",
+  GPT4 = "gpt-4-turbo", //"gpt-4",
   // GPT4 = "gpt-4", //"gpt-4",
   GPT4_0613 = "gpt-4-0613", //"gpt-4",
   GPT4_0314 = "gpt-4-0314",
   GPT4_32K = "gpt-4-32k",
-  GPT4_VISION = "gpt-4-vision-preview",
   CHATGPT = "gpt-3.5-turbo-0613", //gpt-3.5-turbo",
   CHATGPT_16K = "gpt-3.5-turbo-16k",
   CLAUDE_INSTANT = "claude-instant-1",
@@ -26,7 +25,6 @@ export const CONTEXT_WINDOW = {
   [Models.GPT4_0613]: 8192,
   [Models.GPT4_0314]: 8192,
   [Models.GPT4_32K]: 32768,
-  [Models.GPT4_VISION]: 8192,
   [Models.CHATGPT]: 4096,
   [Models.CHATGPT_16K]: 16384,
   [Models.CLAUDE_INSTANT]: 10000,
@@ -40,7 +38,6 @@ export const MAX_OUTPUT_TOKENS = {
   [Models.GPT4_0613]: 4096,
   [Models.GPT4_0314]: 4096,
   [Models.GPT4_32K]: 16384,
-  [Models.GPT4_VISION]: 4096,
   [Models.CHATGPT]: 4096,
   [Models.CHATGPT_16K]: 16384,
   [Models.CLAUDE_INSTANT]: 10000,
@@ -53,7 +50,6 @@ const ENCODING = {
   [Models.GPT4_0613]: "cl100k_base",
   [Models.GPT4_0314]: "cl100k_base",
   [Models.GPT4_32K]: "cl100k_base",
-  [Models.GPT4_VISION]: "cl100k_base",
   [Models.CHATGPT]: "p50k_base",
   [Models.CHATGPT_16K]: "p50k_base",
   [Models.CLAUDE_INSTANT]: "cl100k_base",

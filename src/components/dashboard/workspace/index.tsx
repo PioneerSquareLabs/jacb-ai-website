@@ -63,17 +63,15 @@ const Workspace: React.FC<WorkspaceProps> = ({
       }
 
       case SidebarIcon.Code:
-        return <CodeComponent task={selectedTask} />;
+        return <CodeComponent codeFiles={selectedTask?.codeFiles} />;
       case SidebarIcon.Terminal:
-        return <TerminalComponent task={selectedTask} />;
+        return <TerminalComponent commands={selectedTask?.commands} />;
       case SidebarIcon.Issues:
         return <IssueComponent issue={selectedTask?.issue} />;
       case SidebarIcon.Design:
-        return <DesignComponent imageUrl={"/images/sample_website.jpg"} />;
+        return <DesignComponent imageUrl={selectedTask?.imageUrl} />;
       case SidebarIcon.Prompts:
-        return (
-          <PromptsComponent promptDetailsArray={SAMPLE_PROMPT_DETAILS_ARRAY} />
-        );
+        return <PromptsComponent promptDetailsArray={selectedTask.prompts} />;
       case SidebarIcon.PullRequests:
         return <PullRequestComponent pullRequest={SAMPLE_PR} />;
       default:

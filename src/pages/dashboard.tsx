@@ -12,6 +12,10 @@ import {
   type InternalEvent,
   type Plan,
   PLANS,
+  type PromptDetails,
+  type CodeFile,
+  type Command,
+  SAMPLE_TASKS,
 } from "~/types";
 import { createClient } from "@supabase/supabase-js";
 
@@ -19,6 +23,7 @@ import { type Message, type Task, Role } from "~/types";
 import {
   extractFilePathWithArrow,
   findTaskForInternalEvent,
+  getSnapshotUrl,
   shallowSnakeCaseToCamelCase,
 } from "~/utils";
 
@@ -44,12 +49,187 @@ const DashboardPage: React.FC = () => {
   const [responding, setResponding] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
 
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
   const [selectedIcon, setSelectedIcon] = useState<SidebarIcon>(
     SidebarIcon.Plan,
   );
 
   useEffect(() => {
+    const updateTask = (task: Task) => {
+      const existingTask = tasks.find((t) => t.id === task.id);
+      if (existingTask) {
+        setTasks((tasks) =>
+          tasks.map((t) => {
+            if (t.id === task.id) {
+              return task;
+            }
+            return t;
+          }),
+        );
+      } else {
+        setTasks((tasks) => [...tasks, task]);
+      }
+    };
+
+    const convertPayloadToCode = (
+      codeFile: CodeFile,
+      parentTask: Task | undefined,
+    ) => {
+      if (!codeFile || !parentTask) {
+        console.error("Invalid code or task: ", codeFile, parentTask);
+        return;
+      }
+
+      // If codeFiles doesn't exist, initialize it
+      if (!parentTask.codeFiles) {
+        parentTask.codeFiles = [];
+      }
+
+      // Find the index of the existing codeFile
+      const index = parentTask.codeFiles.findIndex(
+        (file) => file.fileName === codeFile.fileName,
+      );
+
+      // If codeFile exists, update it, otherwise add it
+      if (index !== -1) {
+        parentTask.codeFiles[index] = codeFile;
+      } else {
+        parentTask.codeFiles.push(codeFile);
+      }
+
+      updateTask(parentTask);
+    };
+
+    const convertPayloadToPrompt = (
+      prompt: PromptDetails,
+      parentTask: Task | undefined,
+    ) => {
+      if (!prompt || !parentTask) {
+        console.error("Invalid prompt or task: ", prompt, parentTask);
+        return;
+      }
+
+      // If prompts doesn't exist, initialize it
+      if (!parentTask.prompts) {
+        parentTask.prompts = [];
+      }
+
+      // Find the index of the existing prompt (use the timestamp as a unique identifier)
+      const index = parentTask.prompts.findIndex(
+        (p) =>
+          p.metadata &&
+          prompt.metadata &&
+          p.metadata.timestamp === prompt.metadata.timestamp,
+      );
+
+      // If prompt exists, update it, otherwise add it
+      if (index !== -1) {
+        parentTask.prompts[index] = prompt;
+      } else {
+        parentTask.prompts.push(prompt);
+      }
+
+      updateTask(parentTask);
+    };
+
+    const convertPayloadToTask = (task: Task) => {
+      if (!task) {
+        return null;
+      }
+
+      // set the plan
+      let plan: Plan[] = [];
+      switch (task.type) {
+        case TaskType.CREATE_NEW_FILE:
+          plan = PLANS[TaskType.CREATE_NEW_FILE];
+          break;
+        case TaskType.EDIT_FILES:
+          plan = PLANS[TaskType.EDIT_FILES];
+          break;
+        case TaskType.CODE_REVIEW:
+          plan = PLANS[TaskType.CODE_REVIEW];
+          break;
+        default:
+          console.error("Unknown task type: ", task.type);
+          break;
+      }
+      task.plan = plan;
+      // upsert the task to the tasks array
+      updateTask(task);
+    };
+
+    const convertPayloadToIssue = (
+      issue: Issue,
+      parentTask: Task | undefined,
+    ) => {
+      if (!issue || !parentTask) {
+        console.error("Invalid issue or task: ", issue, parentTask);
+        return;
+      }
+      parentTask.issue = issue;
+
+      // Set imageUrl
+      parentTask.imageUrl = getSnapshotUrl(issue.description);
+      updateTask(parentTask);
+    };
+
+    const convertPayloadToCommand = (
+      command: Command,
+      parentTask: Task | undefined,
+    ) => {
+      if (!command) {
+        return null;
+      }
+      if (!parentTask) {
+        console.error("No parent task found for command: ", command);
+        return;
+      }
+
+      // set the command to the parent task, and add the command to the tasks array
+      parentTask.commands = parentTask.commands
+        ? [...parentTask.commands, command]
+        : [command];
+      updateTask(parentTask);
+    };
+
+    const convertPayloadToInternalEvent = (event: InternalEvent | null) => {
+      if (!event) {
+        return null;
+      }
+      const eventType: InternalEventType = event.type;
+      // convert the payload from snake case to camel case
+      const camelCasePayload = shallowSnakeCaseToCamelCase(event.payload);
+      const camelCaseEvent = shallowSnakeCaseToCamelCase(
+        event,
+      ) as InternalEvent;
+      const parentTask = findTaskForInternalEvent(tasks, camelCaseEvent);
+
+      switch (eventType) {
+        case InternalEventType.Task:
+          convertPayloadToTask(camelCasePayload as Task);
+          setSelectedIcon(SidebarIcon.Plan);
+          break;
+        case InternalEventType.Issue:
+          convertPayloadToIssue(camelCasePayload as Issue, parentTask);
+          setSelectedIcon(SidebarIcon.Issues);
+          break;
+        case InternalEventType.Prompt:
+          convertPayloadToPrompt(camelCasePayload as PromptDetails, parentTask);
+          setSelectedIcon(SidebarIcon.Prompts);
+          break;
+        case InternalEventType.Code:
+          convertPayloadToCode(camelCasePayload as CodeFile, parentTask);
+          setSelectedIcon(SidebarIcon.Code);
+          break;
+        case InternalEventType.Command:
+          convertPayloadToCommand(camelCasePayload as Command, parentTask);
+          setSelectedIcon(SidebarIcon.Terminal);
+        default:
+          console.error("Unknown event type: ", eventType);
+          break;
+      }
+    };
+
     const supabaseFetch = async () => {
       supabase
         .channel("internal_events_channel") // Name your channel
@@ -69,97 +249,7 @@ const DashboardPage: React.FC = () => {
       };
     };
     void supabaseFetch();
-  }, [tasks, setTasks, setSelectedIcon]);
-
-  const convertPayloadToInternalEvent = (event: InternalEvent | null) => {
-    if (!event) {
-      return null;
-    }
-    const eventType: InternalEventType = event.type;
-    // convert the payload from snake case to camel case
-    const camelCasePayload = shallowSnakeCaseToCamelCase(event.payload);
-    const camelCaseEvent = shallowSnakeCaseToCamelCase(event) as InternalEvent;
-    const parentTask = findTaskForInternalEvent(tasks, camelCaseEvent);
-
-    switch (eventType) {
-      case InternalEventType.Task:
-        convertPayloadToTask(camelCasePayload as Task);
-        setSelectedIcon(SidebarIcon.Plan);
-        break;
-      case InternalEventType.Issue:
-        convertPayloadToIssue(camelCasePayload as Issue, parentTask);
-        setSelectedIcon(SidebarIcon.Issues);
-        break;
-      default:
-        console.error("Unknown event type: ", eventType);
-        break;
-    }
-  };
-
-  const convertPayloadToTask = (task: Task) => {
-    if (!task) {
-      return null;
-    }
-
-    // set the plan
-    let plan: Plan[] = [];
-    switch (task.type) {
-      case TaskType.CREATE_NEW_FILE:
-        plan = PLANS[TaskType.CREATE_NEW_FILE];
-        break;
-      case TaskType.EDIT_FILES:
-        plan = PLANS[TaskType.EDIT_FILES];
-        break;
-      case TaskType.CODE_REVIEW:
-        plan = PLANS[TaskType.CODE_REVIEW];
-        break;
-      default:
-        console.error("Unknown task type: ", task.type);
-        break;
-    }
-    task.plan = plan;
-    // upsert the task to the tasks array
-    const existingTask = tasks.find((t) => t.id === task.id);
-    if (existingTask) {
-      setTasks((tasks) =>
-        tasks.map((t) => {
-          if (t.id === task.id) {
-            return task;
-          }
-          return t;
-        }),
-      );
-    } else {
-      setTasks((tasks) => [...tasks, task]);
-    }
-  };
-
-  const convertPayloadToIssue = (
-    issue: Issue,
-    parentTask: Task | undefined,
-  ) => {
-    if (!issue) {
-      return null;
-    }
-    if (!parentTask) {
-      console.error("No parent task found for issue: ", issue);
-      return;
-    }
-
-    // set the issue to the parent task, and add the issue to the tasks array
-    console.log("Issue received: ", issue);
-    setTasks((tasks) =>
-      tasks.map((t) => {
-        if (t.id === parentTask.id) {
-          return {
-            ...t,
-            issue,
-          };
-        }
-        return t;
-      }),
-    );
-  };
+  }, [tasks]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
