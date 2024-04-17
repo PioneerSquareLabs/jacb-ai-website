@@ -40,3 +40,23 @@ export const findTaskForInternalEvent = (
   console.log("tasks: ", tasks);
   return parentTask;
 };
+
+export const statusStyles = {
+  open: "bg-green-700 text-white px-2 py-1 rounded-full text-xs whitespace-nowrap ml-2",
+  closed:
+    "bg-red-700 text-white px-2 py-1 rounded-full text-xs whitespace-nowrap ml-2",
+  merged:
+    "bg-purple-700 text-white px-2 py-1 rounded-full text-xs whitespace-nowrap ml-2",
+};
+
+// The snapshot url of a Figma design might be found in the issue body. If so, we want to extract it.
+// Here is the specific format that a snapshot url will be in:  \`\`\`![snapshot](${snapshotUrl})\`\`\``
+// This function will extract the snapshotUrl from the issue body
+export const getSnapshotUrl = (
+  issueBody: string | null | undefined,
+): string | undefined => {
+  if (!issueBody) return undefined;
+  const regex = /\[snapshot\]\((.+)\)/;
+  const match = issueBody.match(regex);
+  return match ? match[1]?.trim() : undefined;
+};

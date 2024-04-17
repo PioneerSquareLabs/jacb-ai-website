@@ -6,7 +6,7 @@ import { faCircleDot } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer } from "react-toastify";
-import { capitalize } from "~/utils";
+import { capitalize, statusStyles } from "~/utils";
 import { formatDistanceToNow } from "date-fns";
 
 type PullRequestComponentProps = {
@@ -16,12 +16,6 @@ type PullRequestComponentProps = {
 export const PullRequestComponent: React.FC<PullRequestComponentProps> = ({
   pullRequest,
 }) => {
-  const statusStyles = {
-    open: "bg-green-500 text-white px-2 py-1 rounded-full text-xs",
-    closed: "bg-red-500 text-white px-2 py-1 rounded-full text-xs",
-    merged: "bg-purple-500 text-white px-2 py-1 rounded-full text-xs",
-  };
-
   return (
     <div className="h-full w-full overflow-clip  bg-gray-900 px-2 text-gray-200">
       <div className="w-full pt-2">

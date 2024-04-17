@@ -8,7 +8,6 @@ import { SAMPLE_CODE_FILES, type CodeFile, type Task } from "~/types";
 import "react-toastify/dist/ReactToastify.css";
 
 type ComponentProps = {
-  task?: Task;
   codeFiles?: CodeFile[];
 };
 
@@ -17,17 +16,17 @@ const copyToClipboard = async (text: string) => {
   toast.success("Copied to clipboard");
 };
 
-export const CodeComponent: React.FC<ComponentProps> = ({
-  codeFiles = SAMPLE_CODE_FILES,
-}) => (
+export const CodeComponent: React.FC<ComponentProps> = ({ codeFiles }) => (
   <div className="w-full p-2 pt-0 text-gray-100">
     <ToastContainer />
-    {codeFiles.map((codeFile, index) => (
+    {codeFiles?.map((codeFile, index) => (
       <div key={index} className="mb-2 last:mb-0">
         <div className="py-2">
           <div className="flex justify-between">
-            <h2 className="text-lg font-semibold">{codeFile.fileName}</h2>
-            <p className="font-mono text-sm opacity-75">{codeFile.filePath}</p>
+            <h2 className="text-lg font-semibold">
+              {codeFile.fileName?.split("/").pop() ?? ""}
+            </h2>
+            <p className="font-mono text-sm opacity-75">{codeFile.fileName}</p>
           </div>
           <hr className="my-2 border-t border-gray-700" />
         </div>
@@ -41,7 +40,7 @@ export const CodeComponent: React.FC<ComponentProps> = ({
           </button>
           <SyntaxHighlighter
             style={oneDark}
-            language={codeFile.language}
+            language={codeFile.language?.toLowerCase() ?? "javascript"}
             showLineNumbers
           >
             {codeFile.codeBlock}

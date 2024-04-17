@@ -2,7 +2,6 @@ import { type Message } from "~/types";
 import { Models } from "~/utils/openai_completion";
 import { OpenAIStream } from "~/utils/openai_streaming";
 import { chatCreateIssueSystem } from "~/prompts/edge_prompts";
-import { getServerSession } from "next-auth";
 
 export const config = {
   runtime: "edge",

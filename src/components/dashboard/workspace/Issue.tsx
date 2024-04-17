@@ -4,7 +4,7 @@ import gfm from "remark-gfm";
 import { faCircleDot, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { capitalize } from "~/utils";
+import { capitalize, statusStyles } from "~/utils";
 import { formatDistanceToNow } from "date-fns";
 import Markdown, { type Components } from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -59,12 +59,6 @@ export const IssueComponent: React.FC<IssueComponentProps> = ({ issue }) => {
       );
     },
   };
-
-  const statusStyles = {
-    open: "bg-green-500 text-white px-2 py-1 rounded-full text-xs",
-    closed: "bg-red-500 text-white px-2 py-1 rounded-full text-xs",
-  };
-
   return (
     <div className="h-full w-full overflow-clip  bg-gray-900 px-2 text-gray-200">
       <div className="w-full pt-2">
@@ -93,11 +87,11 @@ export const IssueComponent: React.FC<IssueComponentProps> = ({ issue }) => {
             <a
               href={issue.link}
               target="_blank"
-              className="font-sans text-2xl font-semibold"
+              className="font-sans text-2xl font-semibold text-light-blue"
             >
               {issue.title}
             </a>
-            <div className="mb-4 flex items-baseline justify-between">
+            <div className="mb-4 mt-2 flex items-baseline justify-between">
               <div className="text-xs">
                 #{issue.id} opened on{" "}
                 {new Date(issue.createdAt).toLocaleDateString()} by{" "}
@@ -108,7 +102,7 @@ export const IssueComponent: React.FC<IssueComponentProps> = ({ issue }) => {
                 {capitalize(issue.status)}
               </span>
             </div>
-            <hr className="my-3 border-t border-gray-700" />
+            <hr className="my-3 border-t border-gray-500" />
             <Markdown
               remarkPlugins={[gfm]}
               className={`markdown markdown-issue text-sm text-blueGray-300`}
@@ -153,6 +147,7 @@ export const IssueComponent: React.FC<IssueComponentProps> = ({ issue }) => {
           <ToastContainer />
         </div>
       )}
+      <div className="ml-2 hidden whitespace-nowrap rounded-full bg-green-700 bg-purple-700 bg-red-700 text-xs text-white" />
     </div>
   );
 };
