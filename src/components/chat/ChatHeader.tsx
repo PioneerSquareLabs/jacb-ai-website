@@ -14,13 +14,22 @@ const ChatHeader: FC<ChatHeaderProps> = ({
   selectedRepo,
 }) => {
   useEffect(() => {
-    if (repos.length > 0 && !selectedRepo) {
-      onSelectRepo(repos[0]!);
+    const lastUsedRepo = localStorage.getItem("lastUsedRepo");
+    if (repos.length > 0 && lastUsedRepo && repos.includes(lastUsedRepo)) {
+      onSelectRepo(lastUsedRepo);
+    } else if (repos.length > 0) {
+      onSelectRepo(repos[0]);
     }
-  }, [repos, onSelectRepo, selectedRepo]);
+  }, [repos, onSelectRepo]);
 
   const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelectRepo(event.target.value);
+    const repo = event.target.value;
+    onSelectRepo(repo);
+    try {
+      localStorage.setItem("lastUsedRepo", repo);
+    } catch (error) {
+      console.error("Error saving the last-used repository to local storage:", error);
+    }
   };
 
   const getShortRepoName = (repo: string) => {
