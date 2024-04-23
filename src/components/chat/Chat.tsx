@@ -5,6 +5,9 @@ import { type Message } from "~/types";
 import { ChatInput } from "./ChatInput";
 import { ChatLoader } from "./ChatLoader";
 import { ChatMessage } from "./ChatMessage";
+import { useSelector, useDispatch } from 'react-redux';
+import { selectChatState } from '~/store/selectors';
+import { updateChatState } from '~/store/actions';
 
 interface Props {
   messages: Message[];
@@ -37,6 +40,13 @@ export const Chat: FC<Props> = ({
   scrollToBottom,
   isAtBottom,
 }) => {
+  const chatState = useSelector(selectChatState);
+  const dispatch = useDispatch();
+
+  const handleUpdateChatState = (newState) => {
+    dispatch(updateChatState(newState));
+  };
+
   return (
     <div
       className="space-between flex flex-col rounded-lg px-2 pb-8 sm:p-4"
