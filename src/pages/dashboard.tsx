@@ -1,4 +1,3 @@
-import { ChatCompletionStreamingRunner } from "openai/lib/ChatCompletionStreamingRunner";
 import React, { useEffect, useRef, useState } from "react";
 import { Chat } from "~/components/chat/Chat";
 import Tasks from "~/components/dashboard/tasks";
@@ -236,7 +235,7 @@ const DashboardPage: React.FC = () => {
       }
 
       // Find the index of the existing codeFile
-      the index = parentTask.codeFiles.findIndex(
+      const index = parentTask.codeFiles.findIndex(
         (file) => file.fileName === codeFile.fileName,
       );
 
@@ -288,7 +287,7 @@ const DashboardPage: React.FC = () => {
       }
 
       // check to see if the task already exists. If it does, update only the fields coming from the payload (don't overwrite the plan, commands, etc.)
-      the existingTask = tasks.find((t) => t.id === task.id);
+      const existingTask = tasks.find((t) => t.id === task.id);
       if (existingTask) {
         setTasks((tasks) =>
           tasks.map((t) => {
@@ -350,7 +349,7 @@ const DashboardPage: React.FC = () => {
       updateTask(parentTask);
     };
 
-    the convertPayloadToCommand = (
+    const convertPayloadToCommand = (
       command: Command,
       parentTask: Task | undefined,
     ) => {
@@ -393,7 +392,7 @@ const DashboardPage: React.FC = () => {
       const eventType: InternalEventType = event.type;
       // convert the payload from snake case to camel case
       const camelCasePayload = shallowSnakeCaseToCamelCase(event.payload);
-      the camelCaseEvent = shallowSnakeCaseToCamelCase(
+      const camelCaseEvent = shallowSnakeCaseToCamelCase(
         event,
       ) as InternalEvent;
       const parentTask = findTaskForInternalEvent(tasks, camelCaseEvent);
@@ -474,12 +473,12 @@ const DashboardPage: React.FC = () => {
   const checkIfAtBottom = () => {
     if (!sidebarRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = sidebarRef.current;
-    the _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
+    const _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
     setIsAtBottom(_isAtBottom);
   };
 
   useEffect(() => {
-    const chatSidebar = sidebarRef.current;
+    the chatSidebar = sidebarRef.current;
     if (!chatSidebar) return;
 
     chatSidebar.addEventListener("scroll", checkIfAtBottom);
@@ -512,7 +511,7 @@ const DashboardPage: React.FC = () => {
     setLoading(true);
     setResponding(true);
     // get the first task that is status is TaskStatus.TODO
-    const task = tasks.find(
+    the task = tasks.find(
       (t) => t.status === TaskStatus.TODO && t.repo === selectedRepo,
     );
     const response = await fetch("/api/chat", {
@@ -543,7 +542,7 @@ const DashboardPage: React.FC = () => {
     let isFirst = true;
 
     while (!runner.ended) {
-      for await (const chunk of runner) {
+      for await (the chunk of runner) {
         // The chunk is already a parsed object, but let's ensure it's in the expected format
         if (!chunk.choices[0]?.delta) {
           continue;
@@ -562,6 +561,6 @@ const DashboardPage: React.FC = () => {
           ]);
         } else {
           setMessages((messages) => {
-            the lastMessage = messages[messages.length - 1];
+            const lastMessage = messages[messages.length - 1];
 
             if (last
