@@ -9,25 +9,28 @@ interface ChatHeaderProps {
 
 const ChatHeader: FC<ChatHeaderProps> = ({
   shouldHideLogo = false,
-  repos = [],
+  repos,
   onSelectRepo,
   selectedRepo,
 }) => {
   useEffect(() => {
-    if (repos.length > 0 && !selectedRepo) {
-      onSelectRepo(repos[0]!);
+    const lastUsedRepo = localStorage.getItem("lastUsedRepo");
+    if (lastUsedRepo && repos.includes(lastUsedRepo)) {
+      onSelectRepo(lastUsedRepo);
+    } else if (repos.length > 0 && !selectedRepo) {
+      onSelectRepo(repos[0]);
     }
   }, [repos, onSelectRepo, selectedRepo]);
 
   const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelectRepo(event.target.value);
+    const newRepo = event.target.value;
+    onSelectRepo(newRepo);
+    localStorage.setItem("lastUsedRepo", newRepo);
   };
 
   const getShortRepoName = (repo: string) => {
     const shortName = repo.split("/")[1] ?? "";
-    return shortName.length > 30
-      ? shortName.substring(0, 30) + "..."
-      : shortName;
+    return shortName.length > 30 ? shortName.substring(0, 30) + "..." : shortName;
   };
 
   return (
