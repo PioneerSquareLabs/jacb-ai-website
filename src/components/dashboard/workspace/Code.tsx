@@ -4,8 +4,9 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
-import { SAMPLE_CODE_FILES, type CodeFile, type Task } from "~/types";
+import { type CodeFile } from "~/types";
 import "react-toastify/dist/ReactToastify.css";
+import { removeMarkdownCodeblocks } from "~/utils";
 
 type ComponentProps = {
   codeFiles?: CodeFile[];
@@ -43,7 +44,7 @@ export const CodeComponent: React.FC<ComponentProps> = ({ codeFiles }) => (
             language={codeFile.language?.toLowerCase() ?? "javascript"}
             showLineNumbers
           >
-            {codeFile.codeBlock}
+            {removeMarkdownCodeblocks(codeFile.codeBlock ?? "")}
           </SyntaxHighlighter>
         </div>
       </div>

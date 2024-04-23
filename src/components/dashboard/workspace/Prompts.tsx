@@ -81,7 +81,7 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
         <hr className="my-2 border-t border-gray-700" />
       </div>
       <div className="relative h-full w-full overflow-clip rounded-lg bg-gray-800/50 pb-2 text-white">
-        <div className="hide-scrollbar h-full overflow-auto">
+        <div className="hide-scrollbar h-full overflow-auto pb-8">
           <table className="w-full pb-2 text-left text-sm text-gray-400">
             <thead className="table-fixed bg-gray-700 text-xs uppercase text-gray-400">
               <tr>

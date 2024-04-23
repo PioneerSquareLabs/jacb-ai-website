@@ -1,4 +1,4 @@
-import { type InternalEvent, type Task } from "~/types";
+import { type Message, Role, type InternalEvent, type Task } from "~/types";
 
 export const capitalize = (s: string): string => {
   if (typeof s !== "string") return "";
@@ -38,6 +38,12 @@ export const findTaskForInternalEvent = (
   console.log("Parent task: ", parentTask);
   console.log("taskId: ", taskId);
   console.log("tasks: ", tasks);
+  if (!parentTask) {
+    console.log("ERROR - Parent task not found!");
+    console.log("internalEvent: ", internalEvent);
+    console.log("repo: ", internalEvent.repo);
+    console.log("issueId: ", internalEvent.issueId);
+  }
   return parentTask;
 };
 
@@ -60,3 +66,43 @@ export const getSnapshotUrl = (
   const match = issueBody.match(regex);
   return match ? match[1]?.trim() : undefined;
 };
+
+export function removeMarkdownCodeblocks(text: string) {
+  return (
+    text
+      .split("\n")
+      // Filter out lines that start with optional whitespace followed by ```
+      // Explanation of the regex:
+      // ^ - Matches the start of a line
+      // \s* - Matches zero or more whitespace characters
+      // ``` - Matches the literal string ```
+      .filter((line) => !line.match(/^\s*```/))
+      .join("\n")
+  );
+}
+
+export function getIssueDescriptionFromMessages(messages: Message[]) {
+  const assistantMessages = messages.filter((m) => m.role === Role.ASSISTANT);
+  let issue;
+  for (let i = assistantMessages.length - 1; i >= 0; i--) {
+    const message = assistantMessages[i];
+    if (message?.content.includes("```")) {
+      // use a regex to extract the issue
+      const regex = /```markdown(.*?)```/s;
+      const match = message.content.match(regex);
+      if (match) {
+        issue = match[1];
+        break;
+      } else {
+        // try to just find anything inside of triple backticks
+        const regex = /```(.*?)```/s;
+        const match = message.content.match(regex);
+        if (match) {
+          issue = match[1];
+          break;
+        }
+      }
+    }
+  }
+  return issue;
+}

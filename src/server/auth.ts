@@ -6,8 +6,6 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
-import { Octokit } from "@octokit/core";
-import { createAppAuth } from "@octokit/auth-app";
 
 import { env } from "~/env";
 import { prisma } from "~/server/db";
@@ -80,8 +78,8 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: "read:user",
-          redirect_uri: `https://www.jacb.ai/api/auth/callback/github`,
-          // redirect_uri: `http://localhost:3000/api/auth/callback/github`,
+          // redirect_uri: `https://www.jacb.ai/api/auth/callback/github`,
+          redirect_uri: `http://localhost:3000/api/auth/callback/github`,
         },
       },
     }),

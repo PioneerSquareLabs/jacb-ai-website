@@ -10,12 +10,14 @@ export type Message = {
 
 export enum SpecialPhrases {
   CREATE_TASK = "<<CREATE_TASK>>",
+  UPDATE_TASK = "<<UPDATE_TASK>>",
 }
 
 export enum TaskStatus {
   TODO = "todo",
   IN_PROGRESS = "in_progress",
   DONE = "done",
+  ERROR = "error",
 }
 
 export enum TaskType {
@@ -26,14 +28,16 @@ export enum TaskType {
 
 export type Task = {
   id: string;
+  repo: string;
   name: string;
   type: TaskType;
   description: string;
   storyPoints: number;
   status: TaskStatus;
   imageUrl?: string;
-  plan?: Plan[];
   currentPlanStep?: number;
+  statusDescription?: string;
+  plan?: Plan[];
   issue?: Issue;
   pullRequest?: PullRequest;
   commands?: Command[];
@@ -83,6 +87,7 @@ export const SAMPLE_TASKS: Task[] = [
     description:
       'A new design has been added to Figma for the file src/components/Testimonial.tsx.\nThe design was converted into JSX. Here is what was provided:\n\n~~~\nfunction Testimonial() {\n  const happyUsers = 3940;\n\n  return (\n    <div className="w-full h-[672px] bg-white flex flex-col items-center">\n      <div className="mt-24">\n        <p className="text-blue-600 text-sm leading-7 text-center">{happyUsers}+ Happy Landingfolio Users</p>\n        <h2 className="text-5xl font-bold text-gray-900 text-center leading-tight mt-3">Don’t just take our words</h2>\n      </div>\n      <div className="flex justify-between px-24 mt-16">\n        <Quote\n          imageUrl="/images/19f20f0750b4e198d5ba9d67a1acfa203715a7e4.jpg"\n          rating={5}\n          quote="We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of design they want."\n          name="Jenny Wilson"\n          website="Grower.io"\n        />\n        <Quote\n          imageUrl="/images/8cdcee1f5525376b47bcf91a5f80c99d6819e17e.jpg"\n          rating={5}\n          quote="We love Landingfolio! Our designers were using it for their projects, so we already knew what kind of design they want."\n          name="Devon Lane"\n          website="DLDesign.co"\n        />\n      </div>\n    </div>\n  );\n}\n\nfunction Quote({ imageUrl, rating, quote, name, website }) {\n  return (\n    <div className="flex">\n      <img src={imageUrl} className="w-[239px] h-[239px] rounded-lg" alt="user profile" />\n      <div className="ml-8 flex flex-col justify-between">\n        <div>\n          <div className="flex">\n            {Array.from({ length: rating }, (_, i) => (\n              <div key={i} className="w-4 h-4 bg-blue-600 rounded-full mr-1.5"></div>\n            ))}\n          </div>\n          <p className="text-lg font-medium leading-7 text-gray-900 mt-3">{quote}</p>\n        </div>\n        <div>\n          <p className="text-sm text-gray-900">{name}</p>\n          <p className="text-sm font-medium text-gray-500">{website}</p>\n        </div>\n      </div>\n    </div>\n  );\n}\n~~~\n\n- @jacob-ai-bot Here are your instructions for creating the new file:\n1. Create a new file with the name src/components/Testimonial.tsx.\n2. Copy the code above into the new file.\n3. Write additional code as needed to create the complete, working component or file. Note that the code is not guaranteed to be perfect, so you may need to make some adjustments. Specifically, ONLY use valid TailwindCSS classes. For arbitrary values, convert to standard TailwindCSS classes as often as possible. Use the custom Tailwind.config color names if there is an exact match.\n4. The code above is from the design team and will likely have placeholder text. Find the places where the placeholder text will need to be replaced by the real data from the code.\n5. Be sure to create any functions or other code that is needed to make the component work.\n6. Do your best to make the code match the design as closely as possible. Bias towards using flexbox and other modern TailwindCSS features vs hardcoding widths or heights.\n7. There may be icons or images in the design. These will need to be replaced with the real icons or images.\n8. You can use the Font Awesome icon kit to add icons. Here is some example code of how to use it:\n\n```\nimport { FontAwesomeIcon } from \'@fortawesome/react-fontawesome\'\nimport { faEnvelope } from \'@fortawesome/free-solid-svg-icons\'\nconst element = <FontAwesomeIcon icon={faEnvelope} />\n```\n\n9. For images, the figma code will likely list the image name. This image has already been saved to the public folder. You must use that image as the source for the image tag. <img src="[image name]" />\n10. IMPORTANT: The design team did not wire up any of the buttons or links, they assigned that critical task to you. You MUST implement the code to handle the click events.\n\nHere are some important additional instructions from the product owner. You MUST follow these instructions, even if it means adjusting the JSX code provided above: \n Create a separate, sub-component called “Quote”. It should take in an imageUrl, rating, quote, name and website. Hardcode the information for these two users in the Testimonial component. Also make the number of “Happy Landingfolio Users” dynamic (but use 3490 as the default for now)\n\nHere is a temporary snapshot of your design. It will expire in 60 minutes for security purposes.\n![snapshot](https://jacob-snapshots.s3.us-west-2.amazonaws.com/uploads/1713312440656.png?AWSAccessKeyId=AKIAJUND5POKJHI2YDWQ&Expires=1713316041&Signature=OI56Y3%2F1%2BeycMFzb37sBpvJpanI%3D)\n\n\nHere are the images from your design. These images will be downloaded to this branch and these links will expire in 60 minutes for security purposes.\n![image](https://jacob-snapshots.s3.us-west-2.amazonaws.com/uploads/19f20f0750b4e198d5ba9d67a1acfa203715a7e4.png?AWSAccessKeyId=AKIAJUND5POKJHI2YDWQ&Expires=1713316070&Signature=ziUvcmI04an24n8zZiEeWufLinM%3D)\n![image](https://jacob-snapshots.s3.us-west-2.amazonaws.com/uploads/8cdcee1f5525376b47bcf91a5f80c99d6819e17e.png?AWSAccessKeyId=AKIAJUND5POKJHI2YDWQ&Expires=1713316069&Signature=ZZ5NpQjo65QCfDA%2FGLE3M6b%2Bw3Q%3D)\n',
     id: "task-kleneway/local-t3-starter-template-36",
+    repo: "kleneway/local-t3-starter-template",
     name: "Create new file => src/components/Testimonial.tsx",
     status: TaskStatus.IN_PROGRESS,
     storyPoints: 1,
@@ -158,7 +163,7 @@ export const SAMPLE_TASKS: Task[] = [
       {
         id: "9",
         title: "Code Review",
-        description: "Starts the code review process for quality assurance.",
+        description: "Start the code review process for quality assurance.",
         position: 9,
         isComplete: false,
       },
@@ -354,6 +359,7 @@ export const SAMPLE_TASKS: Task[] = [
   },
   {
     id: "2",
+    repo: "project2",
     name: "Fix Bug in User Registration",
     type: TaskType.EDIT_FILES,
     description:
@@ -363,6 +369,7 @@ export const SAMPLE_TASKS: Task[] = [
   },
   {
     id: "3",
+    repo: "project2",
     name: "Add Tests for Profile Page",
     type: TaskType.CODE_REVIEW,
     description:
@@ -372,6 +379,7 @@ export const SAMPLE_TASKS: Task[] = [
   },
   {
     id: "4",
+    repo: "project2",
     name: "Implement Dark Mode",
     type: TaskType.CREATE_NEW_FILE,
     description:
@@ -381,6 +389,7 @@ export const SAMPLE_TASKS: Task[] = [
   },
   {
     id: "5",
+    repo: "project2",
     name: "Optimize Image Loading",
     type: TaskType.CREATE_NEW_FILE,
     description:
@@ -504,72 +513,42 @@ export const CREATE_NEW_FILE_PLAN: Plan[] = [
   },
   {
     id: "1",
-    title: "Clone Repo",
+    title: "Clone & Init Repo",
     description:
-      "Clone the repository from the remote source to your local machine.",
+      "Clone the repository from the remote source and ensure the code builds.",
     position: 1,
     isComplete: false,
   },
   {
     id: "2",
-    title: "Create Plan",
-    description: "Generates a plan for the coding task.",
+    title: "Plan & Write Code",
+    description: "Create a plan for the code and start the code writing phase.",
     position: 2,
     isComplete: false,
   },
   {
     id: "3",
-    title: "Write Code",
-    description: "Triggers the code writing phase.",
+    title: "Create PR",
+    description: "Create a Pull Request to start the code review process.",
     position: 3,
     isComplete: false,
   },
   {
     id: "4",
-    title: "Build",
-    description: "Commences the build process to compile the code.",
+    title: "Create Story",
+    description: "Create a Storybook story for visual testing (optional).",
     position: 4,
     isComplete: false,
   },
   {
     id: "5",
-    title: "Fix Build Error",
-    description: "Addresses and rectifies any build errors.",
+    title: "Task Complete",
+    description:
+      "All code and optional stories have been written and the PR is ready for review.",
     position: 5,
     isComplete: false,
   },
-  {
-    id: "6",
-    title: "Verify Build",
-    description:
-      "Checks the build for any issues or errors and verifies its successful completion.",
-    position: 6,
-    isComplete: false,
-  },
-  {
-    id: "7",
-    title: "Run Tests",
-    description:
-      "Executes the test suite to ensure the code behaves as expected.",
-    position: 7,
-    isComplete: false,
-  },
-  {
-    id: "8",
-    title: "Create Story",
-    description: "Initiates the creation of user stories or documentation.",
-    position: 8,
-    isComplete: false,
-  },
-  {
-    id: "9",
-    title: "Code Review",
-    description: "Starts the code review process for quality assurance.",
-    position: 9,
-    isComplete: false,
-  },
 ];
-
 const EDIT_FILES_PLAN: Plan[] = [
   {
     id: "0",
@@ -588,53 +567,47 @@ const EDIT_FILES_PLAN: Plan[] = [
   },
   {
     id: "2",
-    title: "Edit Files",
-    description: "Edit the necessary files to complete the task.",
+    title: "Create Plan",
+    description: "Generates a plan for the coding task.",
     position: 2,
     isComplete: false,
   },
   {
     id: "3",
-    title: "Build",
-    description: "Commences the build process to compile the code.",
+    title: "Edit Code",
+    description: "Triggers the code editing phase.",
     position: 3,
     isComplete: false,
   },
   {
     id: "4",
-    title: "Fix Build Error",
-    description: "Addresses and rectifies any build errors.",
+    title: "Verify Build",
+    description:
+      "Checks the build for any issues or errors and verifies its successful completion.",
     position: 4,
     isComplete: false,
   },
   {
     id: "5",
-    title: "Verify Build",
-    description:
-      "Checks the build for any issues or errors and verifies its successful completion.",
+    title: "Create Pull Request",
+    description: "Start the code review process for quality assurance.",
     position: 5,
     isComplete: false,
   },
   {
     id: "6",
-    title: "Run Tests",
+    title: "Create Story (optional)",
     description:
-      "Executes the test suite to ensure the code behaves as expected.",
+      "Initiates the creation of Storybook stories for visual testing.",
     position: 6,
     isComplete: false,
   },
   {
     id: "7",
-    title: "Create Story",
-    description: "Initiates the creation of user stories or documentation.",
+    title: "Task Complete",
+    description:
+      "All code and stories have been edited and the PR is ready for review.",
     position: 7,
-    isComplete: false,
-  },
-  {
-    id: "8",
-    title: "Code Review",
-    description: "Starts the code review process for quality assurance.",
-    position: 8,
     isComplete: false,
   },
 ];
@@ -696,6 +669,11 @@ export type Issue = {
   assignee: string;
   status: "open" | "closed";
   link: string;
+  stepsToAddressIssue?: string | null;
+  issueQualityScore?: number | null;
+  commitTitle?: string | null;
+  filesToCreate?: string[] | null;
+  filesToUpdate?: string[] | null;
 };
 
 export type PullRequest = {
@@ -866,4 +844,10 @@ export type InternalEvent = {
     | Command
     | CodeFile
     | PromptDetails;
+};
+
+export type NewIssue = {
+  title: string;
+  description: string;
+  repo: string;
 };

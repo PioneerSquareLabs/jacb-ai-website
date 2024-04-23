@@ -35,7 +35,7 @@ export const TerminalComponent: React.FC<ComponentProps> = ({ commands }) => {
         {commands && commands.length > 0 ? (
           commands.map(({ command, response }, index) => (
             <div key={index}>
-              <div className="my-2 flex items-center space-x-1 font-semibold ">
+              <div className="items-top my-2 flex items-start space-x-1 whitespace-nowrap font-semibold ">
                 <span className="text-green-400">$</span>
                 <span className="text-gray-300">{command}</span>
               </div>
