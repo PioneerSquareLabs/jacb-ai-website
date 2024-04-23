@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -8,8 +8,8 @@ import Droppable from "./Droppable";
 
 import { SelectedTask } from "./SelectedTask";
 import { StandardTask } from "./StandardTask";
-import { type Task } from "~/types";
-import { TaskStatus } from "./TaskStatus";
+import { type Task, TaskStatus } from "~/types";
+import { TaskStatusComponent } from "./TaskStatus";
 
 interface TasksProps {
   tasks: Task[];
@@ -25,6 +25,11 @@ const Tasks: React.FC<TasksProps> = ({
   onStart,
 }) => {
   const [tasks, setTasks] = useState<Task[]>(_tasks);
+
+  useEffect(() => {
+    console.log("Tasks updated", _tasks);
+    setTasks(_tasks);
+  }, [_tasks]);
 
   const handleDragEnd = (result: DropResult) => {
     console.log("Drag end", result);
@@ -44,55 +49,64 @@ const Tasks: React.FC<TasksProps> = ({
   };
 
   return (
-    <div className="border-coolGray-400/20 grid h-screen w-full grid-rows-[1fr_auto] border-x bg-gray-900 bg-slate-50/5">
+    <div className="grid h-full min-h-screen w-full grid-rows-[1fr_auto] border-x border-coolGray-400/20 bg-gray-900 bg-slate-50/5">
       <div className="hide-scrollbar overflow-auto">
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="tasks">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                <h2 className="mt-2 px-2 font-bold text-light-blue">
-                  Next Task
-                </h2>
-                {tasks.map((task, index) => (
-                  <Draggable
-                    key={task.id}
-                    draggableId={task.id.toString()}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+        {tasks.filter((t) => t.status === TaskStatus.TODO).length > 0 ? (
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="tasks">
+              {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  <h2 className="mt-2 px-2 font-bold text-light-blue">
+                    Next Task
+                  </h2>
+                  {tasks
+                    .filter((t) => t.status === TaskStatus.TODO)
+                    .map((task, index) => (
+                      <Draggable
+                        key={task.id}
+                        draggableId={task.id.toString()}
+                        index={index}
                       >
-                        {index === 0 ? (
-                          <>
-                            <div className="border-coolGray-400/20 border-b-2 p-2">
-                              <SelectedTask
-                                task={task}
-                                onStart={onStart}
-                                onEdit={onEdit}
-                              />
-                            </div>
-                            <h2 className="my-2 ml-2 text-sm text-indigo-100/50">
-                              Suggested Tasks
-                            </h2>
-                          </>
-                        ) : (
-                          <StandardTask task={task} />
+                        {(provided) => (
+                          <div
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            {index === 0 ? (
+                              <>
+                                <div className="border-b-2 border-coolGray-400/20 p-2">
+                                  <SelectedTask
+                                    task={task}
+                                    onStart={onStart}
+                                    onEdit={onEdit}
+                                  />
+                                </div>
+                                <h2 className="my-2 ml-2 text-sm text-indigo-100/50">
+                                  Suggested Tasks
+                                </h2>
+                              </>
+                            ) : (
+                              <StandardTask task={task} />
+                            )}
+                          </div>
                         )}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        ) : (
+          <div className="flex h-full flex-col items-center justify-center">
+            <h2 className="mb-4 text-2xl text-gray-200">No tasks available</h2>
+            <p className="text-gray-400">Chat with JACoB to get started</p>
+          </div>
+        )}
       </div>
-      <div className="border-coolGray-400/20 border-t-2 ">
-        <TaskStatus tasks={tasks} />
+      <div className="border-t-2 border-coolGray-400/20 ">
+        <TaskStatusComponent tasks={tasks} />
       </div>
     </div>
   );

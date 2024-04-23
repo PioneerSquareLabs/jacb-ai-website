@@ -1,23 +1,42 @@
 import { type FC, useState, useEffect } from "react";
-import { Role, type Message } from "~/types";
+import { Role, type Message, SpecialPhrases } from "~/types";
 import Markdown, { type Components } from "react-markdown";
+import gfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { faClipboard } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   message: Message;
+  onCreateNewTask: () => void;
+  onUpdateIssue: () => void;
   isResponding?: boolean;
 }
 
-export const ChatMessage: FC<Props> = ({ message }) => {
+export const ChatMessage: FC<Props> = ({
+  message,
+  onCreateNewTask,
+  onUpdateIssue,
+}) => {
   const [content, setContent] = useState<string>(message.content);
 
   useEffect(() => {
-    setContent(message.content);
+    if (
+      message.role === Role.ASSISTANT &&
+      message.content.includes(SpecialPhrases.CREATE_TASK)
+    ) {
+      setContent(message.content.replace(SpecialPhrases.CREATE_TASK, ""));
+    } else if (
+      message.role === Role.ASSISTANT &&
+      message.content.includes(SpecialPhrases.UPDATE_TASK)
+    ) {
+      setContent(message.content.replace(SpecialPhrases.UPDATE_TASK, ""));
+    } else {
+      setContent(message.content);
+    }
   }, [message.content, message.role]);
 
   const copyToClipboard = async (text: string) => {
@@ -71,12 +90,51 @@ export const ChatMessage: FC<Props> = ({ message }) => {
       <ToastContainer />
       {content?.length > 0 && (
         <div
-          className={`markdown flex flex-col ${message.role === Role.ASSISTANT ? "border border-gray-500 " : "bg-gradient-to-l from-gray-500/80 to-gray-600/80"} hide-scrollbar max-w-[95%] rounded-md px-2 font-sans text-sm text-white shadow-md`}
+          className={`markdown-chat flex flex-col font-figtree ${message.role === Role.ASSISTANT ? "border border-blueGray-600/50 " : "bg-gradient-to-l from-blueGray-700/50 to-blueGray-800/50"} hide-scrollbar max-w-[95%] rounded-md px-2  shadow-md`}
           style={{ overflowWrap: "anywhere" }}
         >
-          <Markdown components={renderers}>{content}</Markdown>
+          <Markdown
+            remarkPlugins={[gfm]}
+            className={`px-1 py-1`}
+            components={renderers}
+          >
+            {content}
+          </Markdown>
         </div>
       )}
+      {message.role === Role.ASSISTANT &&
+        message.content.includes(SpecialPhrases.CREATE_TASK) && (
+          <div className="mt-2 flex justify-center self-center">
+            <div
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded border border-gray-400 bg-white px-6 py-2"
+              onClick={onCreateNewTask}
+            >
+              <div className="text-center text-xs font-medium text-black">
+                Add Task to Queue
+              </div>
+              <div className="relative text-black">
+                <FontAwesomeIcon icon={faArrowRight} />
+              </div>
+            </div>
+          </div>
+        )}
+
+      {message.role === Role.ASSISTANT &&
+        message.content.includes(SpecialPhrases.UPDATE_TASK) && (
+          <div className="mt-2 flex justify-center self-center">
+            <div
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded border border-gray-400 bg-white px-6 py-2"
+              onClick={onUpdateIssue}
+            >
+              <div className="text-center text-xs font-medium text-black">
+                Update GitHub Issue
+              </div>
+              <div className="relative text-black">
+                <FontAwesomeIcon icon={faArrowRight} />
+              </div>
+            </div>
+          </div>
+        )}
     </div>
   );
 };
