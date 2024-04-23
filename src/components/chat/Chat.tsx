@@ -43,7 +43,7 @@ export const Chat: FC<Props> = ({
   const chatState = useSelector(selectChatState);
   const dispatch = useDispatch();
 
-  const handleUpdateChatState = (newState) => {
+  const handleUpdateChatState = (newState: any) => {
     dispatch(updateChatState(newState));
   };
 

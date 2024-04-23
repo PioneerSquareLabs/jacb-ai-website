@@ -60,7 +60,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({
               fill="#648299"
               fillRule="nonzero"
             />
-          </svg
+          </svg>
           <select
             value={selectedRepo}
             onChange={handleSelectRepo}
