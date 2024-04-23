@@ -5,7 +5,7 @@ import { Models, sendGptRequestWithSchema } from "~/utils/openai_completion";
 // Define a Zod schema for the expected response format
 const IssueSchema = z.object({
   title: z.string(),
-  description: z.string(),
+  body: z.string(),
 });
 
 // Type for the expected issue details parsed from the text block
@@ -21,10 +21,12 @@ export default async function handler(
     }
 
     const { issueText } = req.body as { issueText: string };
-    const userPrompt = `Extract the title and description from the following GitHub issue text block:
+    const userPrompt = `Extract the title and body from the following GitHub issue text block:
     \`\`\`
     ${issueText}
     \`\`\`
+    It is critical that the body is a copy of ALL of the information from the issue, including all markdown formatting, code, examples, etc. 
+    If the issue is a task to create a single new file, the title MUST be in the following format: "Create new file => /path/to/file/new_filename.ext".
     Your output MUST be in the format of a JSON object with the title and description fields that adheres to the IssueSchema. 
     `;
 
@@ -33,11 +35,11 @@ export default async function handler(
       "Your response MUST be in the format of a JSON object that adheres to the following Zod schema:\n" +
       "const IssueSchema = z.object({\n" +
       "  title: z.string(), // The title of the GitHub issue.\n" +
-      "  description: z.string(), // The description of the GitHub issue.\n" +
+      "  body: z.string(), // Copy the ENTIRED DETAILED GitHub issue body as the description. Use Markdown.\n" +
       "});\n" +
       "Please provide ONLY an object with the title and description based on the GitHub issue text provided. If there is any extra information or if you do not provide an object that is parsable and passes Zod schema validation for the IssueSchema schema, the system will crash.\n";
 
-    const temperature = 0.2;
+    const temperature = 0.1;
     const model = Models.GPT4;
 
     const issueData = (await sendGptRequestWithSchema(
@@ -49,9 +51,12 @@ export default async function handler(
       temperature,
     )) as unknown as Issue;
 
-    const { title, description } = issueData;
+    // Add the @jacob-ai-bot tag to the issue body
+    issueData.body += "\n\n@jacob-ai-bot";
 
-    return res.status(200).json({ title, description });
+    const { title, body } = issueData;
+
+    return res.status(200).json({ title, description: body });
   } catch (error: any) {
     console.error(error);
     const message = (error?.message as string) || "Internal server error";
