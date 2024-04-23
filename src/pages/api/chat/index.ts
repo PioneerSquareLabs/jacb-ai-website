@@ -1,7 +1,10 @@
-import { type Message } from "~/types";
+import { type Task, type Message } from "~/types";
 import { Models } from "~/utils/openai_completion";
 import { OpenAIStream } from "~/utils/openai_streaming";
-import { chatCreateIssueSystem } from "~/prompts/edge_prompts";
+import {
+  chatCreateIssueSystem,
+  chatClarifyIssueSystem,
+} from "~/prompts/edge_prompts";
 
 export const config = {
   runtime: "edge",
@@ -9,13 +12,21 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { messages } = (await req.json()) as {
+    const { messages, task } = (await req.json()) as {
       messages: Message[];
+      task: Task;
     };
 
-    const systemPrompt = chatCreateIssueSystem;
+    const issue = task?.issue ?? undefined;
+
+    let systemPrompt = issue ? chatClarifyIssueSystem : chatCreateIssueSystem;
     const temperature = 0.3;
     const model = Models.GPT4;
+
+    if (issue) {
+      systemPrompt = systemPrompt.replace("{{issue}}", JSON.stringify(issue));
+    }
+    console.log("systemPrompt", systemPrompt);
 
     // Initialize the stream
     const completionStream = await OpenAIStream(

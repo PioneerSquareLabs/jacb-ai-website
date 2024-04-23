@@ -8,15 +8,19 @@ import { faArrowRight, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { on } from "events";
 
 interface Props {
   message: Message;
   onCreateNewTask: () => void;
+  onUpdateIssue: () => void;
   isResponding?: boolean;
 }
 
-export const ChatMessage: FC<Props> = ({ message, onCreateNewTask }) => {
+export const ChatMessage: FC<Props> = ({
+  message,
+  onCreateNewTask,
+  onUpdateIssue,
+}) => {
   const [content, setContent] = useState<string>(message.content);
 
   useEffect(() => {
@@ -25,6 +29,11 @@ export const ChatMessage: FC<Props> = ({ message, onCreateNewTask }) => {
       message.content.includes(SpecialPhrases.CREATE_TASK)
     ) {
       setContent(message.content.replace(SpecialPhrases.CREATE_TASK, ""));
+    } else if (
+      message.role === Role.ASSISTANT &&
+      message.content.includes(SpecialPhrases.UPDATE_TASK)
+    ) {
+      setContent(message.content.replace(SpecialPhrases.UPDATE_TASK, ""));
     } else {
       setContent(message.content);
     }
@@ -81,7 +90,7 @@ export const ChatMessage: FC<Props> = ({ message, onCreateNewTask }) => {
       <ToastContainer />
       {content?.length > 0 && (
         <div
-          className={`markdown-chat font-figtree flex flex-col ${message.role === Role.ASSISTANT ? "border border-blueGray-600/50 " : "bg-gradient-to-l from-blueGray-700/50 to-blueGray-800/50"} hide-scrollbar max-w-[95%] rounded-md px-2  shadow-md`}
+          className={`markdown-chat flex flex-col font-figtree ${message.role === Role.ASSISTANT ? "border border-blueGray-600/50 " : "bg-gradient-to-l from-blueGray-700/50 to-blueGray-800/50"} hide-scrollbar max-w-[95%] rounded-md px-2  shadow-md`}
           style={{ overflowWrap: "anywhere" }}
         >
           <Markdown
@@ -102,6 +111,23 @@ export const ChatMessage: FC<Props> = ({ message, onCreateNewTask }) => {
             >
               <div className="text-center text-xs font-medium text-black">
                 Add Task to Queue
+              </div>
+              <div className="relative text-black">
+                <FontAwesomeIcon icon={faArrowRight} />
+              </div>
+            </div>
+          </div>
+        )}
+
+      {message.role === Role.ASSISTANT &&
+        message.content.includes(SpecialPhrases.UPDATE_TASK) && (
+          <div className="mt-2 flex justify-center self-center">
+            <div
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded border border-gray-400 bg-white px-6 py-2"
+              onClick={onUpdateIssue}
+            >
+              <div className="text-center text-xs font-medium text-black">
+                Update GitHub Issue
               </div>
               <div className="relative text-black">
                 <FontAwesomeIcon icon={faArrowRight} />
