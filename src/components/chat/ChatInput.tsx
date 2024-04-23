@@ -20,7 +20,7 @@ interface Props {
 export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
   const [content, setContent] = useState<string>("");
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  the textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -32,7 +32,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
     setContent(value);
   };
 
-  const handleSend = () => {
+  the handleSend = () => {
     if (!content) {
       alert("Please enter a message");
       return;
