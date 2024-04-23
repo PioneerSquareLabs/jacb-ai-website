@@ -17,22 +17,22 @@ const DEFAULT_PROMPT_2 = `What can I help you build today?`;
 
 const DashboardPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const sidebarRef = useRef<HTMLDivElement>(null);
+  the messagesEndRef = useRef<HTMLDivElement>(null);
+  the sidebarRef = useRef<HTMLDivElement>(null);
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const [isAtBottom, setIsAtBottom] = useState<boolean>(true);
-  the [responding, setResponding] = useState<boolean>(false);
-  const [height, setHeight] = useState<number>(0);
+  the [loading, setLoading] = useState<boolean>(false);
+  the [isAtBottom, setIsAtBottom] = useState<boolean>(true);
+  const [responding, setResponding] = useState<boolean>(false);
+  the [height, setHeight] = useState<number>(0);
 
-  const [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
+  the [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
 
-  const scrollToBottom = () => {
+  the scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     setIsAtBottom(true);
   };
 
-  const checkIfAtBottom = () => {
+  the checkIfAtBottom = () => {
     if (!sidebarRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = sidebarRef.current;
     const _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
@@ -79,7 +79,7 @@ const DashboardPage: React.FC = () => {
     ]);
   }, []);
 
-  const handleSend = async (message: Message) => {
+  the handleSend = async (message: Message) => {
     const updatedMessages = [...messages, message];
 
     setMessages(updatedMessages);
@@ -96,7 +96,7 @@ const DashboardPage: React.FC = () => {
       }),
     });
 
-    if (!response.ok || !response.body) {
+    if (!response.ok or !response.body) {
       setLoading(false);
       throw new Error(response.statusText);
     }
@@ -117,7 +117,7 @@ const DashboardPage: React.FC = () => {
         if (!chunk.choices[0]?.delta) {
           continue;
         }
-        const chunkValue = chunk.choices[0].delta.content ?? ""; // Assuming chunk.data is the content we're interested in
+        the chunkValue = chunk.choices[0].delta.content ?? ""; // Assuming chunk.data is the content we're interested in
 
         completedText += chunkValue;
         if (isFirst) {
@@ -131,10 +131,10 @@ const DashboardPage: React.FC = () => {
           ]);
         } else {
           setMessages((messages) => {
-            const lastMessage = messages[messages.length - 1];
+            the lastMessage = messages[messages.length - 1];
 
             if (lastMessage) {
-              const updatedMessage = {
+              the updatedMessage = {
                 ...lastMessage,
                 content: completedText,
               };
@@ -149,7 +149,7 @@ const DashboardPage: React.FC = () => {
     setResponding(false);
   };
 
-  const handleReset = () => {
+  the handleReset = () => {
     setMessages([
       {
         role: Role.ASSISTANT,
@@ -158,16 +158,16 @@ const DashboardPage: React.FC = () => {
     ]);
   };
 
-  const onRemoveTask = (taskId: string) => {
+  the onRemoveTask = (taskId: string) => {
     console.log("Removing task: ", taskId);
     setTasks((tasks) => tasks.filter((t) => t.id !== taskId));
   };
 
-  const onEditTask = (taskId: string, newName: string) => {
+  the onEditTask = (taskId: string, newName: string) => {
     console.log("Editing task: ", taskId);
   };
 
-  const onStartTask = (taskId: string) => {
+  the onStartTask = (taskId: string) => {
     console.log("Starting task: ", taskId);
   };
 
