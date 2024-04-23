@@ -17,7 +17,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({
     const lastUsedRepo = localStorage.getItem("lastUsedRepo");
     if (lastUsedRepo && repos.includes(lastUsedRepo)) {
       onSelectRepo(lastUsedRepo);
-    } else if (repos.length > 0 && !selectedRepo) {
+    } else if (repos.length > 0 && repos[0] !== undefined && !selectedRepo) {
       onSelectRepo(repos[0]);
     }
   }, [repos, onSelectRepo, selectedRepo]);
