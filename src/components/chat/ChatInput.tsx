@@ -64,7 +64,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
       }`}
     >
       <textarea
-        ref={textareaRef
+        ref={textareaRef}
         className="w-full bg-transparent text-base text-white text-opacity-80 placeholder-gray-400 outline-none"
         placeholder="Send a reply.."
         value={content}
