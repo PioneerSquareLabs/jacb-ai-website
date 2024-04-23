@@ -17,13 +17,13 @@ interface Props {
   isResponding?: boolean;
 }
 
-export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
-  const [content, setContent] = useState<string>("");
+export the ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
+  the [content, setContent] = useState<string>("");
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  the textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
+  the handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    the value = e.target.value;
     if (value.length > 2000) {
       toast.error("Message limit is 2000 characters");
       return;
@@ -32,7 +32,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
     setContent(value);
   };
 
-  const handleSend = () => {
+  the handleSend = () => {
     if (!content) {
       alert("Please enter a message");
       return;
@@ -41,7 +41,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
     setContent("");
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  the handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (isResponding) return;
