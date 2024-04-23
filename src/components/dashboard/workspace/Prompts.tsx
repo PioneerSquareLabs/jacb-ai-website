@@ -10,7 +10,7 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { ToastContainer, toast } from "react-toastify";
 
 type ComponentProps = {
-  promptDetailsArray: PromptDetails[];
+  promptDetailsArray?: PromptDetails[];
 };
 
 export const PromptsComponent: React.FC<ComponentProps> = ({
@@ -72,15 +72,16 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
   const closePanel = () => {
     setIsPanelOpen(false);
   };
+  console.log("promptDetailsArray", promptDetailsArray);
 
   return (
     <div className="min-h-full w-full flex-grow flex-col overflow-clip p-2 pt-0">
       <div className="w-full py-2 ">
-        <h2 className="text-lg font-semibold text-white">Terminal</h2>
+        <h2 className="text-lg font-semibold text-white">Prompts</h2>
         <hr className="my-2 border-t border-gray-700" />
       </div>
       <div className="relative h-full w-full overflow-clip rounded-lg bg-gray-800/50 pb-2 text-white">
-        <div className="hide-scrollbar h-full overflow-auto">
+        <div className="hide-scrollbar h-full overflow-auto pb-8">
           <table className="w-full pb-2 text-left text-sm text-gray-400">
             <thead className="table-fixed bg-gray-700 text-xs uppercase text-gray-400">
               <tr>
@@ -103,14 +104,17 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                   onClick={() => openPanel(promptDetails)}
                 >
                   <td className="px-6 py-4">
-                    {promptDetails.metadata.timestamp}
+                    {formatDistanceToNow(
+                      new Date(promptDetails?.metadata.timestamp ?? 0),
+                      { addSuffix: true },
+                    )}
                   </td>
                   <td className="px-6 py-4">{promptDetails.metadata.model}</td>
                   <td className="px-6 py-4">
                     {promptDetails.metadata.tokens > 1000
                       ? `${(promptDetails.metadata.tokens / 1000)?.toFixed(1)}K`
                       : promptDetails.metadata.tokens}{" "}
-                    (${promptDetails.metadata.cost})
+                    (${promptDetails.metadata.cost.toFixed(2)})
                   </td>
                 </tr>
               ))}
@@ -138,7 +142,7 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                 <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
               </Transition.Child>
               <span
-                className="inline-block h-screen align-middle"
+                className="inline-block h-full min-h-screen align-middle"
                 aria-hidden="true"
               >
                 &#8203;
@@ -189,13 +193,21 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                           <p className="mb-2 text-sm text-gray-400">
                             Total Cost:{" "}
                             <span className="font-medium text-gray-200">
-                              {selectedPromptDetails?.metadata.cost} cents
+                              {(
+                                (selectedPromptDetails?.metadata.cost ?? 0) *
+                                100
+                              ).toFixed(2)}{" "}
+                              cents
                             </span>
                           </p>
                           <p className="text-sm text-gray-400">
                             Request Timing:{" "}
                             <span className="font-medium text-gray-200">
-                              {selectedPromptDetails?.metadata.duration} ms
+                              {(
+                                (selectedPromptDetails?.metadata.duration ??
+                                  0) / 1000
+                              ).toFixed(2)}{" "}
+                              seconds
                             </span>
                           </p>
                         </div>
@@ -205,7 +217,7 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                           <h3 className="mb-2 text-lg font-medium text-gray-200">
                             Request
                           </h3>
-                          <div className="rounded-md border border-blueGray-600 p-4">
+                          <div className="hide-scrollbar overflow-x-auto rounded-md border border-blueGray-600 p-4">
                             {selectedPromptDetails?.request.prompts.map(
                               (prompt, index) => (
                                 <div
@@ -236,9 +248,9 @@ export const PromptsComponent: React.FC<ComponentProps> = ({
                           <h3 className="mb-2 text-lg font-medium text-gray-200">
                             Response
                           </h3>
-                          <div className="mb-2 rounded-md border border-blueGray-600 p-2 text-xs text-gray-200 ">
+                          <div className="hide-scrollbar mb-2 overflow-x-auto rounded-md border border-blueGray-600 p-2 text-xs text-gray-200">
                             <div
-                              className={`markdown hide-scrollbar flex  flex-col   font-sans text-sm text-white `}
+                              className={`markdown hide-scrollbar flex flex-col font-sans text-sm text-white`}
                               style={{ overflowWrap: "anywhere" }}
                             >
                               <Markdown components={renderers}>

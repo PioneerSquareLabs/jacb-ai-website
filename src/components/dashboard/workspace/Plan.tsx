@@ -5,17 +5,16 @@ import {
   faCircle,
   faCircleDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { type Plan, type Task, SAMPLE_PLAN } from "~/types";
+import { type Plan } from "~/types";
 
 type ComponentProps = {
-  planSteps?: Plan[];
-  task?: Task;
-  currentPlanStep?: number;
+  planSteps: Plan[];
+  currentPlanStep: number;
 };
 
 export const PlanComponent: React.FC<ComponentProps> = ({
-  planSteps = SAMPLE_PLAN,
-  currentPlanStep = 4,
+  planSteps,
+  currentPlanStep,
 }) => (
   <div className="w-full bg-blueGray-900 p-2 pt-0 text-gray-100">
     <h2 className="border-b border-blueGray-700 py-2 text-lg font-semibold">
@@ -23,12 +22,12 @@ export const PlanComponent: React.FC<ComponentProps> = ({
     </h2>
     <div className="grid w-full grid-cols-1 gap-4 p-2 md:grid-cols-2 lg:grid-cols-3">
       {planSteps.map((plan, idx) => {
-        const isCurrentStep = idx + 1 === currentPlanStep;
+        const isCurrentStep = !plan.isComplete && idx === currentPlanStep;
         return (
           <div
             key={plan.id}
             className={`relative max-w-sm transform rounded-lg p-4 shadow-lg transition-all duration-300 ease-in-out hover:scale-105 ${
-              idx + 1 === currentPlanStep
+              idx === currentPlanStep
                 ? "bg-blueGray-700 ring-2 ring-light-blue ring-opacity-50"
                 : "bg-blueGray-800"
             } ${plan.isComplete ? "opacity-70" : "opacity-100"}`}

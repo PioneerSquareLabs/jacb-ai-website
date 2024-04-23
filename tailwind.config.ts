@@ -77,6 +77,7 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         gooper: ["Gooper", "sans-serif"],
+        figtree: ["Figtree", "sans-serif"],
       },
     },
   },

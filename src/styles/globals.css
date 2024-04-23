@@ -6,6 +6,8 @@
   src: url("/fonts/gooper-semibold.otf") format("opentype");
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Figtree&display=swap");
+
 *,
 *::before,
 *::after {
@@ -22,7 +24,7 @@ body {
 }
 
 #__next {
-  @apply flex min-h-screen w-full;
+  @apply flex h-full min-h-screen w-full;
 }
 
 h1 {
@@ -51,6 +53,7 @@ h1 {
 }
 
 .markdown {
+  @apply font-figtree;
   @apply text-base;
   @apply leading-normal;
   @apply font-light;
@@ -58,6 +61,7 @@ h1 {
 }
 
 .markdown h1 {
+  @apply font-figtree;
   @apply text-2xl;
   @apply mt-1;
   @apply mb-3;
@@ -123,6 +127,98 @@ h1 {
   @apply rounded-sm;
 }
 
+.markdown-chat {
+  @apply font-figtree;
+  @apply text-base;
+  @apply leading-relaxed;
+  @apply font-light;
+  @apply text-neutral-300;
+}
+
+.markdown-chat h1 {
+  @apply text-2xl;
+  @apply font-figtree;
+  @apply mt-1;
+  @apply mb-3;
+}
+
+.markdown-chat h2 {
+  @apply text-xl;
+  @apply font-figtree;
+  @apply mt-1;
+  @apply mb-3;
+}
+
+.markdown-chat h3 {
+  @apply text-lg;
+  @apply font-figtree;
+  @apply mt-1;
+  @apply mb-3;
+}
+
+.markdown-chat h4 {
+  @apply text-base;
+  @apply font-figtree;
+  @apply mt-1;
+  @apply mb-3;
+}
+
+.markdown-chat h5 {
+  @apply text-base;
+  @apply font-figtree;
+  @apply mt-1;
+  @apply mb-3;
+}
+
+.markdown-chat hr {
+  @apply border-neutral-500;
+  @apply my-3;
+}
+
+.markdown-chat p {
+  @apply font-figtree;
+  @apply my-3;
+}
+
+.markdown-chat ul {
+  @apply font-figtree;
+  list-style: disc;
+  @apply p-2;
+}
+
+.markdown-chat li {
+  @apply font-figtree;
+  @apply mb-1;
+}
+
+.markdown-chat strong {
+  @apply font-figtree;
+  @apply text-lg;
+  @apply font-semibold;
+  @apply text-light-blue;
+}
+
+.markdown-chat code {
+  @apply bg-gray-700/80;
+  @apply font-figtree;
+  @apply px-1;
+  @apply py-1;
+  @apply rounded-sm;
+}
+
+.markdown-issue code {
+  @apply text-blueGray-200;
+  @apply bg-blueGray-800;
+  @apply px-3;
+  @apply py-2;
+  @apply my-2;
+  @apply rounded-md;
+  @apply block;
+  @apply overflow-x-auto;
+  @apply whitespace-pre;
+  @apply border border-blueGray-700;
+}
+
 @keyframes blink {
   50% {
     opacity: 0.5;
@@ -130,6 +226,18 @@ h1 {
 }
 .blink {
   animation: blink 1s linear infinite;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in 0.5s ease-in-out;
 }
 
 @tailwind utilities;
