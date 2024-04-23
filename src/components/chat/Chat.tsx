@@ -1,13 +1,13 @@
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type FC } from "react";
-import { type Message } from "~/types";
+import { type Message } from "../../types";
 import { ChatInput } from "./ChatInput";
 import { ChatLoader } from "./ChatLoader";
 import { ChatMessage } from "./ChatMessage";
 import { useSelector, useDispatch } from 'react-redux';
-import { selectChatState } from '~/store/selectors';
-import { updateChatState } from '~/store/actions';
+import { selectChatState } from '../../store/selectors';
+import { updateChatState } from '../../store/actions';
 
 interface Props {
   messages: Message[];

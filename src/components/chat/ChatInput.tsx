@@ -10,7 +10,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { Tooltip } from "react-tooltip";
-import { type Message, Role } from "~/types";
+import { type Message, Role } from "../../types";
 
 interface Props {
   onSend: (message: Message) => void;
@@ -20,7 +20,7 @@ interface Props {
 export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
   const [content, setContent] = useState<string>();
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  the textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -60,3 +60,4 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
     </div>
   );
 };
+__FILEPATH__store/selectors.ts__
