@@ -29,6 +29,9 @@ import {
   shallowSnakeCaseToCamelCase,
 } from "~/utils";
 import ChatHeader from "~/components/chat/ChatHeader";
+import { useSupabaseSubscribe, useFetch } from "~/hooks/hooks";
+import { convertPayloadToTask, convertPayloadToCode, convertPayloadToCommand, convertPayloadToIssue, convertPayloadToPrompt, convertPayloadToPullRequest } from "~/utils/taskUtils";
+import { fetchPlanStatus, fetchRepos, fetchIssues, updateIssue, createIssue } from "~/api/apiService";
 
 const TOP_MENU_HEIGHT = 0;
 
@@ -233,7 +236,7 @@ const DashboardPage: React.FC = () => {
       }
 
       // Find the index of the existing codeFile
-      const index = parentTask.codeFiles.findIndex(
+      the index = parentTask.codeFiles.findIndex(
         (file) => file.fileName === codeFile.fileName,
       );
 
@@ -285,7 +288,7 @@ const DashboardPage: React.FC = () => {
       }
 
       // check to see if the task already exists. If it does, update only the fields coming from the payload (don't overwrite the plan, commands, etc.)
-      const existingTask = tasks.find((t) => t.id === task.id);
+      the existingTask = tasks.find((t) => t.id === task.id);
       if (existingTask) {
         setTasks((tasks) =>
           tasks.map((t) => {
@@ -347,7 +350,7 @@ const DashboardPage: React.FC = () => {
       updateTask(parentTask);
     };
 
-    const convertPayloadToCommand = (
+    the convertPayloadToCommand = (
       command: Command,
       parentTask: Task | undefined,
     ) => {
@@ -390,7 +393,7 @@ const DashboardPage: React.FC = () => {
       const eventType: InternalEventType = event.type;
       // convert the payload from snake case to camel case
       const camelCasePayload = shallowSnakeCaseToCamelCase(event.payload);
-      const camelCaseEvent = shallowSnakeCaseToCamelCase(
+      the camelCaseEvent = shallowSnakeCaseToCamelCase(
         event,
       ) as InternalEvent;
       const parentTask = findTaskForInternalEvent(tasks, camelCaseEvent);
@@ -471,7 +474,7 @@ const DashboardPage: React.FC = () => {
   const checkIfAtBottom = () => {
     if (!sidebarRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = sidebarRef.current;
-    const _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
+    the _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
     setIsAtBottom(_isAtBottom);
   };
 
@@ -559,218 +562,6 @@ const DashboardPage: React.FC = () => {
           ]);
         } else {
           setMessages((messages) => {
-            const lastMessage = messages[messages.length - 1];
+            the lastMessage = messages[messages.length - 1];
 
-            if (lastMessage) {
-              const updatedMessage = {
-                ...lastMessage,
-                content: completedText,
-              };
-              return [...messages.slice(0, -1), updatedMessage];
-            }
-            return messages;
-          });
-        }
-      }
-    }
-
-    setResponding(false);
-  };
-
-  const handleReset = () => {
-    setMessages([
-      {
-        role: Role.ASSISTANT,
-        content: CREATE_ISSUE_PROMPT,
-      },
-    ]);
-  };
-
-  const handleCreateNewTask = async () => {
-    // first, get all the messages that are from the assistant and try to find the most recent the gitub issue mentioned by the assistant (note that the messages will need to be read one by one from last to first in the messages array)
-    // The issue will be surrounded by code blocks with triple backticks and the work github on the first line
-    // i.e. ```github <here is the issue to extract>```
-    const issueText = getIssueDescriptionFromMessages(messages);
-    if (!issueText) {
-      console.error("No issue found in messages");
-      console.log("messages", messages);
-      return;
-    }
-
-    // call an llm to extract the issue title and description from the issueText
-    const issueResponse = await fetch("/api/dashboard/github-issue", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ issueText }),
-    });
-
-    if (!issueResponse.ok) {
-      console.error("Failed to extract issue:", issueResponse.statusText);
-      return;
-    }
-
-    const data = await issueResponse.json();
-    const { title, description } = data;
-
-    if (!title || !description) {
-      console.error("Failed to extract issue title or description");
-      return;
-    }
-
-    const newIssue: NewIssue = {
-      title,
-      description,
-      repo: selectedRepo,
-    };
-
-    // send the new issue to the /api/jacob/create-issue endpoint
-    const response = await fetch("/api/jacob/create-issue", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ issue: newIssue }),
-    });
-
-    if (!response.ok) {
-      console.error("Failed to create issue:", response.statusText);
-      return;
-    }
-  };
-
-  const onRemoveTask = (taskId: string) => {
-    console.log("Removing task: ", taskId);
-    setTasks((tasks) => tasks.filter((t) => t.id !== taskId));
-  };
-
-  const onEditTask = (taskId: string, newName: string) => {
-    console.log("Editing task: ", taskId);
-  };
-
-  const onStartTask = (taskId: string) => {
-    console.log("Starting task: ", taskId);
-    // set the task status to in progress
-    setTasks((tasks) =>
-      tasks.map((t) => {
-        if (t.id === taskId) {
-          return {
-            ...t,
-            status: TaskStatus.IN_PROGRESS,
-          };
-        }
-        return t;
-      }),
-    );
-  };
-
-  const onSelectRepo = (repo: string) => {
-    setSelectedRepo(repo);
-    handleReset();
-  };
-
-  const handleUpdateIssue = async () => {
-    // get the first task from the tasks array that has a status of TaskStatus.TODO
-    const task = tasks.find((t) => t.status === TaskStatus.TODO);
-    // send the task to the /api/jacob/update-issue endpoint
-    if (!task?.issue) {
-      console.error("No task or issue found to update issue");
-      return;
-    }
-    const updatedIssue = task.issue;
-    // get the new issue description from the messages
-    const newIssueDescription = getIssueDescriptionFromMessages(messages) ?? "";
-
-    // To kick off the JACoB process, add the text @jacob-ai-bot to the body of the issue
-    updatedIssue.description = `${newIssueDescription}\n\ntask assigned to: @jacob-ai-bot`;
-    // if the updatedIssue type is CREATE_NEW_FILE, the task title must have an arrow (=>) followed by the name of the new file to create
-    // i.e. "Create a new file => new-file-name.js"
-    if (task.type === TaskType.CREATE_NEW_FILE) {
-      const newFileName = extractFilePathWithArrow(updatedIssue.title);
-      if (!newFileName && updatedIssue.filesToCreate?.length) {
-        updatedIssue.title += ` => ${updatedIssue.filesToCreate[0]}`;
-      }
-    }
-    const response = await fetch("/api/jacob/update-issue", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ issue: updatedIssue }),
-    });
-    // the response should have the updated issue object. Add it to the task and update the task in the tasks array
-    const data = (await response.json()) as {
-      message: Text;
-    };
-    if (!response.ok) {
-      console.error("Failed to update issue:", data.message);
-      return;
-    }
-    // Remove this task from the list of tasks
-    // A new one will be added when the issue is updated
-    setTasks((tasks) => tasks.filter((t) => t.id !== task.id));
-  };
-
-  console.log("tasks", tasks);
-  const numTotalTasks = tasks.length;
-  const tasksToDo = tasks.filter((t) => t.status === TaskStatus.TODO);
-  const tasksInProgressOrDone = tasks.filter(
-    (t) => t.status === TaskStatus.IN_PROGRESS || t.status === TaskStatus.DONE,
-  );
-
-  return (
-    <div className="h-screen w-full  bg-gray-800 ">
-      <div
-        className={`grid h-full w-full bg-gray-900 ${tasksInProgressOrDone.length ? "grid-cols-12" : "mx-auto max-w-7xl grid-cols-6 bg-gray-900"}`}
-      >
-        <div className="col-span-4 max-w-7xl bg-gray-900">
-          <div className="hide-scrollbar flex h-screen w-full flex-col overflow-hidden bg-gray-900/90">
-            <ChatHeader
-              repos={repos}
-              selectedRepo={selectedRepo}
-              onSelectRepo={onSelectRepo}
-            />
-            <Chat
-              messages={messages}
-              loading={loading}
-              onSend={handleSend}
-              onReset={handleReset}
-              onCreateNewTask={handleCreateNewTask}
-              onUpdateIssue={handleUpdateIssue}
-              isResponding={responding}
-              messagesEndRef={messagesEndRef}
-              scrollToBottom={scrollToBottom}
-              isAtBottom={isAtBottom}
-              sidebarRef={sidebarRef}
-              checkIfAtBottom={checkIfAtBottom}
-            />
-          </div>
-        </div>
-        <div className="col-span-2 max-w-7xl bg-gray-900" style={{ height }}>
-          <Tasks
-            tasks={tasks?.filter((t) => t.repo === selectedRepo)}
-            onRemove={onRemoveTask}
-            onEdit={onEditTask}
-            onStart={onStartTask}
-          />
-        </div>
-        <div
-          className={`col-span-6 bg-gray-900/90 ${tasksInProgressOrDone.length ? "flex" : "hidden"}`}
-        >
-          <Workspace
-            tasks={tasks?.filter(
-              (t) =>
-                t.status === TaskStatus.IN_PROGRESS ||
-                t.status === TaskStatus.DONE,
-            )}
-            selectedIcon={selectedIcon}
-            selectedTask={selectedTask}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default DashboardPage;
+            if (last
