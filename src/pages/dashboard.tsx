@@ -11,13 +11,13 @@ import {
   TaskType,
   type InternalEvent,
   type Plan,
-  PLANS,
   type PromptDetails,
   type CodeFile,
   type Command,
   type PullRequest,
   type NewIssue,
 } from "~/types";
+import { PLANS } from "~/data/plans";
 import { createClient } from "@supabase/supabase-js";
 
 import { type Message, type Task, Role } from "~/types";
@@ -28,7 +28,6 @@ import {
   getSnapshotUrl,
   shallowSnakeCaseToCamelCase,
 } from "~/utils";
-import { error } from "console";
 import ChatHeader from "~/components/chat/ChatHeader";
 
 const TOP_MENU_HEIGHT = 0;
