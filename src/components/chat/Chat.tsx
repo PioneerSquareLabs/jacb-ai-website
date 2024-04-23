@@ -1,4 +1,4 @@
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type FC } from "react";
 import { type Message } from "~/types";
@@ -34,7 +34,13 @@ export const Chat: FC<Props> = ({
   isAtBottom,
 }) => {
   return (
-    <div className="relative flex h-full w-full flex-col bg-gray-900/90">
+    <div className={`relative flex h-full w-full flex-col bg-gray-900/90 ${loading ? "pointer-events-none" : ""}`}>
+      {loading && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
+          <FontAwesomeIcon icon={faSpinner} className="animate-spin text-white" size="2x" />
+          <span className="ml-2 text-white">Loading...</span>
+        </div>
+      )}
       <div
         className={`flex items-center justify-between border-b border-gray-800 p-4 ${
           shouldHideLogo ? "hidden" : ""
