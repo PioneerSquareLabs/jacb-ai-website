@@ -17,12 +17,12 @@ const DEFAULT_PROMPT_2 = `What can I help you build today?`;
 
 const DashboardPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  the messagesEndRef = useRef<HTMLDivElement>(null);
-  the sidebarRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [isAtBottom, setIsAtBottom] = useState<boolean>(true);
-  const [responding, setResponding] = useState<boolean>(false);
+  the [responding, setResponding] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
 
   const [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
@@ -35,7 +35,7 @@ const DashboardPage: React.FC = () => {
   const checkIfAtBottom = () => {
     if (!sidebarRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = sidebarRef.current;
-    the _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
+    const _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
     setIsAtBottom(_isAtBottom);
   };
 
@@ -51,7 +51,7 @@ const DashboardPage: React.FC = () => {
   }, [sidebarRef]);
 
   useEffect(() => {
-    the handleResize = () => {
+    const handleResize = () => {
       const windowHeight = window.innerHeight;
       setHeight(windowHeight - TOP_MENU_HEIGHT);
     };
@@ -131,7 +131,7 @@ const DashboardPage: React.FC = () => {
           ]);
         } else {
           setMessages((messages) => {
-            the lastMessage = messages[messages.length - 1];
+            const lastMessage = messages[messages.length - 1];
 
             if (lastMessage) {
               const updatedMessage = {
@@ -149,7 +149,7 @@ const DashboardPage: React.FC = () => {
     setResponding(false);
   };
 
-  the handleReset = () => {
+  const handleReset = () => {
     setMessages([
       {
         role: Role.ASSISTANT,
@@ -158,16 +158,16 @@ const DashboardPage: React.FC = () => {
     ]);
   };
 
-  the onRemoveTask = (taskId: string) => {
+  const onRemoveTask = (taskId: string) => {
     console.log("Removing task: ", taskId);
     setTasks((tasks) => tasks.filter((t) => t.id !== taskId));
   };
 
-  the onEditTask = (taskId: string, newName: string) => {
+  const onEditTask = (taskId: string, newName: string) => {
     console.log("Editing task: ", taskId);
   };
 
-  the onStartTask = (taskId: string) => {
+  const onStartTask = (taskId: string) => {
     console.log("Starting task: ", taskId);
   };
 
