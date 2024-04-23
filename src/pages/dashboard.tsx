@@ -17,30 +17,30 @@ const DEFAULT_PROMPT_2 = `What can I help you build today?`;
 
 const DashboardPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  the messagesEndRef = useRef<HTMLDivElement>(null);
-  the sidebarRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
-  the [loading, setLoading] = useState<boolean>(false);
-  the [isAtBottom, setIsAtBottom] = useState<boolean>(true);
-  the [responding, setResponding] = useState<boolean>(false);
-  the [height, setHeight] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isAtBottom, setIsAtBottom] = useState<boolean>(true);
+  const [responding, setResponding] = useState<boolean>(false);
+  const [height, setHeight] = useState<number>(0);
 
-  the [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
+  const [tasks, setTasks] = useState<Task[]>(SAMPLE_TASKS);
 
-  the scrollToBottom = () => {
+  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     setIsAtBottom(true);
   };
 
-  the checkIfAtBottom = () => {
+  const checkIfAtBottom = () => {
     if (!sidebarRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = sidebarRef.current;
-    the _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
+    const _isAtBottom = scrollHeight - scrollTop <= clientHeight + 120; // give a little buffer so the arrow isn't covering action items
     setIsAtBottom(_isAtBottom);
   };
 
   useEffect(() => {
-    the chatSidebar = sidebarRef.current;
+    const chatSidebar = sidebarRef.current;
     if (!chatSidebar) return;
 
     chatSidebar.addEventListener("scroll", checkIfAtBottom);
@@ -51,8 +51,8 @@ const DashboardPage: React.FC = () => {
   }, [sidebarRef]);
 
   useEffect(() => {
-    the handleResize = () => {
-      the windowHeight = window.innerHeight;
+    const handleResize = () => {
+      const windowHeight = window.innerHeight;
       setHeight(windowHeight - TOP_MENU_HEIGHT);
     };
     handleResize();
@@ -61,7 +61,7 @@ const DashboardPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (messages?.length > 0 and messagesEndRef.current and isAtBottom) {
+    if (messages?.length > 0 && messagesEndRef.current && isAtBottom) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, isAtBottom]);
@@ -79,13 +79,13 @@ const DashboardPage: React.FC = () => {
     ]);
   }, []);
 
-  the handleSend = async (message: Message) => {
-    the updatedMessages = [...messages, message];
+  const handleSend = async (message: Message) => {
+    const updatedMessages = [...messages, message];
 
     setMessages(updatedMessages);
     setLoading(true);
     setResponding(true);
-    the response = await fetch("/api/chat", {
+    const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,12 +96,12 @@ const DashboardPage: React.FC = () => {
       }),
     });
 
-    if (!response.ok or !response.body) {
+    if (!response.ok || !response.body) {
       setLoading(false);
       throw new Error(response.statusText);
     }
 
-    the runner = ChatCompletionStreamingRunner.fromReadableStream(
+    const runner = ChatCompletionStreamingRunner.fromReadableStream(
       response.body,
     );
     if (!runner) {
@@ -117,7 +117,7 @@ const DashboardPage: React.FC = () => {
         if (!chunk.choices[0]?.delta) {
           continue;
         }
-        the chunkValue = chunk.choices[0].delta.content ?? ""; // Assuming chunk.data is the content we're interested in
+        const chunkValue = chunk.choices[0].delta.content ?? ""; // Assuming chunk.data is the content we're interested in
 
         completedText += chunkValue;
         if (isFirst) {
@@ -131,10 +131,10 @@ const DashboardPage: React.FC = () => {
           ]);
         } else {
           setMessages((messages) => {
-            the lastMessage = messages[messages.length - 1];
+            const lastMessage = messages[messages.length - 1];
 
             if (lastMessage) {
-              the updatedMessage = {
+              const updatedMessage = {
                 ...lastMessage,
                 content: completedText,
               };
@@ -149,7 +149,7 @@ const DashboardPage: React.FC = () => {
     setResponding(false);
   };
 
-  the handleReset = () => {
+  const handleReset = () => {
     setMessages([
       {
         role: Role.ASSISTANT,
@@ -158,16 +158,16 @@ const DashboardPage: React.FC = () => {
     ]);
   };
 
-  the onRemoveTask = (taskId: string) => {
+  const onRemoveTask = (taskId: string) => {
     console.log("Removing task: ", taskId);
     setTasks((tasks) => tasks.filter((t) => t.id !== taskId));
   };
 
-  the onEditTask = (taskId: string, newName: string) => {
+  const onEditTask = (taskId: string, newName: string) => {
     console.log("Editing task: ", taskId);
   };
 
-  the onStartTask = (taskId: string) => {
+  const onStartTask = (taskId: string) => {
     console.log("Starting task: ", taskId);
   };
 
@@ -178,9 +178,9 @@ const DashboardPage: React.FC = () => {
       <div className="col-span-3 max-w-7xl bg-gray-900" style={{ height }}>
         <Chat
           messages={messages}
-          loading={loading}
+          loading={loading
           onSend={handleSend}
-          onReset={handleReset
+          onReset={handleReset}
           isResponding={responding}
           messagesEndRef={messagesEndRef}
           scrollToBottom={scrollToBottom}

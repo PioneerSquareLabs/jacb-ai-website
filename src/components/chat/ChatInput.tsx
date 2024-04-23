@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
-  const [content, setContent] = useState<string>();
+  const [content, setContent] = useState<string>("");
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -42,8 +42,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    // if it's responding, don't allow the user to send a message
-    if (e.key === "Enter" and !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (isResponding) return;
       handleSend();
@@ -51,9 +50,9 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
   };
 
   useEffect(() => {
-    if (textareaRef?.current) {
+    if (textareaRef.current) {
       textareaRef.current.style.height = "inherit";
-      textareaRef.current.style.height = `${textareaRef.current?.scrollHeight}px`;
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [content]);
 
@@ -64,7 +63,7 @@ export const ChatInput: FC<Props> = ({ onSend, isResponding = false }) => {
       }`}
     >
       <textarea
-        ref={textareaRef
+        ref={textareaRef}
         className="w-full bg-transparent text-base text-white text-opacity-80 placeholder-gray-400 outline-none"
         placeholder="Send a reply.."
         value={content}
