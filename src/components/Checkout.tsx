@@ -9,15 +9,15 @@ function Checkout() {
   const [country, setCountry] = useState('');
   const [zip, setZip] = useState('');
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handleCardNumberChange = (e) => setCardDetails({ ...cardDetails, number: e.target.value });
-  const handleCardExpiryChange = (e) => setCardDetails({ ...cardDetails, expiry: e.target.value });
-  const handleCardCVCChange = (e) => setCardDetails({ ...cardDetails, cvc: e.target.value });
-  const handleNameChange = (e) => setNameOnCard(e.target.value);
-  const handleCountryChange = (e) => setCountry(e.target.value);
-  const handleZipChange = (e) => setZip(e.target.value);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => setCardDetails({ ...cardDetails, number: e.target.value });
+  const handleCardExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => setCardDetails({ ...cardDetails, expiry: e.target.value });
+  const handleCardCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => setCardDetails({ ...cardDetails, cvc: e.target.value });
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setNameOnCard(e.target.value);
+  const handleCountryChange = (e: React.ChangeEvent<HTMLInputElement>) => setCountry(e.target.value);
+  const handleZipChange = (e: React.ChangeEvent<HTMLInputElement>) => setZip(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ email, cardDetails, nameOnCard, country, zip });
     // Here you would typically handle the submission to the backend
