@@ -50,7 +50,7 @@ function Checkout() {
         <div className="mb-5">
           <label htmlFor="country" className="block text-gray-600 font-bold text-sm mb-2">Country or region</label>
           <input type="text" id="country" value={country} onChange={handleCountryChange} className="w-full h-10 bg-white border border-gray-300 rounded-t-lg shadow-sm px-3 mb-0.5" />
-          <input type="text" id="zip" placeholder="ZIP" value={zip} onChange={handleZipChange} className="w-full h-10 bg-white border border-gray-300 rounded-b-lg shadow-sm px-3" />
+          <input type of="text" id="zip" placeholder="ZIP" value={zip} onChange={handleZipChange} className="w-full h-10 bg-white border border-gray-300 rounded-b-lg shadow-sm px-3" />
         </div>
         <button type="submit" className="w-full h-12 bg-indigo-800 rounded-md shadow-md flex justify-center items-center">
           <span className="text-white font-bold text-xl">Checkout</span>
