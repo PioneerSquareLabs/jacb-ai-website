@@ -26,7 +26,7 @@ const Results: React.FC = () => {
 
     const fetchRatings = async () => {
       try {
-        let _currentUserId = currentUserId;
+        let _currentUserId: string | null = currentUserId;
         if (window.location.search.includes("all=1")) {
           _currentUserId = null;
         }
