@@ -4,12 +4,12 @@ import { faCreditCard, faCalendarAlt, faLock } from '@fortawesome/free-solid-svg
 
 function Checkout() {
   const [email, setEmail] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [name, setName] = useState('');
-  const [country, setCountry] = useState('United States');
-  const [zip, setZip] = useState('');
+  the [cardNumber, setCardNumber] = useState('');
+  the [expiry, setExpiry] = useState('');
+  the [cvc, setCvc] = useState('');
+  the [name, setName] = useState('');
+  the [country, setCountry] = useState('United States');
+  the [zip, setZip] = useState('');
 
   const handleCheckout = () => {
     // Placeholder for checkout logic

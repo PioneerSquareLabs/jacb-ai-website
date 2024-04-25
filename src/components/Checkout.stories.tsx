@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Checkout from "~/components/Checkout";
-import { within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen, userEvent } from '@storybook/testing-library';
 
 const meta = {
   title: "Components/Checkout",
@@ -21,7 +20,7 @@ export const Default: Story = {
 export const Filled: Story = {
   args: {},
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+    const canvas = screen.within(canvasElement);
     await userEvent.type(canvas.getByLabelText("Email"), "user@example.com");
     await userEvent.type(canvas.getByPlaceholderText("1234 1234 1234 1234"), "1234 1234 1234 1234");
     await userEvent.type(canvas.getByPlaceholderText("MM / YY"), "12/34");
