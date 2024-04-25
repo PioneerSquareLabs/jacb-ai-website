@@ -11,7 +11,7 @@ if (!stripeApiKey) {
 }
 
 const stripe = new Stripe(stripeApiKey, {
-  apiVersion: '2020-08-27',
+  apiVersion: '2024-04-10',
 });
 
 export const createSubscription = async (customerId: string, priceId: string) => {
@@ -30,7 +30,7 @@ export const createSubscription = async (customerId: string, priceId: string) =>
 
 export const cancelSubscription = async (subscriptionId: string) => {
   try {
-    const canceledSubscription = await stripe.subscriptions.del(subscriptionId);
+    const canceledSubscription = await stripe.subscriptions.cancel(subscriptionId);
     return canceledSubscription;
   } catch (error) {
     console.error('Failed to cancel subscription:', error);
