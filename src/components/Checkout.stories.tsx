@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Checkout from "~/components/Checkout";
+import { Checkout } from "~/components/Checkout";
 import { screen, userEvent } from '@storybook/testing-library';
 
 const meta = {
@@ -29,4 +29,4 @@ export const Filled: Story = {
     await userEvent.type(canvas.getByLabelText("Country or region"), "United States");
     await userEvent.type(canvas.getByPlaceholderText("ZIP"), "12345");
   },
-};
+}

@@ -41,4 +41,9 @@ function Checkout() {
           <FontAwesomeIcon icon={faCalendarAlt} className="mt-4" />
           <input type="text" placeholder="CVC" value={cvc} onChange={(e) => setCvc(e.target.value)} className="w-1/2 mt-2 p-2 border border-gray-300 rounded-br-md" />
           <FontAwesomeIcon icon={faLock} className="mt-4" />
-        </div
+        </div>
+    </div>
+  );
+}
+
+export { Checkout };
