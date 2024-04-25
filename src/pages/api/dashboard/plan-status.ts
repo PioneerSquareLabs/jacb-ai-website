@@ -9,7 +9,6 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    // if it's not a post request, return a 405
     if (req.method?.toLowerCase() !== "post") {
       return res.status(405).json({ error: "Method not allowed" });
     }
@@ -61,7 +60,6 @@ export default async function handler(
 
     type PlanStatus = z.infer<typeof PlanStatusSchema>;
 
-    // Initialize the stream
     const planStatus = (await sendGptRequestWithSchema(
       userPrompt,
       systemPrompt,
@@ -73,8 +71,6 @@ export default async function handler(
 
     const { isMostRecentStepCompleted, statusDescription } = planStatus;
 
-    // Update the task with the last step completed. Mark every step before it as complete
-    // First find the last step completed using the lastStepCompleted id
     const lastStepCompletedIndex = task.plan.findIndex(
       (step) => step.position === task.currentPlanStep ?? 0,
     );
