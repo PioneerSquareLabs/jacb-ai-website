@@ -1,3 +1,5 @@
+import { Position } from "postcss";
+
 export enum Role {
   ASSISTANT = "assistant",
   USER = "user",
@@ -178,4 +180,24 @@ export type NewIssue = {
   title: string;
   description: string;
   repo: string;
+};
+
+export enum Mode {
+  EXISTING_ISSUES = "existing-issues",
+  NEW_TASKS = "new-tasks",
+  TEST_COVERAGE = "test-coverage",
+  BUG_FIXES = "bug-fixes",
+  CODE_REVIEWS = "code-reviews",
+}
+
+export type Developer = {
+  id: string;
+  name: string;
+  location: string;
+  imageUrl: string;
+  bio: string;
+  yearsOfExperience: number;
+  mode: Mode;
+  cta: string;
+  personalityProfile: string;
 };

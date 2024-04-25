@@ -45,7 +45,6 @@ export const TaskStatusComponent = ({ tasks }: TaskStatusProps) => {
     () => calculateVelocity(inProgressTasks),
     [inProgressTasks],
   );
-  console.log("totalProgress", totalProgress);
 
   return (
     <div className="border-b border-blueGray-700 bg-blueGray-700/20 pb-1 text-blueGray-300  transition-all duration-300">

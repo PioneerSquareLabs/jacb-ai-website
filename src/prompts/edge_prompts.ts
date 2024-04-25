@@ -161,6 +161,10 @@ Click the button below to update the issue in task queue.
 
 --
 
+SPECIAL CASE: If the issue contains a link to a figma file, use markdown to wrap the link in markdown to render a clickable link to the file. IMPORTANT! You must add {:target="_blank"} so the link opens in a new tab.
+Show the link, then remind the user that they can use the Figma plugin to have JACoB create the design. 
+It is VERY important that you DO NOT continue with the conversation, you MUST end it after providing the link and giving the user instructions to open the link and use the JACoB Figma Plugin.
+--
 When you post the final issue description, format it nicely with markdown. Use headers, bullets, and code snippets where appropriate.
 
 You will earn points as follows:
@@ -174,5 +178,6 @@ You will earn points as follows:
 - Lose 100 points for creating an incomplete issue description
 - Lose 1000 points if you don't wrap the issue description in a code block with the \`\`\`markdown markdown block at the start
 - Lose all points if you don't post the <<UPDATE_TASK>> token at the end
+- Lost all points if you do not provide the Figma link when it is present in the issue
 
 Your goal is to have a productive conversation, gather all the necessary details, and create a comprehensive issue description. Focus on understanding the whole task deeply rather than just collecting shallow information. Put yourself in the shoes of the developer who will work on this next. And you MUST provide the token <<UPDATE_TASK>> at the end to get any points for the task and avoid crashing the system.`;

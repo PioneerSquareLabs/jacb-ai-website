@@ -98,7 +98,7 @@ const Workspace: React.FC<WorkspaceProps> = ({
               className={`mr-2 flex flex-shrink-0 items-center rounded-t-md px-2 py-2 ${selectedTask?.id === task.id ? "bg-slate-700 text-orange" : "bg-blueGray-800 text-blueGray-500"} transition duration-300 ease-in-out hover:bg-slate-700 hover:text-orange`}
             >
               <button
-                className="max-w-32 truncate text-sm"
+                className=" max-w-[30rem] truncate text-sm"
                 onClick={() => handleSelectTask(task)}
               >
                 {task.name}
