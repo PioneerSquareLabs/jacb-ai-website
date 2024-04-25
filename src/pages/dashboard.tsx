@@ -16,9 +16,11 @@ import {
   type Command,
   type PullRequest,
   type NewIssue,
+  type Developer,
 } from "~/types";
 import { PLANS } from "~/data/plans";
 import { createClient } from "@supabase/supabase-js";
+import Modal from "react-modal";
 
 import { type Message, type Task, Role } from "~/types";
 import {
@@ -29,6 +31,13 @@ import {
   shallowSnakeCaseToCamelCase,
 } from "~/utils";
 import ChatHeader from "~/components/chat/ChatHeader";
+import {
+  fetchIssues,
+  fetchPlanStatus,
+  fetchRepos,
+  type PlanStatus,
+} from "~/server/api";
+import DevelopersGrid from "~/components/dashboard/developers";
 
 const TOP_MENU_HEIGHT = 0;
 
@@ -40,6 +49,7 @@ const supabaseUrl = "https://yeoamgnozxgaklixkfnt.supabase.co";
 const supabaseAnonKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inllb2FtZ25venhnYWtsaXhrZm50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg2MzA5NjMsImV4cCI6MjAyNDIwNjk2M30.PxmPBNFaUYJxwAGzbBpbDl2LztWIRIRj3bVfnAfVc2I";
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+Modal.setAppElement("#__next");
 
 const DashboardPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -62,11 +72,15 @@ const DashboardPage: React.FC = () => {
   const [repos, setRepos] = useState<string[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<string>("");
   const [issues, setIssues] = useState<Issue[]>([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedDeveloper, setSelectedDeveloper] = useState<
+    Developer | undefined
+  >(undefined);
 
   const lastFetchTimes = useRef<Record<string, number>>({});
 
   useEffect(() => {
-    const fetchPlanStatus = async (task: Task) => {
+    const getPlanStatus = async (task: Task) => {
       const now = Date.now();
       const lastFetchTime = lastFetchTimes.current[task.id] ?? 0;
 
@@ -80,18 +94,7 @@ const DashboardPage: React.FC = () => {
       lastFetchTimes.current[task.id] = now;
       setRecentlyUpdatedTaskIds((ids) => ids.filter((id) => id !== task.id));
 
-      const response = await fetch("/api/dashboard/plan-status", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ task }),
-      });
-
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      const data = await response.json();
+      const data = await fetchPlanStatus(task);
       const { statusDescription, isMostRecentStepCompleted } = data;
       let currentPlanStep = data.currentPlanStep ?? 0;
 
@@ -128,46 +131,28 @@ const DashboardPage: React.FC = () => {
     for (const taskId of recentlyUpdatedTaskIds) {
       const task = tasks.find((t) => t.id === taskId);
       if (task) {
-        void fetchPlanStatus(task);
+        void getPlanStatus(task);
       }
     }
   }, [tasks, recentlyUpdatedTaskIds]);
 
   useEffect(() => {
     // call the /api/jacob/repos endpoint to get the list of repos
-    const fetchRepos = async () => {
-      const response = await fetch("/api/jacob/repos");
-
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        console.log("Failed to fetch repos:", errorMessage);
-        return;
-      }
-      const data = (await response.json()) as {
-        repos: string[];
-        message: string;
-      };
-      setRepos(data.repos);
+    const getRepos = async () => {
+      const _repos = await fetchRepos();
+      setRepos(_repos);
     };
-    void fetchRepos();
+    void getRepos();
   }, []);
 
   useEffect(() => {
     // call the /api/jacob/issues endpoint to get the list of issues
-    const fetchIssues = async (selectedRepo: string) => {
-      const response = await fetch("/api/jacob/issues?repo=" + selectedRepo);
+    const getIssues = async (selectedRepo: string) => {
+      const _issues = await fetchIssues(selectedRepo);
 
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        console.log("Failed to fetch issues:", errorMessage);
-        return;
-      }
-      const data = (await response.json()) as {
-        issues: Issue[];
-      };
-      setIssues(data.issues);
+      setIssues(_issues);
       // TEMP: go through each issue and create a new task for each one
-      for (const [index, issue] of data.issues.entries()) {
+      for (const [index, issue] of _issues?.entries()) {
         const newTask: Task = {
           id: Math.random().toString(36).substring(7),
           repo: selectedRepo,
@@ -197,7 +182,7 @@ const DashboardPage: React.FC = () => {
     };
 
     if (selectedRepo?.length > 0) {
-      void fetchIssues(selectedRepo);
+      void getIssues(selectedRepo);
     }
   }, [selectedRepo]);
 
@@ -577,13 +562,22 @@ const DashboardPage: React.FC = () => {
     setResponding(false);
   };
 
-  const handleReset = () => {
-    setMessages([
-      {
-        role: Role.ASSISTANT,
-        content: CREATE_ISSUE_PROMPT,
-      },
-    ]);
+  const handleReset = (task?: Task) => {
+    if (task) {
+      setMessages([
+        {
+          role: Role.ASSISTANT,
+          content: `I'm ready to help with the *${task.name}* task. Want to start working on this?`,
+        },
+      ]);
+    } else {
+      setMessages([
+        {
+          role: Role.ASSISTANT,
+          content: CREATE_ISSUE_PROMPT,
+        },
+      ]);
+    }
   };
 
   const handleCreateNewTask = async () => {
@@ -712,9 +706,21 @@ const DashboardPage: React.FC = () => {
     setTasks((tasks) => tasks.filter((t) => t.id !== task.id));
   };
 
-  console.log("tasks", tasks);
-  const numTotalTasks = tasks.length;
-  const tasksToDo = tasks.filter((t) => t.status === TaskStatus.TODO);
+  const onNewTaskSelected = (task: Task) => {
+    console.log("set selected task", task);
+    setSelectedTask(task);
+    handleReset(task);
+    console.log("selected task", selectedTask);
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   const tasksInProgressOrDone = tasks.filter(
     (t) => t.status === TaskStatus.IN_PROGRESS || t.status === TaskStatus.DONE,
   );
@@ -730,6 +736,8 @@ const DashboardPage: React.FC = () => {
               repos={repos}
               selectedRepo={selectedRepo}
               onSelectRepo={onSelectRepo}
+              selectedDeveloper={selectedDeveloper}
+              onShowDevelopers={() => setSelectedDeveloper(undefined)}
             />
             <Chat
               messages={messages}
@@ -749,10 +757,12 @@ const DashboardPage: React.FC = () => {
         </div>
         <div className="col-span-2 max-w-7xl bg-gray-900" style={{ height }}>
           <Tasks
-            tasks={tasks?.filter((t) => t.repo === selectedRepo)}
+            tasks={tasks}
             onRemove={onRemoveTask}
             onEdit={onEditTask}
             onStart={onStartTask}
+            setTasks={setTasks}
+            onNewTaskSelected={onNewTaskSelected}
           />
         </div>
         <div
@@ -769,6 +779,28 @@ const DashboardPage: React.FC = () => {
           />
         </div>
       </div>
+      <Modal
+        isOpen={!selectedDeveloper}
+        onRequestClose={closeModal}
+        contentLabel="Developers"
+        style={{
+          content: {
+            backgroundColor: "#1a202c",
+            borderColor: "#2d3748",
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            width: "80%", // Adjust based on your needs
+            height: "90%", // Adjust based on your needs
+          },
+          overlay: { backgroundColor: "rgba(0, 0, 0, 0.85)" },
+        }}
+      >
+        <DevelopersGrid onSelectDeveloper={setSelectedDeveloper} />
+      </Modal>
     </div>
   );
 };

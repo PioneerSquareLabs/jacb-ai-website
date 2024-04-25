@@ -1,10 +1,13 @@
-import React, { type FC, useEffect, useState } from "react";
+import React, { type FC, useEffect } from "react";
+import { type Developer } from "~/types";
 
 interface ChatHeaderProps {
   shouldHideLogo?: boolean;
   repos: string[];
   onSelectRepo: (repo: string) => void;
   selectedRepo: string;
+  selectedDeveloper?: Developer;
+  onShowDevelopers?: () => void;
 }
 
 const ChatHeader: FC<ChatHeaderProps> = ({
@@ -12,13 +15,17 @@ const ChatHeader: FC<ChatHeaderProps> = ({
   repos,
   onSelectRepo,
   selectedRepo,
+  selectedDeveloper,
+  onShowDevelopers,
 }) => {
   useEffect(() => {
-    const lastUsedRepo = localStorage.getItem("lastUsedRepo");
-    if (lastUsedRepo && repos.includes(lastUsedRepo)) {
-      onSelectRepo(lastUsedRepo);
-    } else if (repos.length > 0 && repos[0] !== undefined && !selectedRepo) {
-      onSelectRepo(repos[0]);
+    if (repos.length > 0 && !selectedRepo) {
+      const lastUsedRepo = localStorage.getItem("lastUsedRepo");
+      if (lastUsedRepo && repos.includes(lastUsedRepo)) {
+        onSelectRepo(lastUsedRepo);
+      } else if (repos.length > 0 && repos[0] !== undefined && !selectedRepo) {
+        onSelectRepo(repos[0]);
+      }
     }
   }, [repos, onSelectRepo, selectedRepo]);
 
@@ -30,7 +37,9 @@ const ChatHeader: FC<ChatHeaderProps> = ({
 
   const getShortRepoName = (repo: string) => {
     const shortName = repo.split("/")[1] ?? "";
-    return shortName.length > 30 ? shortName.substring(0, 30) + "..." : shortName;
+    return shortName.length > 30
+      ? shortName.substring(0, 30) + "..."
+      : shortName;
   };
 
   return (
@@ -40,27 +49,38 @@ const ChatHeader: FC<ChatHeaderProps> = ({
       }`}
       style={{ height: "6rem" }}
     >
-      <div className={`flex items-center `}>
-        <img
-          className="h-14 w-14 rounded-full"
-          src="/images/logo.png"
-          alt="JACoB Logo"
-        />
-        <h1 className="ml-4 text-lg text-white">JACoB</h1>
+      <div className="relative inline-flex items-center">
+        <button
+          onClick={onShowDevelopers}
+          className="flex items-center justify-between rounded-md bg-blueGray-800 p-2 hover:bg-blueGray-700 focus:outline-none"
+        >
+          <img
+            src={selectedDeveloper?.imageUrl ?? "/images/logo.png"}
+            alt={`${selectedDeveloper?.name}'s profile`}
+            className="mr-2 h-12 w-12 rounded-full object-cover"
+          />
+          <div className="flex flex-col space-y-1 text-left">
+            <span className="text-sm text-blueGray-200">
+              {selectedDeveloper?.name ?? "Jacob"}
+            </span>
+            <span className="text-xs text-blueGray-400">
+              {selectedDeveloper?.cta ?? ""}
+            </span>
+          </div>
+          <img
+            src="/images/chevron.svg"
+            alt="chevron"
+            className="ml-4 h-2 w-2 "
+          />
+        </button>
       </div>
       {repos.length > 1 ? (
         <div className="relative inline-flex">
-          <svg
+          <img
+            src="/images/chevron.svg"
+            alt="chevron"
             className="pointer-events-none absolute right-0 top-0 m-4 h-2 w-2"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 412 232"
-          >
-            <path
-              d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.763-9.763 25.592 0 35.355l181 181c9.763 9.763 25.592 9.763 35.355 0l181-181c9.762-9.763 9.762-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-              fill="#648299"
-              fillRule="nonzero"
-            />
-          </svg>
+          />
           <select
             value={selectedRepo}
             onChange={handleSelectRepo}

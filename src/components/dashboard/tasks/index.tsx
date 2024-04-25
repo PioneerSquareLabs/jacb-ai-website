@@ -1,4 +1,3 @@
-import React, { use, useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -16,24 +15,25 @@ interface TasksProps {
   onRemove: (taskId: string) => void;
   onEdit: (taskId: string, newName: string) => void;
   onStart: (taskId: string) => void;
+  onNewTaskSelected: (task: Task) => void;
+  setTasks: (tasks: Task[]) => void;
 }
 
 const Tasks: React.FC<TasksProps> = ({
-  tasks: _tasks = [],
+  tasks = [],
   onRemove,
   onEdit,
   onStart,
+  onNewTaskSelected,
+  setTasks,
 }) => {
-  const [tasks, setTasks] = useState<Task[]>(_tasks);
-
-  useEffect(() => {
-    console.log("Tasks updated", _tasks);
-    setTasks(_tasks);
-  }, [_tasks]);
-
   const handleDragEnd = (result: DropResult) => {
     console.log("Drag end", result);
     if (!result.destination) {
+      return;
+    }
+    if (!tasks?.length) {
+      console.log("No tasks");
       return;
     }
 
@@ -44,6 +44,11 @@ const Tasks: React.FC<TasksProps> = ({
       return;
     }
     newTasks.splice(result.destination.index, 0, removed);
+
+    // If the first task has changed, call onNewTaskSelected
+    if (tasks[0] !== newTasks[0]) {
+      onNewTaskSelected(newTasks[0]!);
+    }
 
     setTasks(newTasks);
   };
