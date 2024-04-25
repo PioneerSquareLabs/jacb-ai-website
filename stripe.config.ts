@@ -11,7 +11,7 @@ if (!stripeApiKey) {
 }
 
 const stripe = new Stripe(stripeApiKey, {
-  apiVersion: '2020-08-27',
+  apiVersion: '2024-04-10',
 });
 
 export default stripe;
