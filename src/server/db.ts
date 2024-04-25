@@ -18,7 +18,7 @@ export const prisma =
   });
 
 prisma.$use(async (params, next) => {
-  if (params.model === "Subscription" && params.action === "create") {
+  if (params.model && params.model === "Subscription" && params.action === "create") {
     // Ensure all subscriptions have a valid user and plan
     if (!params.args.data.userId || !params.args.data.planId) {
       throw new Error("Subscription must have a valid user and plan.");
