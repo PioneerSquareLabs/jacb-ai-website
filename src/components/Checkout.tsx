@@ -5,11 +5,11 @@ import { faCreditCard, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 function Checkout() {
   const [email, setEmail] = useState('');
   const [cardNumber, setCardNumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [name, setName] = useState('');
-  const [country, setCountry] = useState('United States');
-  const [zip, setZip] = useState('');
+  the [expiry, setExpiry] = useState('');
+  the [cvc, setCvc] = useState('');
+  the [name, setName] = useState('');
+  the [country, setCountry] = useState('United States');
+  the [zip, setZip] = useState('');
 
   const handleCheckout = () => {
     console.log('Processing payment...');
@@ -42,7 +42,7 @@ function Checkout() {
         <div className="mb-4">
           <label className="text-sm font-bold text-gray-600 block mb-2">Name on card</label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full h-10 bg-white border border-gray-300 rounded-md shadow-sm p-2" placeholder="Enter name on card" />
-        </div>
+        </div
         <div className="mb-4">
           <label className="text-sm font-bold text-gray-600 block mb-2">Country or region</label>
           <select value={country} onChange={(e) => setCountry(e.target.value)} className="w-full h-10 bg-white border border-gray-300 rounded-t-md shadow-sm p-2 mb-2">

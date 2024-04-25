@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Checkout from "~/components/Checkout";
+import { within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const meta: Meta<typeof Checkout> = {
   title: "Components/Checkout",
