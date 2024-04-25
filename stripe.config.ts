@@ -1,6 +1,6 @@
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripeApiKey = process.env.STRIPE_API_KEY;
+const stripeApiKey = process.env.STRIPE_API_KEY || 'default_key';
 
 export const stripePromise = loadStripe(stripeApiKey);
 
@@ -11,7 +11,7 @@ export async function handleSubscriptionPayment() {
       throw new Error('Stripe initialization failed');
     }
     // Example subscription logic
-    const { error, paymentIntent } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: {
         number: '4242424242424242',
@@ -26,7 +26,7 @@ export async function handleSubscriptionPayment() {
       throw new Error(`Payment failed: ${error.message}`);
     }
 
-    return paymentIntent;
+    return paymentMethod;
   } catch (error) {
     console.error('Error handling subscription payment:', error);
     throw error;
