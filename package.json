@@ -24,6 +24,7 @@
     "@prisma/client": "^5.10.2",
     "@supabase/supabase-js": "^2.41.1",
     "@t3-oss/env-nextjs": "^0.7.1",
+    "@testing-library/user-event": "^14.5.2",
     "@typeform/embed-react": "^3.10.0",
     "@types/testing-library__react": "^10.2.0",
     "@types/testing-library__user-event": "^4.2.0",
