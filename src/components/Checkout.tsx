@@ -4,12 +4,12 @@ import { faCreditCard, faCalendarAlt, faLock } from '@fortawesome/free-solid-svg
 
 function Checkout() {
   const [email, setEmail] = useState('');
-  the [cardNumber, setCardNumber] = useState('');
-  the [expiry, setExpiry] = useState('');
-  the [cvc, setCvc] = useState('');
-  the [name, setName] = useState('');
-  the [country, setCountry] = useState('United States');
-  the [zip, setZip] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [cvc, setCvc] = useState('');
+  const [name, setName] = useState('');
+  const [country, setCountry] = useState('United States');
+  const [zip, setZip] = useState('');
 
   const handleCheckout = () => {
     // Placeholder for checkout logic
@@ -41,22 +41,4 @@ function Checkout() {
           <FontAwesomeIcon icon={faCalendarAlt} className="mt-4" />
           <input type="text" placeholder="CVC" value={cvc} onChange={(e) => setCvc(e.target.value)} className="w-1/2 mt-2 p-2 border border-gray-300 rounded-br-md" />
           <FontAwesomeIcon icon={faLock} className="mt-4" />
-        </div>
-      </div>
-      <div className="mb-6">
-        <label className="text-gray-600 font-bold">Name on card</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-      </div>
-      <div className="mb-6">
-        <label className="text-gray-600 font-bold">Country or region</label>
-        <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} className="w-full mt-2 p-2 border border-gray-300 rounded-t-md" />
-        <input type="text" placeholder="ZIP" value={zip} onChange={(e) => setZip(e.target.value)} className="w-full mt-2 p-2 border border-gray-300 rounded-b-md" />
-      </div>
-      <button onClick={handleCheckout} className="w-full py-3 bg-blue-900 text-white font-bold rounded-md shadow-md">
-        Checkout
-      </button>
-    </div>
-  );
-}
-
-export default Checkout;
+        </div

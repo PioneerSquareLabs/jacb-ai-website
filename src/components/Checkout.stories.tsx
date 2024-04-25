@@ -20,7 +20,7 @@ export const Default: Story = {
 export const Filled: Story = {
   args: {},
   play: async ({ canvasElement }) => {
-    const canvas = screen.within(canvasElement);
+    const canvas = screen.getByTestId(canvasElement);
     await userEvent.type(canvas.getByLabelText("Email"), "user@example.com");
     await userEvent.type(canvas.getByPlaceholderText("1234 1234 1234 1234"), "1234 1234 1234 1234");
     await userEvent.type(canvas.getByPlaceholderText("MM / YY"), "12/34");
