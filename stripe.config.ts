@@ -5,7 +5,7 @@ config();
 
 const stripeApiKey: string = process.env.STRIPE_API_KEY || '';
 const stripe = new Stripe(stripeApiKey, {
-  apiVersion: '2020-08-27',
+  apiVersion: '2024-04-10',
 });
 
 function handleSubscriptionSuccess(event: Stripe.Event) {
@@ -17,8 +17,8 @@ function handleSubscriptionCancellation(event: Stripe.Event) {
 }
 
 function setupWebhookListeners() {
-  stripe.webhooks.constructEvent = (payload, sig, secret) => {
-    const event = stripe.webhooks.constructEvent(payload, sig, secret);
+  stripe.webhooks.constructEvent = (payload, sig, secret, tolerance, cryptoProvider) => {
+    const event = stripe.webhooks.constructEvent(payload, sig, secret, tolerance, cryptoProvider);
 
     switch (event.type) {
       case 'invoice.payment_succeeded':
