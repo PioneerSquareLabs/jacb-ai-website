@@ -18,18 +18,7 @@ function handleSubscriptionCancellation(event: Stripe.Event) {
 
 function setupWebhookListeners() {
   stripe.webhooks.constructEvent = (payload, sig, secret, tolerance, cryptoProvider) => {
-    const event = stripe.webhooks.constructEvent(payload, sig, secret, tolerance, cryptoProvider);
-
-    switch (event.type) {
-      case 'invoice.payment_succeeded':
-        handleSubscriptionSuccess(event);
-        break;
-      case 'customer.subscription.deleted':
-        handleSubscriptionCancellation(event);
-        break;
-      default:
-        throw new Error('Unhandled event type');
-    }
+    return stripe.webhooks.constructEvent(payload, sig, secret, tolerance, cryptoProvider);
   };
 }
 
