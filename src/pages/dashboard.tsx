@@ -17,6 +17,7 @@ import {
   type PullRequest,
   type NewIssue,
   type Developer,
+  Mode,
 } from "~/types";
 import { PLANS } from "~/data/plans";
 import { createClient } from "@supabase/supabase-js";
@@ -57,6 +58,7 @@ const DashboardPage: React.FC = () => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingTasks, setLoadingTasks] = useState<boolean>(false);
   const [isAtBottom, setIsAtBottom] = useState<boolean>(true);
   const [responding, setResponding] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
@@ -95,6 +97,8 @@ const DashboardPage: React.FC = () => {
       setRecentlyUpdatedTaskIds((ids) => ids.filter((id) => id !== task.id));
 
       const data = await fetchPlanStatus(task);
+      if (!data) return;
+
       const { statusDescription, isMostRecentStepCompleted } = data;
       let currentPlanStep = data.currentPlanStep ?? 0;
 
@@ -148,7 +152,9 @@ const DashboardPage: React.FC = () => {
   useEffect(() => {
     // call the /api/jacob/issues endpoint to get the list of issues
     const getIssues = async (selectedRepo: string) => {
+      setLoadingTasks(true);
       const _issues = await fetchIssues(selectedRepo);
+      setLoadingTasks(false);
 
       setIssues(_issues);
       // TEMP: go through each issue and create a new task for each one
@@ -165,7 +171,13 @@ const DashboardPage: React.FC = () => {
           status: TaskStatus.TODO,
           issue,
         };
-        setTasks((tasks) => [...tasks, newTask]);
+        setTasks((tasks) => {
+          if (tasks.some((task) => task.name === newTask.name)) {
+            return tasks;
+          } else {
+            return [...tasks, newTask];
+          }
+        });
         if (index === 0) {
           setMessages([
             {
@@ -181,10 +193,25 @@ const DashboardPage: React.FC = () => {
       }
     };
 
-    if (selectedRepo?.length > 0) {
+    if (
+      selectedRepo?.length > 0 &&
+      selectedDeveloper?.mode === Mode.EXISTING_ISSUES
+    ) {
       void getIssues(selectedRepo);
     }
-  }, [selectedRepo]);
+  }, [selectedRepo, selectedDeveloper]);
+
+  useEffect(() => {
+    // when the selected developer changes, clear the messages and give a new starting message
+    if (selectedDeveloper?.startingMessage) {
+      setMessages([
+        {
+          role: Role.ASSISTANT,
+          content: `${selectedDeveloper.startingMessage}`,
+        },
+      ]);
+    }
+  }, [selectedDeveloper]);
 
   useEffect(() => {
     const updateTask = (task: Task) => {
@@ -506,6 +533,7 @@ const DashboardPage: React.FC = () => {
         messages: updatedMessages,
         prompt,
         task,
+        developer: selectedDeveloper,
       }),
     });
 
@@ -574,7 +602,7 @@ const DashboardPage: React.FC = () => {
       setMessages([
         {
           role: Role.ASSISTANT,
-          content: CREATE_ISSUE_PROMPT,
+          content: selectedDeveloper?.startingMessage ?? CREATE_ISSUE_PROMPT,
         },
       ]);
     }
@@ -703,7 +731,10 @@ const DashboardPage: React.FC = () => {
     }
     // Remove this task from the list of tasks
     // A new one will be added when the issue is updated
-    setTasks((tasks) => tasks.filter((t) => t.id !== task.id));
+    const newTasks = tasks.filter((t) => t.id !== task.id);
+    setTasks(newTasks);
+    // reset the messages (send in the first task)
+    newTasks.length ? onNewTaskSelected(newTasks[0]!) : handleReset();
   };
 
   const onNewTaskSelected = (task: Task) => {
@@ -763,6 +794,7 @@ const DashboardPage: React.FC = () => {
             onStart={onStartTask}
             setTasks={setTasks}
             onNewTaskSelected={onNewTaskSelected}
+            isLoading={loadingTasks}
           />
         </div>
         <div
@@ -776,6 +808,7 @@ const DashboardPage: React.FC = () => {
             )}
             selectedIcon={selectedIcon}
             selectedTask={selectedTask}
+            onRemoveTask={onRemoveTask}
           />
         </div>
       </div>

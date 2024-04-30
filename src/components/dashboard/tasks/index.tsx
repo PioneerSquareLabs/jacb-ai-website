@@ -17,6 +17,7 @@ interface TasksProps {
   onStart: (taskId: string) => void;
   onNewTaskSelected: (task: Task) => void;
   setTasks: (tasks: Task[]) => void;
+  isLoading?: boolean;
 }
 
 const Tasks: React.FC<TasksProps> = ({
@@ -26,6 +27,7 @@ const Tasks: React.FC<TasksProps> = ({
   onStart,
   onNewTaskSelected,
   setTasks,
+  isLoading = false,
 }) => {
   const handleDragEnd = (result: DropResult) => {
     console.log("Drag end", result);
@@ -52,6 +54,14 @@ const Tasks: React.FC<TasksProps> = ({
 
     setTasks(newTasks);
   };
+  if (isLoading) {
+    return (
+      <div className="flex h-full min-h-screen w-full flex-col items-center justify-center space-x-2 space-y-4 border-x border-coolGray-400/20 bg-gray-900 bg-slate-50/5 text-2xl text-blueGray-500">
+        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-light-blue"></div>
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="grid h-full min-h-screen w-full grid-rows-[1fr_auto] border-x border-coolGray-400/20 bg-gray-900 bg-slate-50/5">

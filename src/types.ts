@@ -200,4 +200,5 @@ export type Developer = {
   mode: Mode;
   cta: string;
   personalityProfile: string;
+  startingMessage: string;
 };

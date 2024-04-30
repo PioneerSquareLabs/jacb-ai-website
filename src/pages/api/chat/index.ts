@@ -1,9 +1,10 @@
-import { type Task, type Message } from "~/types";
+import { type Task, type Message, type Developer } from "~/types";
 import { Models } from "~/utils/openai_completion";
 import { OpenAIStream } from "~/utils/openai_streaming";
 import {
   chatCreateIssueSystem,
   chatClarifyIssueSystem,
+  chatShowFigmaSystem,
 } from "~/prompts/edge_prompts";
 
 export const config = {
@@ -12,19 +13,29 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { messages, task } = (await req.json()) as {
+    const { messages, task, developer } = (await req.json()) as {
       messages: Message[];
       task: Task;
+      developer: Developer;
     };
 
     const issue = task?.issue ?? undefined;
 
     let systemPrompt = issue ? chatClarifyIssueSystem : chatCreateIssueSystem;
+    if (issue?.description?.includes("figma.com")) {
+      systemPrompt = chatShowFigmaSystem;
+    }
     const temperature = 0.3;
     const model = Models.GPT4;
 
     if (issue) {
       systemPrompt = systemPrompt.replace("{{issue}}", JSON.stringify(issue));
+    }
+    if (developer?.personalityProfile) {
+      systemPrompt = systemPrompt.replace(
+        "{{personalityProfile}}",
+        developer.personalityProfile,
+      );
     }
     console.log("systemPrompt", systemPrompt);
 

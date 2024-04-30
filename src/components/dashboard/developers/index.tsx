@@ -47,7 +47,9 @@ const DevelopersGrid: React.FC<DevelopersGridProps> = ({
 }) => {
   return (
     <>
-      <h1 className="mt-2 text-center text-white">Choose a Developer</h1>
+      <h1 className="mt-2 text-center font-figtree text-white">
+        Choose a Developer
+      </h1>
       <div className="mx-auto flex max-w-[1000px] flex-wrap justify-center p-8">
         {DEVELOPERS.map((developer) => (
           <DeveloperCard

@@ -21,12 +21,14 @@ type WorkspaceProps = {
   tasks: Task[];
   selectedIcon: SidebarIcon;
   selectedTask?: Task;
+  onRemoveTask: (taskId: string) => void;
 };
 
 const Workspace: React.FC<WorkspaceProps> = ({
   tasks,
   selectedIcon: _selectedIcon,
   selectedTask: _selectedTask,
+  onRemoveTask,
 }) => {
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(
     _selectedTask,
@@ -35,10 +37,10 @@ const Workspace: React.FC<WorkspaceProps> = ({
 
   // if new tasks are added, update selectedTask to the first task
   useEffect(() => {
-    if (tasks && tasks.length > 0) {
+    if (tasks && tasks.length > 0 && !selectedTask) {
       setSelectedTask(tasks[0]);
     }
-  }, [tasks]);
+  }, [tasks, selectedTask]);
 
   // if the selected icon changes, update the selected icon
   useEffect(() => {
@@ -79,6 +81,13 @@ const Workspace: React.FC<WorkspaceProps> = ({
         return null;
     }
   };
+  const handleRemoveTask = (task: Task) => {
+    // if the task being removed is the selected task, set selected task to undefined
+    if (selectedTask?.id === task.id) {
+      setSelectedTask(undefined);
+    }
+    onRemoveTask(task?.id);
+  };
 
   const handleSelectTask = (task: Task) => {
     setSelectedTask(task);
@@ -105,7 +114,7 @@ const Workspace: React.FC<WorkspaceProps> = ({
               </button>
               <button
                 className="ml-2 h-6 w-6 text-gray-300  hover:rounded-full hover:bg-gray-500"
-                onClick={() => console.log("Delete task")}
+                onClick={() => handleRemoveTask(task)}
               >
                 <FontAwesomeIcon icon={faTimes} />
               </button>

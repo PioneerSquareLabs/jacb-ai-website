@@ -1,5 +1,3 @@
-// apiService.ts
-
 import { type Task, type Issue, type NewIssue } from "~/types";
 
 export type PlanStatus = {
@@ -23,16 +21,21 @@ export type IssueResponse = {
  * @param task The task to fetch the status for.
  * @returns A promise that resolves with the status data.
  */
-export const fetchPlanStatus = async (task: Task): Promise<PlanStatus> => {
-  const response = await fetch(`/api/dashboard/plan-status/${task.id}`, {
-    method: "GET",
+export const fetchPlanStatus = async (
+  task: Task,
+): Promise<PlanStatus | undefined> => {
+  const response = await fetch(`/api/dashboard/plan-status`, {
+    method: "POST",
+    body: JSON.stringify({ task }),
     headers: {
       "Content-Type": "application/json",
     },
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch plan status: ${response.statusText}`);
+    console.log(response.statusText);
+    return undefined;
+    // throw new Error(`Failed to fetch plan status: ${response.statusText}`);
   }
 
   return (await response.json()) as PlanStatus;
