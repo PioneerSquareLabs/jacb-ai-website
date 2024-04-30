@@ -9,6 +9,6 @@ if (!stripeApiKey) {
   throw new Error('Stripe API key is missing in the .env file');
 }
 
-const stripe = new Stripe(stripeApiKey, { apiVersion: '2020-08-27' });
+const stripe = new Stripe(stripeApiKey, { apiVersion: '2024-04-10' });
 
 export default stripe;
