@@ -26,9 +26,17 @@ const Results: React.FC = () => {
 
     const fetchRatings = async () => {
       try {
-        const response = await fetch(
-          `/api/challenge/ratings?snippet_name=all&user_id=${currentUserId}`,
-        );
+        let _currentUserId: string | null = currentUserId;
+        if (window.location.search.includes("all=1")) {
+          _currentUserId = null;
+        }
+        
+        let url = '/api/challenge/ratings?snippet_name=all';
+        if (_currentUserId) {
+          url += `&user_id=${_currentUserId}`;
+        }
+        
+        const response = await fetch(url);
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setPluginScores(
