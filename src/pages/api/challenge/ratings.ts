@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "~/server/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 /*
@@ -13,8 +13,6 @@ W = result of the match (1 for win, 0.5 for draw, 0 for loss)
 We = expected result of the match
 We = 1 / (1 + 10^((Rb - Ra) / 400))
 */
-
-const prisma = new PrismaClient();
 
 const sortByRatingDesc = (a: any, b: any) => b.rating - a.rating;
 
@@ -47,7 +45,7 @@ export default async function handler(
     const allChoices = await prisma.choice.findMany({
       where: {
         isActive: true,
-        ...(userIdParam ? { userId: userIdParam } : {}),
+        // ...(userIdParam ? { userId: userIdParam } : {}),
       },
     });
 

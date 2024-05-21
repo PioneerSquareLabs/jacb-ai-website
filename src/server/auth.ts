@@ -78,8 +78,8 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: "read:user",
-          redirect_uri: `https://www.jacb.ai/api/auth/callback/github`,
-          // redirect_uri: `http://localhost:3000/api/auth/callback/github`,
+          // redirect_uri: `https://www.jacb.ai/api/auth/callback/github`,
+          redirect_uri: `http://localhost:3000/api/auth/callback/github`,
         },
       },
     }),

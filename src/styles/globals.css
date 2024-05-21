@@ -206,6 +206,12 @@ h1 {
   @apply rounded-sm;
 }
 
+.markdown-chat a {
+  @apply font-figtree;
+  @apply text-light-blue;
+  @apply underline;
+}
+
 .markdown-issue code {
   @apply text-blueGray-200;
   @apply bg-blueGray-800;
