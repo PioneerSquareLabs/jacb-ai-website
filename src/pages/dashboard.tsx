@@ -586,6 +586,7 @@ const DashboardPage: React.FC = () => {
         }
       }
     }
+    console.log("completedText", completedText);
 
     setResponding(false);
   };
@@ -610,7 +611,7 @@ const DashboardPage: React.FC = () => {
 
   const handleCreateNewTask = async () => {
     // first, get all the messages that are from the assistant and try to find the most recent the gitub issue mentioned by the assistant (note that the messages will need to be read one by one from last to first in the messages array)
-    // The issue will be surrounded by code blocks with triple backticks and the work github on the first line
+    // The issue will be surrounded by code blocks with triple backticks and the word github on the first line
     // i.e. ```github <here is the issue to extract>```
     const issueText = getIssueDescriptionFromMessages(messages);
     if (!issueText) {

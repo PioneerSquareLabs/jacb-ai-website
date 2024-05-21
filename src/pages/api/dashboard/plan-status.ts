@@ -28,7 +28,7 @@ export default async function handler(
     ## Task Details\n\n
     ${
       task.plan?.length && task.status === TaskStatus.DONE
-        ? `The task is complete! Be sure to set the idOfLastStepCompleted to id: ${lastPlanStep.id} in the PlanStatusSchema.`
+        ? `The task is complete! Be sure to set the isMostRecentStepCompleted field to true.\n`
         : `The task is not complete. Here are the details:\n
     - Task Name: ${task.name}\n
     - Status: ${task.status}\n
@@ -40,14 +40,15 @@ export default async function handler(
     - Code Files Created: ${task.codeFiles?.length ? task.codeFiles?.map((codeFile) => codeFile.fileName).join(", ") : "IMPORTANT! No Code Files Have Been Written Yet"}\n
     - GitHub Pull Request Title: ${task.pullRequest?.title ?? "IMPORTANT! No Pull Request Has Been Created Yet"}\n
     
-    ## Most Recent Plan Step
-    Step ${currentPlan?.position ?? 0}: ${currentPlan?.title ?? "No plan step found"}\n${currentPlan?.description ?? "No description found"}
+    ## Most Recent Plan Step - Your Task is to determine if this step is complete\n
+      **Step ${currentPlan?.position ?? 0}: ${currentPlan?.title ?? "No plan step found"} - ${currentPlan?.description ?? "No description found"}**
+    
 
     ## Instructions
     Your response MUST be in the format of a JSON object that adheres to the following Zod schema:
     const PlanStatusSchema = z.object({
-        statusDescription: z.string(), // a concise, useful, professional but semi-casual non-obvious human-readable description of the current status of the task. Act as a junior developer reporting status to your lead. Don't give a rationale for why this is your status, just tell the user what you've done (without rationale!). Then tell the user in plain english what specifically you plan to do next and why you're doing that next. If the job is complete, don't say what you're doing next, but let them know you are done! Respond in first person. This should only be 1-2 sentences.
-        isMostRecentStepCompleted: z.boolean(), // Based ONLY on the information provided and your expert judgment, determine if the most recent step has been completed.
+        statusDescription: z.string(), // a concise, useful, professional but semi-casual non-obvious human-readable description of the current status of the plan. Act as a junior developer reporting status to your lead. Don't give a rationale for why this is your status, just tell the user what you've done (without rationale!). Then tell the user in plain english what specifically you plan to do next and why you're doing that next. If the job is complete, don't say what you're doing next, but let them know you are done! Respond in first person. This should only be 1-2 sentences.
+        isMostRecentStepCompleted: z.boolean(), // Based ONLY on the information provided and your expert judgment, determine if the most recent step has been completed or not.
       });
     `
     }`;

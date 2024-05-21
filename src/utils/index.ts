@@ -1,4 +1,10 @@
-import { type Message, Role, type InternalEvent, type Task } from "~/types";
+import {
+  type Message,
+  Role,
+  type InternalEvent,
+  type Task,
+  SpecialPhrases,
+} from "~/types";
 
 export const capitalize = (s: string): string => {
   if (typeof s !== "string") return "";
@@ -82,27 +88,25 @@ export function removeMarkdownCodeblocks(text: string) {
 }
 
 export function getIssueDescriptionFromMessages(messages: Message[]) {
-  const assistantMessages = messages.filter((m) => m.role === Role.ASSISTANT);
-  let issue;
-  for (let i = assistantMessages.length - 1; i >= 0; i--) {
-    const message = assistantMessages[i];
-    if (message?.content.includes("```")) {
-      // use a regex to extract the issue
-      const regex = /```markdown(.*?)```/s;
-      const match = message.content.match(regex);
-      if (match) {
-        issue = match[1];
-        break;
-      } else {
-        // try to just find anything inside of triple backticks
-        const regex = /```(.*?)```/s;
-        const match = message.content.match(regex);
-        if (match) {
-          issue = match[1];
-          break;
-        }
-      }
-    }
-  }
-  return issue;
+  // Issue descriptions are always contained in code blocks towards the end of the conversation
+  // To find the issue description, get the most recent message from the assistant that is not a
+  // special phrase and has a code block
+  const messageWithIssue = messages
+    .filter(
+      (m) =>
+        m.role === Role.ASSISTANT &&
+        !Object.values(SpecialPhrases).some((phrase) =>
+          m.content.includes(phrase),
+        ),
+    )
+    .reverse()
+    .find((message) => message?.content.includes("```"));
+
+  if (!messageWithIssue) return null;
+
+  // find the first code block in the message
+  const regex = /```(?:markdown)?(.*?)```/s;
+  const match = messageWithIssue.content.match(regex);
+
+  return match ? match[1] : null;
 }
