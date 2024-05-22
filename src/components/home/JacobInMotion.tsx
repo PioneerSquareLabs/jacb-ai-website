@@ -9,8 +9,8 @@ function JacobInMotion() {
   const videoUrls = {
     "Live Coding Session":
       "https://www.youtube.com/embed/OfRUaehTcEM?si=Ztt02TwiywbZkSMS",
-    "Code Review Process":
-      "https://www.youtube.com/embed/j9Yeow-LxT8?si=wqtbVVTOztIMKzVt",
+    "Web Portal Preview":
+      "https://www.youtube.com/embed/AcQsKkz8jdc?si=oOzL-MEB7YpNh99-",
     "Setting up JACoB":
       "https://www.youtube.com/embed/sdLNSL-vFTU?si=MysanCOjnirBDF_J",
   };
@@ -84,9 +84,9 @@ function JacobInMotion() {
             videoUrl={videoUrls["Live Coding Session"]}
           />
           <SessionCard
-            title="Code Review Process"
-            description="How JACoB reviews a pull request, providing insights and suggestions."
-            videoUrl={videoUrls["Code Review Process"]}
+            title="Web Portal Preview"
+            description="Refine GitHub issues and watch JACoB work in real-time to create a pull request."
+            videoUrl={videoUrls["Web Portal Preview"]}
           />
           <SessionCard
             title="Setting up JACoB"

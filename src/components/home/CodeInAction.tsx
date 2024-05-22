@@ -86,10 +86,7 @@ const CodeInAction = () => {
         <button
           className="mt-8 rounded-full bg-blue-500 px-6 py-2 shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:px-8"
           onClick={() =>
-            window.open(
-              "https://github.com/PioneerSquareLabs/jacb-ai-website",
-              "_blank",
-            )
+            window.open("https://github.com/jacob-ai-bot/jacob", "_blank")
           }
         >
           <p className="text-md text-center font-medium uppercase text-white md:text-lg">

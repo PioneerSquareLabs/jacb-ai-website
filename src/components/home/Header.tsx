@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 
 function Header() {
-  // Placeholder for the actual logo component
   const Logo = () => (
     <img src="/images/logo.svg" alt="Logo" className="h-8 w-auto" />
   );
@@ -18,6 +18,14 @@ function Header() {
           Get Started
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </Link>
+        <a
+          href="https://www.github.com/jacob-ai-bot/jacob"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-4 text-4xl text-black"
+        >
+          <FontAwesomeIcon icon={faGithub} />
+        </a>
       </div>
     </div>
   );
