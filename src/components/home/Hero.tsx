@@ -1,20 +1,23 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <div className="mx-auto flex w-full max-w-[1400px] flex-col px-4 py-8 pt-20 sm:px-6 md:flex-row md:py-24 lg:px-8">
+    <div className="mx-auto flex w-full max-w-[1800px] flex-col px-4 py-8 pt-20 sm:px-6 md:flex-row md:py-24 lg:px-8">
       <div className="flex w-full flex-col justify-center px-4 sm:px-0 md:w-3/5 md:pr-24">
         <h1 className="text-secondary text-3xl font-semibold text-dark-blue sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-          Meet JACoB: Your AI Coding Partner
+          Meet JACoB: The Open Source AI Coding Agent
         </h1>
         <p className="mt-4 text-lg font-light text-gray-700">
-          JACoB (Just Another Coding Bot) is the AI-powered coding assistant
-          that turns your designs into deployable code, understands your
-          codebase, and collaborates via your existing GitHub workflow
+          JACoB (Just Another Coding Bot) is the open source, AI-powered coding
+          agent that extends your capabilities in writing, reviewing, and
+          integrating production-level code. JACoB maintains your team's coding
+          standards to enhance your workflow and accelerate software
+          development, freeing you to focus on big-picture projects.
         </p>
+
         <Link href="/signup" className="button-primary mt-6 text-white">
           Get Started
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />

@@ -28,7 +28,7 @@ body {
 }
 
 h1 {
-  @apply font-gooper text-4xl font-semibold;
+  @apply font-gooper text-3xl font-semibold;
 }
 
 .button-primary {
