@@ -22,7 +22,7 @@ function Header() {
           href="https://www.github.com/jacob-ai-bot/jacob"
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-4 text-4xl text-black"
+          className="mx-4 text-4xl text-black sm:hidden"
         >
           <FontAwesomeIcon icon={faGithub} />
         </a>
