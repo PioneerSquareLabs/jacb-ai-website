@@ -191,7 +191,7 @@ function SetupComponent() {
             description="Provide feedback on your experience with fellow devs"
             ctaText="Join Discord"
             onCtaClick={() => markAsComplete(3)}
-            ctaLink="https://discord.gg/73TBGbES"
+            ctaLink="https://discord.gg/sSDbPR4BUH"
           />
         </div>
         <div className="mt-4 text-center text-xs text-gray-400">
