@@ -18,10 +18,12 @@ const HeroSection = () => {
           development, freeing you to focus on big-picture projects.
         </p>
 
-        <Link href="/signup" className="button-primary mt-6 text-white">
-          Get Started
-          <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-        </Link>
+        <div className="mt-6">
+          <Link href="/signup" className="button-primary inline-flex items-center text-white">
+            Get Started
+            <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+          </Link>
+        </div>
       </div>
       <div className="mt-8 hidden w-full items-center justify-center overflow-hidden md:mt-0 md:flex md:w-3/5">
         <div className="aspect-ratio-box relative h-0 w-full">
