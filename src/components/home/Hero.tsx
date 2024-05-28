@@ -18,7 +18,7 @@ const HeroSection = () => {
           development, freeing you to focus on big-picture projects.
         </p>
 
-        <Link href="/signup" className="button-primary mt-6 text-white">
+        <Link href="/signup" className="button-primary mt-10 text-white">
           Get Started
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </Link>
