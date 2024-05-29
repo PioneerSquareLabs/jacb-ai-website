@@ -1,6 +1,11 @@
 import React from 'react';
 
-const InfoBox = ({ title, description }) => (
+interface InfoBoxProps {
+  title: string;
+  description: string;
+}
+
+const InfoBox: React.FC<InfoBoxProps> = ({ title, description }) => (
   <div className="flex flex-col items-start w-full max-w-xl p-4 bg-dark-beige border border-solid border-[#e9dad7] rounded-lg mb-4">
     <h2 className="text-xl font-medium text-dark-blue">{title}</h2>
     <p className="text-base font-light text-[#61668b] mt-2">{description}</p>
